@@ -164,6 +164,64 @@ Também disponíveis em [`iocs.csv`](iocs.csv).
 
 ---
 
+### Evidências
+
+<details open>
+<summary><b>E-mail renderizado</b>: logo "gov.br" montado com texto colorido</summary>
+
+![E-mail renderizado](evidencias/01-email-renderizado.png)
+</details>
+
+<details>
+<summary><b>MXToolbox</b>: 0 de 5 controles de autenticação</summary>
+
+![MXToolbox](evidencias/04-mxtoolbox-auth.png)
+</details>
+
+<details>
+<summary><b>VirusTotal</b>: 11/93 detecções</summary>
+
+![VirusTotal](evidencias/05-virustotal.png)
+</details>
+
+<details>
+<summary><b>urlscan.io</b>: host no Google Cloud, sem classificação no Safe Browsing</summary>
+
+![urlscan](evidencias/02-urlscan.png)
+</details>
+
+<details>
+<summary><b>AbuseIPDB</b>: IP de origem sem histórico (VPS Vultr)</summary>
+
+![AbuseIPDB](evidencias/03-abuseipdb.png)
+</details>
+
+<details>
+<summary><b>Denúncia ao Google Cloud Abuse</b></summary>
+
+![Denúncia Google Cloud](evidencias/06-denuncia-google-cloud.png)
+</details>
+
+<details>
+<summary><b>Denúncia ao Google Safe Browsing</b></summary>
+
+![Denúncia Safe Browsing](evidencias/07-denuncia-safebrowsing.png)
+</details>
+
+<details>
+<summary><b>Denúncia ao AbuseIPDB</b></summary>
+
+![Denúncia AbuseIPDB](evidencias/08-denuncia-abuseipdb.png)
+</details>
+
+<details>
+<summary><b>Denúncia à Vultr (provedor do servidor de envio)</b></summary>
+
+![Denúncia Vultr](evidencias/09-denuncia-vultr.png)
+</details>
+
+---
+
 ## 5. MITRE ATT&CK
 
 | Tática | Técnica | Aplicação |
@@ -183,6 +241,17 @@ Também disponíveis em [`iocs.csv`](iocs.csv).
 - ✅ Nenhum clique no link e nenhuma interação
 - ✅ E-mail mantido em quarentena (Lixo Eletrônico) e reportado como phishing à Microsoft
 - ✅ Amostra preservada em `.eml` para análise (fora do repositório)
+
+**Notificações enviadas**
+
+| Data | Destino | Indicador | Status |
+|---|---|---|---|
+| 13/11/2026 | Google Cloud Platform Abuse | `dete3-489991573399[.]southamerica-east1[.]run[.]app` | ❌ Ticket `3PDGZ6DX7MWGMBLVGMMGCWYT4A` encerrado: a automação avaliou o IP da Vultr citado no texto ("não hospedado no Google Cloud") |
+| 13/11/2026 | Google Cloud Platform Abuse (reenvio) | Somente a URL do Cloud Run e o IP `34[.]143[.]78[.]2` | ✅ Reenviado com escopo corrigido: aguardando análise (até 1 semana) |
+| 13/11/2026 | Google Safe Browsing | URL de phishing (categoria *Engenharia social → Phishing de órgãos governamentais*) | ✅ Envio concluído |
+| 13/11/2026 | AbuseIPDB | `66[.]42[.]69[.]62` (categorias *Phishing* + *Email Spam*) | ✅ Reportado: **primeira denúncia** desse IP na base |
+| 13/11/2026 | Vultr Abuse (`abuse@vultr.com`) | `66[.]42[.]69[.]62` + cabeçalhos completos (redigidos) | ✅ E-mail enviado: aguardando ticket |
+| 13/11/2026 | CERT.br (`cert@cert.br`) | Campanha completa (e-mail, IP, URL) + cabeçalhos redigidos | ✅ E-mail enviado |
 
 **Se fosse um ambiente corporativo (playbook SOC N1)**
 1. **Escopo:** buscar no gateway de e-mail outras mensagens com o remetente `*@detran659532`, IP `66.42.69.62` ou host `*.run.app` no corpo
@@ -206,3 +275,4 @@ Python (`email`, `html.parser`, `hashlib`) · RDAP/ARIN · ipinfo.io · VirusTot
 - `spf/dkim/dmarc = none` não significa "falhou na verificação": significa que **não há nada para verificar**. Também é um sinal de alerta.
 - O host real de uma URL é o que vem **depois do `@`** e antes da primeira `/`.
 - Atacantes abusam de nuvens confiáveis (Google, Microsoft, Cloudflare) para herdar a reputação delas.
+- Formulários de abuso são triados por automação: cada denúncia deve conter **apenas os indicadores daquele provedor**. Citar o IP de outro provedor fez a primeira denúncia ao Google ser encerrada.
