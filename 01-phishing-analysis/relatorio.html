@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-br"><head><meta charset="utf-8">
+<title>Relatório de Incidente — Phishing Falso DETRAN</title>
+<style>
+@page{size:A4;margin:11mm 12mm}
+*{box-sizing:border-box}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:8.6pt;color:#1b1f24;margin:0;line-height:1.32}
+h1{font-size:14.5pt;margin:0;color:#0b2545}
+h2{font-size:9.6pt;margin:7px 0 3px;padding-bottom:2px;border-bottom:1.5px solid #0b2545;color:#0b2545;text-transform:uppercase;letter-spacing:.3px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #0b2545;padding-bottom:5px}
+.meta{font-size:7.8pt;color:#555;text-align:right}
+.badge{display:inline-block;background:#c62828;color:#fff;font-weight:700;padding:2px 7px;border-radius:3px;font-size:8.3pt}
+.badge.m{background:#ef6c00}
+table{width:100%;border-collapse:collapse;margin:2px 0}
+td,th{border:1px solid #cfd6de;padding:2px 5px;vertical-align:top;text-align:left}
+th{background:#eef2f6;font-weight:600;white-space:nowrap}
+code{font-family:Consolas,monospace;font-size:7.7pt;background:#f2f4f7;padding:0 2px;word-break:break-all}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.fail{color:#c62828;font-weight:700}
+ul{margin:2px 0;padding-left:15px} li{margin:1px 0}
+.sum{background:#f6f8fa;border-left:4px solid #c62828;padding:5px 8px;margin-top:6px}
+.foot{margin-top:6px;font-size:7.2pt;color:#666;border-top:1px solid #ccc;padding-top:3px}
+</style></head><body>
+
+<div class="head">
+ <div><h1>Relatório de Incidente — Phishing "Falso DETRAN"</h1>
+ <div>Suspensão de CNH · Credential harvesting / fraude · Análise estática de <code>.eml</code> + OSINT passivo</div></div>
+ <div class="meta">Analista: <b>Igor Mendes</b> — SOC N1<br>Data da análise: 13/11/2026<br>Recebido: 13/10/2026 03:37:43 UTC</div>
+</div>
+
+<div class="sum"><b>Veredito:</b> <span class="badge">MALICIOSO — PHISHING CONFIRMADO</span> &nbsp; <b>Severidade:</b> <span class="badge m">MÉDIA</span> &nbsp;(retido no Lixo Eletrônico, SCL 9, sem interação do usuário)<br>
+E-mail que se passa pelo DETRAN/gov.br e ameaça a vítima com a suspensão da CNH. O remetente <b>não tem domínio válido</b>, a mensagem falhou em <b>todos os controles de autenticação</b>, saiu de um <b>VPS alugado (Vultr)</b> e o link leva a uma página no <b>Google Cloud Run</b>, disfarçada com o truque do <code>@</code> na URL.</div>
+
+<div class="grid">
+<div>
+<h2>1. Cabeçalhos e autenticação</h2>
+<table>
+<tr><th>From / Return-Path</th><td><code>infracao@detran659532</code> — <span class="fail">sem domínio/TLD</span></td></tr>
+<tr><th>1º salto (origem)</th><td><code>[127.0.1.1] (66.42.69.62)</code>: HELO localhost, script de envio em massa</td></tr>
+<tr><th>SPF / DKIM / DMARC</th><td><span class="fail">none / none / none</span></td></tr>
+<tr><th>MXToolbox</th><td><span class="fail">✗</span> DMARC · <span class="fail">✗</span> SPF Auth/Align · <span class="fail">✗</span> DKIM Auth/Align (0 de 5)</td></tr>
+<tr><th>Filtro Microsoft</th><td>SCL 9, entregue em <code>JunkEmail</code></td></tr>
+</table>
+
+<h2>2. Análise da URL</h2>
+<code>hxxps://www[.]office[.]com-pt-br333593896principal@dete3-489991573399[.]southamerica-east1[.]run[.]app</code>
+<ul>
+<li>Tudo antes do <b>@</b> é <i>userinfo</i> (RFC 3986) e é ignorado. O "office.com" é só isca.</li>
+<li><b>Host real:</b> Google Cloud Run (região São Paulo), IP <code>34.143.78.2</code>. Herda a reputação do Google e tem TLS válido.</li>
+<li><b>Evasão:</b> logo "gov.br" feito com <code>&lt;span&gt;</code> coloridos (sem imagem), nenhum script ou recurso externo, parte <code>text/plain</code> sem link.</li>
+</ul>
+
+<h2>3. Engenharia social</h2>
+<ul>
+<li><b>Autoridade:</b> "Notificação Oficial", logo gov.br, CNPJ e endereço em Brasília</li>
+<li><b>Medo e urgência:</b> suspensão da CNH por 12 meses, apreensão do veículo, prazo de 3 dias</li>
+<li><b>Inconsistências:</b> protocolo do assunto ≠ protocolo do corpo; órgão "Estadual" com endereço federal; vítima chamada pelo e-mail</li>
+</ul>
+</div>
+
+<div>
+<h2>4. IOCs (defanged)</h2>
+<table>
+<tr><th>IPv4</th><td><code>66[.]42[.]69[.]62</code> (Vultr, AS20473, US)</td></tr>
+<tr><th>Domínio</th><td><code>dete3-489991573399[.]southamerica-east1[.]run[.]app</code></td></tr>
+<tr><th>IP do host</th><td><code>34[.]143[.]78[.]2</code> (Google Cloud, AS396982)</td></tr>
+<tr><th>Remetente</th><td><code>infracao@detran659532</code></td></tr>
+<tr><th>Message-ID</th><td><code>1791862663.6106918.398501@detran659532</code></td></tr>
+<tr><th>SHA-256 .eml</th><td><code>3f57a8387d1b8dd3ec756dc62a9ee1c74160a91b9510ee2299b53e454943fe82</code></td></tr>
+</table>
+
+<h2>5. Reputação (OSINT)</h2>
+<table>
+<tr><th>VirusTotal</th><td><span class="fail">11/93</span>: Phishing (Kaspersky, Fortinet, Sophos, BitDefender…). HTTP 404 em 11/11</td></tr>
+<tr><th>Safe Browsing</th><td>Sem classificação: o Chrome <b>não alertaria</b> o usuário</td></tr>
+<tr><th>urlscan.io</th><td>1º scan público; sem screenshot (página removida ou <i>geo-cloaking</i>)</td></tr>
+<tr><th>AbuseIPDB</th><td>0%, sem denúncias: VPS descartável, sem histórico</td></tr>
+</table>
+
+<h2>6. MITRE ATT&amp;CK</h2>
+<table>
+<tr><td><b>T1566.002</b> Spearphishing Link</td><td><b>T1656</b> Impersonation</td></tr>
+<tr><td><b>T1583.003</b> Acquire Infra: VPS</td><td><b>T1583.006</b> Acquire Infra: Web Services</td></tr>
+<tr><td><b>T1036</b> Masquerading (URL com @)</td><td><b>T1204.001</b> User Execution: Link</td></tr>
+</table>
+
+<h2>7. Resposta e recomendações</h2>
+<ul>
+<li><b>Contenção:</b> bloquear o IP no gateway e a URL no proxy/DNS; fazer <i>purge</i> das mensagens com o mesmo remetente/Message-ID</li>
+<li><b>Escopo:</b> verificar nos logs de proxy/DNS acessos a <code>*.run.app</code> com esse host; se houver clique, escalar para N2 e resetar credenciais</li>
+<li><b>Detecção:</b> alertar quando o <code>From</code> não tiver TLD, quando houver URL com <code>@</code> na autoridade, e quando "DETRAN/gov.br" aparecer sem DMARC <i>pass</i></li>
+<li><b>Notificação:</b> Google Cloud Abuse, Safe Browsing, Vultr Abuse, AbuseIPDB, CERT.br</li>
+</ul>
+</div>
+</div>
+
+<div class="foot">Metodologia: nenhum link foi acessado diretamente. Análise estática do <code>.eml</code> com Python (email/html.parser/hashlib) e OSINT passivo (RDAP/ARIN, VirusTotal, urlscan.io, AbuseIPDB, MXToolbox). Dados do destinatário substituídos por [REDACTED]. Detalhes completos e evidências: <b>github.com/cannibaligor/infosec-portfolio</b></div>
+</body></html>

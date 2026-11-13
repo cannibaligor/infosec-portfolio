@@ -1,0 +1,9 @@
+type,value_defanged,context,first_seen_utc
+ipv4,66[.]42[.]69[.]62,Sending server - Vultr Holdings LLC AS20473 US,2026-10-13T03:37:43Z
+hostname,66[.]42[.]69[.]62[.]vultrusercontent[.]com,rDNS of sending VPS,2026-10-13T03:37:43Z
+url,hxxps://www[.]office[.]com-pt-br333593896principal@dete3-489991573399[.]southamerica-east1[.]run[.]app,Phishing link (userinfo @ obfuscation),2026-10-13T03:37:43Z
+domain,dete3-489991573399[.]southamerica-east1[.]run[.]app,Real host - Google Cloud Run,2026-10-13T03:37:43Z
+email_sender,infracao@detran659532,From / Return-Path (no TLD),2026-10-13T03:37:43Z
+message_id,1791862663.6106918.398501@detran659532,Message-ID,2026-10-13T03:37:43Z
+subject,DETRAN: Suspensão de CNH em processamento - Regularize Urgente! Protocolo: 308565566,Subject,2026-10-13T03:37:43Z
+sha256,3f57a8387d1b8dd3ec756dc62a9ee1c74160a91b9510ee2299b53e454943fe82,.eml sample,2026-10-13T03:37:43Z

@@ -1,0 +1,5 @@
+# Nunca versionar amostras brutas (podem conter links ativos e dados pessoais)
+01-phishing-analysis/amostra/*
+!01-phishing-analysis/amostra/.gitkeep
+*.eml
+*.msg
