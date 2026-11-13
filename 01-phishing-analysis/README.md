@@ -247,7 +247,7 @@ Também disponíveis em [`iocs.csv`](iocs.csv).
 | Data | Destino | Indicador | Status |
 |---|---|---|---|
 | 13/11/2026 | Google Cloud Platform Abuse | `dete3-489991573399[.]southamerica-east1[.]run[.]app` | ❌ Ticket `3PDGZ6DX7MWGMBLVGMMGCWYT4A` encerrado: a automação avaliou o IP da Vultr citado no texto ("não hospedado no Google Cloud") |
-| 13/11/2026 | Google Cloud Platform Abuse (reenvio) | Somente a URL do Cloud Run e o IP `34[.]143[.]78[.]2` | ✅ Reenviado com escopo corrigido: aguardando análise (até 1 semana) |
+| 13/11/2026 | Google Cloud Platform Abuse (reenvio) | Somente a URL do Cloud Run e o IP `34[.]143[.]78[.]2` | ❌ Ticket `XZMESDHVMAVPID7EXE5KIOJBI4` encerrado com o mesmo motivo. O IP do Cloud Run pertence ao *Google Front End* compartilhado, não a um recurso de cliente, e a triagem automática (orientada a IP) não o atribui a nenhum projeto. Canal encerrado: a URL segue tratada via Safe Browsing. |
 | 13/11/2026 | Google Safe Browsing | URL de phishing (categoria *Engenharia social → Phishing de órgãos governamentais*) | ✅ Envio concluído |
 | 13/11/2026 | AbuseIPDB | `66[.]42[.]69[.]62` (categorias *Phishing* + *Email Spam*) | ✅ Reportado: **primeira denúncia** desse IP na base |
 | 13/11/2026 | Vultr Abuse (`abuse@vultr.com`) | `66[.]42[.]69[.]62` + cabeçalhos completos (redigidos) | ✅ E-mail enviado: aguardando ticket |
@@ -276,3 +276,4 @@ Python (`email`, `html.parser`, `hashlib`) · RDAP/ARIN · ipinfo.io · VirusTot
 - O host real de uma URL é o que vem **depois do `@`** e antes da primeira `/`.
 - Atacantes abusam de nuvens confiáveis (Google, Microsoft, Cloudflare) para herdar a reputação delas.
 - Formulários de abuso são triados por automação: cada denúncia deve conter **apenas os indicadores daquele provedor**. Citar o IP de outro provedor fez a primeira denúncia ao Google ser encerrada.
+- **Serverless dificulta a resposta:** no Cloud Run, o IP de destino é a borda compartilhada do Google, usada por milhares de clientes. Bloquear por IP causaria falsos positivos, e o formulário de abuso do GCP, orientado a IP, encerrou a denúncia automaticamente. Para esse tipo de infraestrutura, os controles eficazes são **por URL/domínio** (Safe Browsing, proxy, filtro DNS), não por IP.
