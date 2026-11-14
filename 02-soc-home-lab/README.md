@@ -76,7 +76,41 @@ No Wazuh → **Threat Hunting → Events**, com o período cobrindo o ataque:
 agent.name:SOC-Win11 and data.win.eventdata.ipAddress:10.0.10.30
 ```
 
-Evidência bruta (19 alertas da janela do ataque, exportados do indexador): [`evidencias/cenario1-alertas-wazuh.json`](evidencias/cenario1-alertas-wazuh.json)
+Evidência bruta (19 alertas da janela do ataque, documentos completos exportados do indexador): [`evidencias/cenario1-alertas-wazuh.json`](evidencias/cenario1-alertas-wazuh.json)
+
+🎬 **Replay 3D interativo deste ataque:** [cannibaligor.github.io/infosec-portfolio](https://cannibaligor.github.io/infosec-portfolio/#replay)
+
+### Prints do Wazuh
+
+<details open>
+<summary><b>Threat Hunting</b>: 19 alertas, 9 falhas de autenticação e as técnicas MITRE da janela do ataque</summary>
+
+![Dashboard](evidencias/01-threat-hunting-dashboard.png)
+</details>
+
+<details>
+<summary><b>Eventos filtrados pelo IP do atacante</b>: falhas a cada ~2 s, alerta 60204 e o sucesso no fim</summary>
+
+![Eventos](evidencias/02-eventos-ataque.png)
+</details>
+
+<details>
+<summary><b>Alerta 60204</b>: origem, conta, logonType 3 e códigos de erro</summary>
+
+![60204](evidencias/03-alerta-60204-detalhe.png)
+</details>
+
+<details>
+<summary><b>Alerta 60204, regra</b>: nível 10, frequência 8, MITRE T1110</summary>
+
+![60204 regra](evidencias/05-alerta-60204-regra-mitre.png)
+</details>
+
+<details>
+<summary><b>Alerta 92652</b>: login bem-sucedido de 10.0.10.30 como joao.teste</summary>
+
+![92652](evidencias/04-login-sucesso-92652.png)
+</details>
 
 ---
 

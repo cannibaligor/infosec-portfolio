@@ -2,6 +2,8 @@
 
 Portfólio prático de Segurança da Informação com foco em **SOC N1 / Blue Team**.
 
+🌐 **Site interativo (PT/EN), com replay 3D dos ataques:** https://cannibaligor.github.io/infosec-portfolio/
+
 | # | Projeto | Status | Habilidades |
 |---|---------|--------|-------------|
 | 01 | [Análise de Phishing — Falso DETRAN](01-phishing-analysis/) | ✅ Concluído | Análise de cabeçalhos, SPF/DKIM/DMARC, ofuscação de URL, IOCs, OSINT, MITRE ATT&CK |

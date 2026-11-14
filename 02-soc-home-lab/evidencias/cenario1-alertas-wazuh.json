@@ -1,645 +1,1947 @@
 [
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "Advapi",
-          "targetUserName": "SISTEMA",
-          "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
-          "authenticationPackageName": "Negotiate",
-          "targetDomainName": "AUTORIDADE NT",
-          "logonType": "5"
-        },
-        "system": {
-          "eventID": "4624"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 16,
-      "level": 3,
-      "description": "Windows Logon Success",
-      "mitre": {
-        "technique": [
-          "Valid Accounts"
-        ],
-        "id": [
-          "T1078"
-        ],
-        "tactic": [
-          "Defense Evasion",
-          "Persistence",
-          "Privilege Escalation",
-          "Initial Access"
-        ]
-      },
-      "id": "60106"
-    },
-    "timestamp": "2026-11-14T05:55:04.177+0000"
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "LOGON ANÃ”NIMO",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "AUTORIDADE NT",
-          "lmPackageName": "NTLM V1",
-          "logonType": "3"
-        },
-        "system": {
-          "eventID": "4624"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 1,
-      "level": 6,
-      "description": "Successful Remote Logon Detected - User:\\LOGON ANÃ”NIMO - NTLM authentication, possible pass-the-hash attack.",
-      "mitre": {
-        "technique": [
-          "Pass the Hash",
-          "Domain Accounts"
-        ],
-        "id": [
-          "T1550.002",
-          "T1078.002"
-        ],
-        "tactic": [
-          "Defense Evasion",
-          "Lateral Movement",
-          "Persistence",
-          "Privilege Escalation",
-          "Initial Access"
-        ]
-      },
-      "id": "92652"
-    },
-    "timestamp": "2026-11-14T05:56:39.976+0000"
+  "manager": {
+   "name": "wazuh-server"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "targetUserName": "LOGON ANÃ”NIMO",
-          "targetDomainName": "AUTORIDADE NT",
-          "logonType": "3"
-        },
-        "system": {
-          "eventID": "4634"
-        }
-      }
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x3e7",
+     "subjectDomainName": "WORKGROUP",
+     "targetLinkedLogonId": "0x0",
+     "impersonationLevel": "%%1833",
+     "authenticationPackageName": "Negotiate",
+     "targetLogonId": "0x3e7",
+     "logonProcessName": "Advapi",
+     "logonGuid": "{00000000-0000-0000-0000-000000000000}",
+     "targetUserName": "SISTEMA",
+     "keyLength": "0",
+     "elevatedToken": "%%1842",
+     "subjectUserSid": "S-1-5-18",
+     "processId": "0x32c",
+     "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
+     "targetDomainName": "AUTORIDADE NT",
+     "targetUserSid": "S-1-5-18",
+     "virtualAccount": "%%1843",
+     "logonType": "5",
+     "subjectUserName": "SOC-WIN11$"
     },
-    "rule": {
-      "firedtimes": 2,
-      "level": 3,
-      "description": "Windows User Logoff",
-      "id": "60137"
-    },
-    "timestamp": "2026-11-14T05:56:39.978+0000"
+    "system": {
+     "eventID": "4624",
+     "keywords": "0x8020000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Uma conta foi acessada com sucesso.\r\n\r\nEntidade:\r\n\tID de segurança:t\tS-1-5-18\r\n\tNome da conta:\t\tSOC-WIN11$\r\n\tDomínio da conta:\t\tWORKGROUP\r\n\tID de Logon:\t\t0x3E7\r\n\r\nInformações de Logon:\r\n\tTipo de Logon:\t\t5\r\n\tModo de administração restrito:\t-\r\n\tCredential Guard Remoto:\t-\r\n\tConta virtual: \t\tNão\r\n\tToken Elevado:\t\tSim\r\n\r\nNível de Falsificação:\t\tRepresentação\r\n\r\nNovo Logon:\r\n\tID de Segurança:\t\tS-1-5-18\r\n\tNome da Conta:\t\tSISTEMA\r\n\tConta de Domínio:\t\tAUTORIDADE NT\r\n\tID de Logon:\t\t0x3E7\r\n\tID de Logon Vinculada:\t\t0x0\r\n\tNome da Conta na Rede: \t-\r\n\tDomínio da Conta de Rede:\t-\r\n\tGUID de Logon:\t\t{00000000-0000-0000-0000-000000000000}\r\n\r\n\r\nInformação do processo:\r\n\t ID do processo:\t\t0x32c\r\n\tNome do processo:\t\tC:\\Windows\\System32\\services.exe\r\n\r\nInformação da rede:\r\n\tNome da Estação de trabalho:\t-\r\n\r\n\tEndereço da rede de origem:\t-\r\n\r\n\tPorta de origem: \t\t-\r\n\r\nInformação detalhada de autenticação:\r\n\tProcesso de logon:\t\tAdvapi  \r\n\tPacote de autenticação:\tNegotiate\r\n\tServiços transitados:\t-\r\n\tNome do pacote (apenas NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n Este evento é gerado quando uma sessão de logon é criada. É gerado no computador que foi acessado.\r\n\r\n Os campos de assunto indicam a conta no sistema local que solicitou o logon. Este é mais comumente um serviço como o serviço do servidor, ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\n\r\nO campo tipo de logon indica o tipo de logon que ocorreu. Os tipos mais comuns são 2 (interativo) e 3 (rede).\r\n\r\nOs campos Novo Logon indicam a conta para a qual o novo logon foi criado, ou seja, a conta que foi logada.\r\n\r\nOs campos rede indicam a origem de uma solicitação de logon remoto. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nO campo nível de falsificação indica até que ponto um processo na sessão de logon pode ser falsificado.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- O GUID de logon é um identificador único que pode ser usado para correlacionar este evento com um evento KDC.\r\n\t- Os serviços transitados indicam quais serviços intermediários participaram desta solicitação de logon.\r\n\t- O nome do pacote indica qual subprotocolo foi usado entre os protocolos NTLM.\r\n\t- O comprimento da chave indica o comprimento da chave de sessão gerada. Este será 0 se nenhuma chave de sessão tiver sido solicitada.\"",
+     "version": "3",
+     "systemTime": "2026-11-14T05:51:25.9590189Z",
+     "eventRecordID": "1688",
+     "threadID": "868",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_SUCCESS",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
   },
-  {
-    "data": {
-      "win": {
-        "system": {
-          "eventID": "7040"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 1,
-      "level": 3,
-      "description": "Service startup type was changed",
-      "id": "61104"
-    },
-    "timestamp": "2026-11-14T05:56:47.689+0000"
+  "rule": {
+   "mail": false,
+   "level": 3,
+   "pci_dss": [
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Windows Logon Success",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_success"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.9"
+   ],
+   "gdpr": [
+    "IV_32.2"
+   ],
+   "firedtimes": 16,
+   "mitre": {
+    "technique": [
+     "Valid Accounts"
+    ],
+    "id": [
+     "T1078"
+    ],
+    "tactic": [
+     "Defense Evasion",
+     "Persistence",
+     "Privilege Escalation",
+     "Initial Access"
+    ]
+   },
+   "id": "60106",
+   "gpg13": [
+    "7.1",
+    "7.2"
+   ]
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 1,
-      "level": 5,
-      "description": "Logon Failure - Unknown user or bad password",
-      "mitre": {
-        "technique": [
-          "Account Access Removal"
-        ],
-        "id": [
-          "T1531"
-        ],
-        "tactic": [
-          "Impact"
-        ]
-      },
-      "id": "60122"
-    },
-    "timestamp": "2026-11-14T05:56:50.327+0000"
+  "decoder": {
+   "name": "windows_eventchannel"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 2,
-      "level": 5,
-      "description": "Logon Failure - Unknown user or bad password",
-      "mitre": {
-        "technique": [
-          "Account Access Removal"
-        ],
-        "id": [
-          "T1531"
-        ],
-        "tactic": [
-          "Impact"
-        ]
-      },
-      "id": "60122"
-    },
-    "timestamp": "2026-11-14T05:56:52.366+0000"
+  "input": {
+   "type": "log"
   },
-  {
-    "data": {
-      "win": {
-        "system": {
-          "eventID": "7040"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 2,
-      "level": 3,
-      "description": "Service startup type was changed",
-      "id": "61104"
-    },
-    "timestamp": "2026-11-14T05:56:52.367+0000"
+  "@timestamp": "2026-11-14T05:55:04.177Z",
+  "location": "EventChannel",
+  "id": "1794635704.2794442",
+  "timestamp": "2026-11-14T05:55:04.177+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "Advapi",
-          "targetUserName": "SISTEMA",
-          "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
-          "authenticationPackageName": "Negotiate",
-          "targetDomainName": "AUTORIDADE NT",
-          "logonType": "5"
-        },
-        "system": {
-          "eventID": "4624"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 17,
-      "level": 3,
-      "description": "Windows Logon Success",
-      "mitre": {
-        "technique": [
-          "Valid Accounts"
-        ],
-        "id": [
-          "T1078"
-        ],
-        "tactic": [
-          "Defense Evasion",
-          "Persistence",
-          "Privilege Escalation",
-          "Initial Access"
-        ]
-      },
-      "id": "60106"
-    },
-    "timestamp": "2026-11-14T05:56:52.381+0000"
+  "manager": {
+   "name": "wazuh-server"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "targetLinkedLogonId": "0x0",
+     "impersonationLevel": "%%1833",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "lmPackageName": "NTLM V1",
+     "targetLogonId": "0x1ba8f3",
+     "logonProcessName": "NtLmSsp",
+     "logonGuid": "{00000000-0000-0000-0000-000000000000}",
+     "targetUserName": "LOGON ANÔNIMO",
+     "keyLength": "128",
+     "elevatedToken": "%%1843",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "46014",
+     "targetDomainName": "AUTORIDADE NT",
+     "targetUserSid": "S-1-5-7",
+     "virtualAccount": "%%1843",
+     "logonType": "3"
     },
-    "rule": {
-      "firedtimes": 3,
-      "level": 5,
-      "description": "Logon Failure - Unknown user or bad password",
-      "mitre": {
-        "technique": [
-          "Account Access Removal"
-        ],
-        "id": [
-          "T1531"
-        ],
-        "tactic": [
-          "Impact"
-        ]
-      },
-      "id": "60122"
-    },
-    "timestamp": "2026-11-14T05:56:54.404+0000"
+    "system": {
+     "eventID": "4624",
+     "keywords": "0x8020000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Uma conta foi acessada com sucesso.\r\n\r\nEntidade:\r\n\tID de segurança:t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tID de Logon:\t\t0x0\r\n\r\nInformações de Logon:\r\n\tTipo de Logon:\t\t3\r\n\tModo de administração restrito:\t-\r\n\tCredential Guard Remoto:\t-\r\n\tConta virtual: \t\tNão\r\n\tToken Elevado:\t\tNão\r\n\r\nNível de Falsificação:\t\tRepresentação\r\n\r\nNovo Logon:\r\n\tID de Segurança:\t\tS-1-5-7\r\n\tNome da Conta:\t\tLOGON ANÔNIMO\r\n\tConta de Domínio:\t\tAUTORIDADE NT\r\n\tID de Logon:\t\t0x1BA8F3\r\n\tID de Logon Vinculada:\t\t0x0\r\n\tNome da Conta na Rede: \t-\r\n\tDomínio da Conta de Rede:\t-\r\n\tGUID de Logon:\t\t{00000000-0000-0000-0000-000000000000}\r\n\r\n\r\nInformação do processo:\r\n\t ID do processo:\t\t0x0\r\n\tNome do processo:\t\t-\r\n\r\nInformação da rede:\r\n\tNome da Estação de trabalho:\t-\r\n\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\r\n\tPorta de origem: \t\t46014\r\n\r\nInformação detalhada de autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (apenas NTLM):\tNTLM V1\r\n\tComprimento da chave:\t\t128\r\n\r\n Este evento é gerado quando uma sessão de logon é criada. É gerado no computador que foi acessado.\r\n\r\n Os campos de assunto indicam a conta no sistema local que solicitou o logon. Este é mais comumente um serviço como o serviço do servidor, ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\n\r\nO campo tipo de logon indica o tipo de logon que ocorreu. Os tipos mais comuns são 2 (interativo) e 3 (rede).\r\n\r\nOs campos Novo Logon indicam a conta para a qual o novo logon foi criado, ou seja, a conta que foi logada.\r\n\r\nOs campos rede indicam a origem de uma solicitação de logon remoto. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nO campo nível de falsificação indica até que ponto um processo na sessão de logon pode ser falsificado.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- O GUID de logon é um identificador único que pode ser usado para correlacionar este evento com um evento KDC.\r\n\t- Os serviços transitados indicam quais serviços intermediários participaram desta solicitação de logon.\r\n\t- O nome do pacote indica qual subprotocolo foi usado entre os protocolos NTLM.\r\n\t- O comprimento da chave indica o comprimento da chave de sessão gerada. Este será 0 se nenhuma chave de sessão tiver sido solicitada.\"",
+     "version": "3",
+     "systemTime": "2026-11-14T05:53:24.1999259Z",
+     "eventRecordID": "1690",
+     "threadID": "868",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_SUCCESS",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 4,
-      "level": 5,
-      "description": "Logon Failure - Unknown user or bad password",
-      "mitre": {
-        "technique": [
-          "Account Access Removal"
-        ],
-        "id": [
-          "T1531"
-        ],
-        "tactic": [
-          "Impact"
-        ]
-      },
-      "id": "60122"
-    },
-    "timestamp": "2026-11-14T05:56:56.443+0000"
+  "rule": {
+   "mail": false,
+   "level": 6,
+   "hipaa": [
+    "164.312.b"
+   ],
+   "pci_dss": [
+    "10.2.5"
+   ],
+   "tsc": [
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Successful Remote Logon Detected - User:\\LOGON ANÔNIMO - NTLM authentication, possible pass-the-hash attack.",
+   "groups": [
+    "win_evt_channel",
+    "windows",
+    "authentication_success"
+   ],
+   "nist_800_53": [
+    "AC.7",
+    "AU.14"
+   ],
+   "gdpr": [
+    "IV_32.2"
+   ],
+   "firedtimes": 1,
+   "mitre": {
+    "technique": [
+     "Pass the Hash",
+     "Domain Accounts"
+    ],
+    "id": [
+     "T1550.002",
+     "T1078.002"
+    ],
+    "tactic": [
+     "Defense Evasion",
+     "Lateral Movement",
+     "Persistence",
+     "Privilege Escalation",
+     "Initial Access"
+    ]
+   },
+   "id": "92652",
+   "gpg13": [
+    "7.1",
+    "7.2"
+   ]
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 5,
-      "level": 5,
-      "description": "Logon Failure - Unknown user or bad password",
-      "mitre": {
-        "technique": [
-          "Account Access Removal"
-        ],
-        "id": [
-          "T1531"
-        ],
-        "tactic": [
-          "Impact"
-        ]
-      },
-      "id": "60122"
-    },
-    "timestamp": "2026-11-14T05:56:57.652+0000"
+  "decoder": {
+   "name": "windows_eventchannel"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 6,
-      "level": 5,
-      "description": "Logon Failure - Unknown user or bad password",
-      "mitre": {
-        "technique": [
-          "Account Access Removal"
-        ],
-        "id": [
-          "T1531"
-        ],
-        "tactic": [
-          "Impact"
-        ]
-      },
-      "id": "60122"
-    },
-    "timestamp": "2026-11-14T05:57:00.564+0000"
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4624\",\"version\":\"3\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8020000000000000\",\"systemTime\":\"2026-11-14T05:53:24.1999259Z\",\"eventRecordID\":\"1690\",\"processID\":\"820\",\"threadID\":\"868\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_SUCCESS\",\"message\":\"\\\"Uma conta foi acessada com sucesso.\\r\\n\\r\\nEntidade:\\r\\n\\tID de segurança:t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tID de Logon:\\t\\t0x0\\r\\n\\r\\nInformações de Logon:\\r\\n\\tTipo de Logon:\\t\\t3\\r\\n\\tModo de administração restrito:\\t-\\r\\n\\tCredential Guard Remoto:\\t-\\r\\n\\tConta virtual: \\t\\tNão\\r\\n\\tToken Elevado:\\t\\tNão\\r\\n\\r\\nNível de Falsificação:\\t\\tRepresentação\\r\\n\\r\\nNovo Logon:\\r\\n\\tID de Segurança:\\t\\tS-1-5-7\\r\\n\\tNome da Conta:\\t\\tLOGON ANÔNIMO\\r\\n\\tConta de Domínio:\\t\\tAUTORIDADE NT\\r\\n\\tID de Logon:\\t\\t0x1BA8F3\\r\\n\\tID de Logon Vinculada:\\t\\t0x0\\r\\n\\tNome da Conta na Rede: \\t-\\r\\n\\tDomínio da Conta de Rede:\\t-\\r\\n\\tGUID de Logon:\\t\\t{00000000-0000-0000-0000-000000000000}\\r\\n\\r\\n\\r\\nInformação do processo:\\r\\n\\t ID do processo:\\t\\t0x0\\r\\n\\tNome do processo:\\t\\t-\\r\\n\\r\\nInformação da rede:\\r\\n\\tNome da Estação de trabalho:\\t-\\r\\n\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\r\\n\\tPorta de origem: \\t\\t46014\\r\\n\\r\\nInformação detalhada de autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (apenas NTLM):\\tNTLM V1\\r\\n\\tComprimento da chave:\\t\\t128\\r\\n\\r\\n Este evento é gerado quando uma sessão de logon é criada. É gerado no computador que foi acessado.\\r\\n\\r\\n Os campos de assunto indicam a conta no sistema local que solicitou o logon. Este é mais comumente um serviço como o serviço do servidor, ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon que ocorreu. Os tipos mais comuns são 2 (interativo) e 3 (rede).\\r\\n\\r\\nOs campos Novo Logon indicam a conta para a qual o novo logon foi criado, ou seja, a conta que foi logada.\\r\\n\\r\\nOs campos rede indicam a origem de uma solicitação de logon remoto. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nO campo nível de falsificação indica até que ponto um processo na sessão de logon pode ser falsificado.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- O GUID de logon é um identificador único que pode ser usado para correlacionar este evento com um evento KDC.\\r\\n\\t- Os serviços transitados indicam quais serviços intermediários participaram desta solicitação de logon.\\r\\n\\t- O nome do pacote indica qual subprotocolo foi usado entre os protocolos NTLM.\\r\\n\\t- O comprimento da chave indica o comprimento da chave de sessão gerada. Este será 0 se nenhuma chave de sessão tiver sido solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-5-7\",\"targetUserName\":\"LOGON ANÔNIMO\",\"targetDomainName\":\"AUTORIDADE NT\",\"targetLogonId\":\"0x1ba8f3\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"logonGuid\":\"{00000000-0000-0000-0000-000000000000}\",\"lmPackageName\":\"NTLM V1\",\"keyLength\":\"128\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"46014\",\"impersonationLevel\":\"%%1833\",\"virtualAccount\":\"%%1843\",\"targetLinkedLogonId\":\"0x0\",\"elevatedToken\":\"%%1843\"}}}",
+  "input": {
+   "type": "log"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 7,
-      "level": 5,
-      "description": "Logon Failure - Unknown user or bad password",
-      "mitre": {
-        "technique": [
-          "Account Access Removal"
-        ],
-        "id": [
-          "T1531"
-        ],
-        "tactic": [
-          "Impact"
-        ]
-      },
-      "id": "60122"
-    },
-    "timestamp": "2026-11-14T05:57:02.699+0000"
+  "@timestamp": "2026-11-14T05:56:39.976Z",
+  "location": "EventChannel",
+  "id": "1794635799.2804842",
+  "timestamp": "2026-11-14T05:56:39.976+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 1,
-      "level": 10,
-      "description": "Multiple Windows Logon Failures",
-      "mitre": {
-        "technique": [
-          "Brute Force"
-        ],
-        "id": [
-          "T1110"
-        ],
-        "tactic": [
-          "Credential Access"
-        ]
-      },
-      "id": "60204"
-    },
-    "timestamp": "2026-11-14T05:57:04.812+0000"
+  "manager": {
+   "name": "wazuh-server"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "subStatus": "0xc000006a",
-          "logonType": "3",
-          "status": "0xc000006d"
-        },
-        "system": {
-          "eventID": "4625"
-        }
-      }
+  "data": {
+   "win": {
+    "eventdata": {
+     "targetLogonId": "0x1ba8f3",
+     "targetUserName": "LOGON ANÔNIMO",
+     "targetDomainName": "AUTORIDADE NT",
+     "targetUserSid": "S-1-5-7",
+     "logonType": "3"
     },
-    "rule": {
-      "firedtimes": 8,
-      "level": 5,
-      "description": "Logon Failure - Unknown user or bad password",
-      "mitre": {
-        "technique": [
-          "Account Access Removal"
-        ],
-        "id": [
-          "T1531"
-        ],
-        "tactic": [
-          "Impact"
-        ]
-      },
-      "id": "60122"
-    },
-    "timestamp": "2026-11-14T05:57:06.946+0000"
+    "system": {
+     "eventID": "4634",
+     "keywords": "0x8020000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Foi efetuado o logoff de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-5-7\r\n\tNome da conta:\t\tLOGON ANÔNIMO\r\n\tDomínio da conta:\t\tAUTORIDADE NT\r\n\tIdentificação de logon:\t\t0x1BA8F3\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nEste evento é gerado quando uma sessão de logon é destruída. Ele pode ser positivamente correlacionado com um evento de logon, utilizando o valor Identificação de logon. As identificações de logon são exclusivas apenas entre as reinicializações do mesmo computador.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:24.2492245Z",
+     "eventRecordID": "1691",
+     "threadID": "884",
+     "computer": "soc-win11",
+     "task": "12545",
+     "processID": "820",
+     "severityValue": "AUDIT_SUCCESS",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "NtLmSsp",
-          "targetUserName": "joao.teste",
-          "ipAddress": "10.0.10.30",
-          "authenticationPackageName": "NTLM",
-          "targetDomainName": "SOC-WIN11",
-          "lmPackageName": "NTLM V2",
-          "logonType": "3"
-        },
-        "system": {
-          "eventID": "4624"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 2,
-      "level": 6,
-      "description": "Successful Remote Logon Detected - User:\\joao.teste - NTLM authentication, possible pass-the-hash attack.",
-      "mitre": {
-        "technique": [
-          "Pass the Hash",
-          "Domain Accounts"
-        ],
-        "id": [
-          "T1550.002",
-          "T1078.002"
-        ],
-        "tactic": [
-          "Defense Evasion",
-          "Lateral Movement",
-          "Persistence",
-          "Privilege Escalation",
-          "Initial Access"
-        ]
-      },
-      "id": "92652"
-    },
-    "timestamp": "2026-11-14T05:57:09.133+0000"
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 3,
+   "pci_dss": [
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Windows User Logoff",
+   "groups": [
+    "windows",
+    "windows_security"
+   ],
+   "id": "60137",
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_32.2"
+   ]
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "targetUserName": "joao.teste",
-          "targetDomainName": "SOC-WIN11",
-          "logonType": "3"
-        },
-        "system": {
-          "eventID": "4634"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 3,
-      "level": 3,
-      "description": "Windows User Logoff",
-      "id": "60137"
-    },
-    "timestamp": "2026-11-14T05:57:09.149+0000"
+  "decoder": {
+   "name": "windows_eventchannel"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "Advapi",
-          "targetUserName": "SISTEMA",
-          "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
-          "authenticationPackageName": "Negotiate",
-          "targetDomainName": "AUTORIDADE NT",
-          "logonType": "5"
-        },
-        "system": {
-          "eventID": "4624"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 18,
-      "level": 3,
-      "description": "Windows Logon Success",
-      "mitre": {
-        "technique": [
-          "Valid Accounts"
-        ],
-        "id": [
-          "T1078"
-        ],
-        "tactic": [
-          "Defense Evasion",
-          "Persistence",
-          "Privilege Escalation",
-          "Initial Access"
-        ]
-      },
-      "id": "60106"
-    },
-    "timestamp": "2026-11-14T05:58:07.846+0000"
+  "input": {
+   "type": "log"
   },
-  {
-    "data": {
-      "win": {
-        "eventdata": {
-          "logonProcessName": "Advapi",
-          "targetUserName": "SISTEMA",
-          "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
-          "authenticationPackageName": "Negotiate",
-          "targetDomainName": "AUTORIDADE NT",
-          "logonType": "5"
-        },
-        "system": {
-          "eventID": "4624"
-        }
-      }
+  "@timestamp": "2026-11-14T05:56:39.978Z",
+  "location": "EventChannel",
+  "id": "1794635799.2802234",
+  "timestamp": "2026-11-14T05:56:39.978+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "param3": "iniciar demanda",
+     "param4": "BITS",
+     "param1": "Serviço de Transferência Inteligente em Segundo Plano",
+     "param2": "iniciar automaticamente"
     },
-    "rule": {
-      "firedtimes": 19,
-      "level": 3,
-      "description": "Windows Logon Success",
-      "mitre": {
-        "technique": [
-          "Valid Accounts"
-        ],
-        "id": [
-          "T1078"
-        ],
-        "tactic": [
-          "Defense Evasion",
-          "Persistence",
-          "Privilege Escalation",
-          "Initial Access"
-        ]
-      },
-      "id": "60106"
+    "system": {
+     "eventID": "7040",
+     "eventSourceName": "Service Control Manager",
+     "keywords": "0x8080000000000000",
+     "providerGuid": "{555908d1-a6d7-4695-8e1e-26931d2012f4}",
+     "level": "4",
+     "channel": "System",
+     "opcode": "0",
+     "message": "\"O tipo de inicialização do serviço Serviço de Transferência Inteligente em Segundo Plano foi alterado de iniciar automaticamente para iniciar demanda.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:31.9260142Z",
+     "eventRecordID": "727",
+     "threadID": "5080",
+     "computer": "soc-win11",
+     "task": "0",
+     "processID": "812",
+     "severityValue": "INFORMATION",
+     "providerName": "Service Control Manager"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": false,
+   "level": 3,
+   "pci_dss": [
+    "10.6"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Service startup type was changed",
+   "groups": [
+    "windows",
+    "windows_system",
+    "policy_changed"
+   ],
+   "id": "61104",
+   "nist_800_53": [
+    "AU.6"
+   ],
+   "info": "This does not appear to be logged on Windows 2000",
+   "gdpr": [
+    "IV_35.7.d"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:56:47.689Z",
+  "location": "EventChannel",
+  "id": "1794635807.2812568",
+  "timestamp": "2026-11-14T05:56:47.689+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "47114",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
     },
-    "timestamp": "2026-11-14T05:58:32.064+0000"
-  }
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t47114\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:34.5585947Z",
+     "eventRecordID": "1692",
+     "threadID": "884",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 5,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Logon Failure - Unknown user or bad password",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failed"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 1,
+   "mitre": {
+    "technique": [
+     "Account Access Removal"
+    ],
+    "id": [
+     "T1531"
+    ],
+    "tactic": [
+     "Impact"
+    ]
+   },
+   "id": "60122",
+   "gpg13": [
+    "7.1"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:56:50.327Z",
+  "location": "EventChannel",
+  "id": "1794635810.2814526",
+  "timestamp": "2026-11-14T05:56:50.327+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "47142",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
+    },
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t47142\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:36.5946903Z",
+     "eventRecordID": "1693",
+     "threadID": "884",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 5,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Logon Failure - Unknown user or bad password",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failed"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 2,
+   "mitre": {
+    "technique": [
+     "Account Access Removal"
+    ],
+    "id": [
+     "T1531"
+    ],
+    "tactic": [
+     "Impact"
+    ]
+   },
+   "id": "60122",
+   "gpg13": [
+    "7.1"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:56:52.366Z",
+  "location": "EventChannel",
+  "id": "1794635812.2822994",
+  "timestamp": "2026-11-14T05:56:52.366+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "param3": "iniciar automaticamente",
+     "param4": "BITS",
+     "param1": "Serviço de Transferência Inteligente em Segundo Plano",
+     "param2": "iniciar demanda"
+    },
+    "system": {
+     "eventID": "7040",
+     "eventSourceName": "Service Control Manager",
+     "keywords": "0x8080000000000000",
+     "providerGuid": "{555908d1-a6d7-4695-8e1e-26931d2012f4}",
+     "level": "4",
+     "channel": "System",
+     "opcode": "0",
+     "message": "\"O tipo de inicialização do serviço Serviço de Transferência Inteligente em Segundo Plano foi alterado de iniciar demanda para iniciar automaticamente.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:37.5340418Z",
+     "eventRecordID": "728",
+     "threadID": "5080",
+     "computer": "soc-win11",
+     "task": "0",
+     "processID": "812",
+     "severityValue": "INFORMATION",
+     "providerName": "Service Control Manager"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 3,
+   "pci_dss": [
+    "10.6"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Service startup type was changed",
+   "groups": [
+    "windows",
+    "windows_system",
+    "policy_changed"
+   ],
+   "id": "61104",
+   "nist_800_53": [
+    "AU.6"
+   ],
+   "info": "This does not appear to be logged on Windows 2000",
+   "gdpr": [
+    "IV_35.7.d"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:56:52.367Z",
+  "location": "EventChannel",
+  "id": "1794635812.2821036",
+  "timestamp": "2026-11-14T05:56:52.367+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x3e7",
+     "subjectDomainName": "WORKGROUP",
+     "targetLinkedLogonId": "0x0",
+     "impersonationLevel": "%%1833",
+     "authenticationPackageName": "Negotiate",
+     "targetLogonId": "0x3e7",
+     "logonProcessName": "Advapi",
+     "logonGuid": "{00000000-0000-0000-0000-000000000000}",
+     "targetUserName": "SISTEMA",
+     "keyLength": "0",
+     "elevatedToken": "%%1842",
+     "subjectUserSid": "S-1-5-18",
+     "processId": "0x32c",
+     "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
+     "targetDomainName": "AUTORIDADE NT",
+     "targetUserSid": "S-1-5-18",
+     "virtualAccount": "%%1843",
+     "logonType": "5",
+     "subjectUserName": "SOC-WIN11$"
+    },
+    "system": {
+     "eventID": "4624",
+     "keywords": "0x8020000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Uma conta foi acessada com sucesso.\r\n\r\nEntidade:\r\n\tID de segurança:t\tS-1-5-18\r\n\tNome da conta:\t\tSOC-WIN11$\r\n\tDomínio da conta:\t\tWORKGROUP\r\n\tID de Logon:\t\t0x3E7\r\n\r\nInformações de Logon:\r\n\tTipo de Logon:\t\t5\r\n\tModo de administração restrito:\t-\r\n\tCredential Guard Remoto:\t-\r\n\tConta virtual: \t\tNão\r\n\tToken Elevado:\t\tSim\r\n\r\nNível de Falsificação:\t\tRepresentação\r\n\r\nNovo Logon:\r\n\tID de Segurança:\t\tS-1-5-18\r\n\tNome da Conta:\t\tSISTEMA\r\n\tConta de Domínio:\t\tAUTORIDADE NT\r\n\tID de Logon:\t\t0x3E7\r\n\tID de Logon Vinculada:\t\t0x0\r\n\tNome da Conta na Rede: \t-\r\n\tDomínio da Conta de Rede:\t-\r\n\tGUID de Logon:\t\t{00000000-0000-0000-0000-000000000000}\r\n\r\n\r\nInformação do processo:\r\n\t ID do processo:\t\t0x32c\r\n\tNome do processo:\t\tC:\\Windows\\System32\\services.exe\r\n\r\nInformação da rede:\r\n\tNome da Estação de trabalho:\t-\r\n\r\n\tEndereço da rede de origem:\t-\r\n\r\n\tPorta de origem: \t\t-\r\n\r\nInformação detalhada de autenticação:\r\n\tProcesso de logon:\t\tAdvapi  \r\n\tPacote de autenticação:\tNegotiate\r\n\tServiços transitados:\t-\r\n\tNome do pacote (apenas NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n Este evento é gerado quando uma sessão de logon é criada. É gerado no computador que foi acessado.\r\n\r\n Os campos de assunto indicam a conta no sistema local que solicitou o logon. Este é mais comumente um serviço como o serviço do servidor, ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\n\r\nO campo tipo de logon indica o tipo de logon que ocorreu. Os tipos mais comuns são 2 (interativo) e 3 (rede).\r\n\r\nOs campos Novo Logon indicam a conta para a qual o novo logon foi criado, ou seja, a conta que foi logada.\r\n\r\nOs campos rede indicam a origem de uma solicitação de logon remoto. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nO campo nível de falsificação indica até que ponto um processo na sessão de logon pode ser falsificado.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- O GUID de logon é um identificador único que pode ser usado para correlacionar este evento com um evento KDC.\r\n\t- Os serviços transitados indicam quais serviços intermediários participaram desta solicitação de logon.\r\n\t- O nome do pacote indica qual subprotocolo foi usado entre os protocolos NTLM.\r\n\t- O comprimento da chave indica o comprimento da chave de sessão gerada. Este será 0 se nenhuma chave de sessão tiver sido solicitada.\"",
+     "version": "3",
+     "systemTime": "2026-11-14T05:53:37.3378098Z",
+     "eventRecordID": "1694",
+     "threadID": "884",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_SUCCESS",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 3,
+   "pci_dss": [
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Windows Logon Success",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_success"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.9"
+   ],
+   "gdpr": [
+    "IV_32.2"
+   ],
+   "firedtimes": 17,
+   "mitre": {
+    "technique": [
+     "Valid Accounts"
+    ],
+    "id": [
+     "T1078"
+    ],
+    "tactic": [
+     "Defense Evasion",
+     "Persistence",
+     "Privilege Escalation",
+     "Initial Access"
+    ]
+   },
+   "id": "60106",
+   "gpg13": [
+    "7.1",
+    "7.2"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:56:52.381Z",
+  "location": "EventChannel",
+  "id": "1794635812.2829504",
+  "timestamp": "2026-11-14T05:56:52.381+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "47150",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
+    },
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t47150\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:38.6308067Z",
+     "eventRecordID": "1696",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 5,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Logon Failure - Unknown user or bad password",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failed"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 3,
+   "mitre": {
+    "technique": [
+     "Account Access Removal"
+    ],
+    "id": [
+     "T1531"
+    ],
+    "tactic": [
+     "Impact"
+    ]
+   },
+   "id": "60122",
+   "gpg13": [
+    "7.1"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:56:54.404Z",
+  "location": "EventChannel",
+  "id": "1794635814.2837296",
+  "timestamp": "2026-11-14T05:56:54.404+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "47164",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
+    },
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t47164\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:40.6741593Z",
+     "eventRecordID": "1697",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 5,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Logon Failure - Unknown user or bad password",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failed"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 4,
+   "mitre": {
+    "technique": [
+     "Account Access Removal"
+    ],
+    "id": [
+     "T1531"
+    ],
+    "tactic": [
+     "Impact"
+    ]
+   },
+   "id": "60122",
+   "gpg13": [
+    "7.1"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:56:56.443Z",
+  "location": "EventChannel",
+  "id": "1794635816.2843808",
+  "timestamp": "2026-11-14T05:56:56.443+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "39582",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
+    },
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t39582\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:42.6997981Z",
+     "eventRecordID": "1700",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 5,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Logon Failure - Unknown user or bad password",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failed"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 5,
+   "mitre": {
+    "technique": [
+     "Account Access Removal"
+    ],
+    "id": [
+     "T1531"
+    ],
+    "tactic": [
+     "Impact"
+    ]
+   },
+   "id": "60122",
+   "gpg13": [
+    "7.1"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:56:57.652Z",
+  "location": "EventChannel",
+  "id": "1794635817.2850320",
+  "timestamp": "2026-11-14T05:56:57.652+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "39594",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
+    },
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t39594\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:44.8003498Z",
+     "eventRecordID": "1701",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 5,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Logon Failure - Unknown user or bad password",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failed"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 6,
+   "mitre": {
+    "technique": [
+     "Account Access Removal"
+    ],
+    "id": [
+     "T1531"
+    ],
+    "tactic": [
+     "Impact"
+    ]
+   },
+   "id": "60122",
+   "gpg13": [
+    "7.1"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:57:00.564Z",
+  "location": "EventChannel",
+  "id": "1794635820.2856832",
+  "timestamp": "2026-11-14T05:57:00.564+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "39606",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
+    },
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t39606\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:46.9351601Z",
+     "eventRecordID": "1702",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 5,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Logon Failure - Unknown user or bad password",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failed"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 7,
+   "mitre": {
+    "technique": [
+     "Account Access Removal"
+    ],
+    "id": [
+     "T1531"
+    ],
+    "tactic": [
+     "Impact"
+    ]
+   },
+   "id": "60122",
+   "gpg13": [
+    "7.1"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:57:02.699Z",
+  "location": "EventChannel",
+  "id": "1794635822.2863344",
+  "timestamp": "2026-11-14T05:57:02.699+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "previous_output": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4625\",\"version\":\"0\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8010000000000000\",\"systemTime\":\"2026-11-14T05:53:46.9351601Z\",\"eventRecordID\":\"1702\",\"processID\":\"820\",\"threadID\":\"7800\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_FAILURE\",\"message\":\"\\\"Falha no logon de uma conta.\\r\\n\\r\\nRequerente:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tIdentificação de logon:\\t\\t0x0\\r\\n\\r\\nTipo de logon:\\t\\t\\t3\\r\\n\\r\\nConta cujo logon falhou:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\tjoao.teste\\r\\n\\tDomínio da conta:\\t\\tSOC-WIN11\\r\\n\\r\\nInformações da falha:\\r\\n\\tRazão da falha:\\t\\tNome de usuário desconhecido ou senha incorreta.\\r\\n\\tStatus:\\t\\t\\t0xC000006D\\r\\n\\tSubstatus:\\t\\t0xC000006A\\r\\n\\r\\nInformações do processo:\\r\\n\\tID de processo do chamador:\\t0x0\\r\\n\\tNome de processo do chamador:\\t-\\r\\n\\r\\nInformações da rede:\\r\\n\\tNome da estação de trabalho:\\t-\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\tPorta de origem:\\t\\t39606\\r\\n\\r\\nInformações detalhadas da autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (somente NTLM):\\t-\\r\\n\\tComprimento da chave:\\t\\t0\\r\\n\\r\\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\\r\\n\\r\\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\\r\\n\\r\\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\\r\\n\\r\\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\\r\\n\\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\\r\\n\\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-0-0\",\"targetUserName\":\"joao.teste\",\"targetDomainName\":\"SOC-WIN11\",\"status\":\"0xc000006d\",\"failureReason\":\"%%2313\",\"subStatus\":\"0xc000006a\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"keyLength\":\"0\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"39606\"}}}\n{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4625\",\"version\":\"0\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8010000000000000\",\"systemTime\":\"2026-11-14T05:53:44.8003498Z\",\"eventRecordID\":\"1701\",\"processID\":\"820\",\"threadID\":\"7800\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_FAILURE\",\"message\":\"\\\"Falha no logon de uma conta.\\r\\n\\r\\nRequerente:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tIdentificação de logon:\\t\\t0x0\\r\\n\\r\\nTipo de logon:\\t\\t\\t3\\r\\n\\r\\nConta cujo logon falhou:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\tjoao.teste\\r\\n\\tDomínio da conta:\\t\\tSOC-WIN11\\r\\n\\r\\nInformações da falha:\\r\\n\\tRazão da falha:\\t\\tNome de usuário desconhecido ou senha incorreta.\\r\\n\\tStatus:\\t\\t\\t0xC000006D\\r\\n\\tSubstatus:\\t\\t0xC000006A\\r\\n\\r\\nInformações do processo:\\r\\n\\tID de processo do chamador:\\t0x0\\r\\n\\tNome de processo do chamador:\\t-\\r\\n\\r\\nInformações da rede:\\r\\n\\tNome da estação de trabalho:\\t-\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\tPorta de origem:\\t\\t39594\\r\\n\\r\\nInformações detalhadas da autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (somente NTLM):\\t-\\r\\n\\tComprimento da chave:\\t\\t0\\r\\n\\r\\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\\r\\n\\r\\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\\r\\n\\r\\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\\r\\n\\r\\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\\r\\n\\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\\r\\n\\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-0-0\",\"targetUserName\":\"joao.teste\",\"targetDomainName\":\"SOC-WIN11\",\"status\":\"0xc000006d\",\"failureReason\":\"%%2313\",\"subStatus\":\"0xc000006a\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"keyLength\":\"0\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"39594\"}}}\n{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4625\",\"version\":\"0\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8010000000000000\",\"systemTime\":\"2026-11-14T05:53:42.6997981Z\",\"eventRecordID\":\"1700\",\"processID\":\"820\",\"threadID\":\"7800\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_FAILURE\",\"message\":\"\\\"Falha no logon de uma conta.\\r\\n\\r\\nRequerente:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tIdentificação de logon:\\t\\t0x0\\r\\n\\r\\nTipo de logon:\\t\\t\\t3\\r\\n\\r\\nConta cujo logon falhou:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\tjoao.teste\\r\\n\\tDomínio da conta:\\t\\tSOC-WIN11\\r\\n\\r\\nInformações da falha:\\r\\n\\tRazão da falha:\\t\\tNome de usuário desconhecido ou senha incorreta.\\r\\n\\tStatus:\\t\\t\\t0xC000006D\\r\\n\\tSubstatus:\\t\\t0xC000006A\\r\\n\\r\\nInformações do processo:\\r\\n\\tID de processo do chamador:\\t0x0\\r\\n\\tNome de processo do chamador:\\t-\\r\\n\\r\\nInformações da rede:\\r\\n\\tNome da estação de trabalho:\\t-\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\tPorta de origem:\\t\\t39582\\r\\n\\r\\nInformações detalhadas da autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (somente NTLM):\\t-\\r\\n\\tComprimento da chave:\\t\\t0\\r\\n\\r\\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\\r\\n\\r\\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\\r\\n\\r\\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\\r\\n\\r\\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\\r\\n\\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\\r\\n\\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-0-0\",\"targetUserName\":\"joao.teste\",\"targetDomainName\":\"SOC-WIN11\",\"status\":\"0xc000006d\",\"failureReason\":\"%%2313\",\"subStatus\":\"0xc000006a\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"keyLength\":\"0\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"39582\"}}}\n{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4625\",\"version\":\"0\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8010000000000000\",\"systemTime\":\"2026-11-14T05:53:40.6741593Z\",\"eventRecordID\":\"1697\",\"processID\":\"820\",\"threadID\":\"7800\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_FAILURE\",\"message\":\"\\\"Falha no logon de uma conta.\\r\\n\\r\\nRequerente:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tIdentificação de logon:\\t\\t0x0\\r\\n\\r\\nTipo de logon:\\t\\t\\t3\\r\\n\\r\\nConta cujo logon falhou:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\tjoao.teste\\r\\n\\tDomínio da conta:\\t\\tSOC-WIN11\\r\\n\\r\\nInformações da falha:\\r\\n\\tRazão da falha:\\t\\tNome de usuário desconhecido ou senha incorreta.\\r\\n\\tStatus:\\t\\t\\t0xC000006D\\r\\n\\tSubstatus:\\t\\t0xC000006A\\r\\n\\r\\nInformações do processo:\\r\\n\\tID de processo do chamador:\\t0x0\\r\\n\\tNome de processo do chamador:\\t-\\r\\n\\r\\nInformações da rede:\\r\\n\\tNome da estação de trabalho:\\t-\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\tPorta de origem:\\t\\t47164\\r\\n\\r\\nInformações detalhadas da autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (somente NTLM):\\t-\\r\\n\\tComprimento da chave:\\t\\t0\\r\\n\\r\\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\\r\\n\\r\\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\\r\\n\\r\\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\\r\\n\\r\\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\\r\\n\\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\\r\\n\\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-0-0\",\"targetUserName\":\"joao.teste\",\"targetDomainName\":\"SOC-WIN11\",\"status\":\"0xc000006d\",\"failureReason\":\"%%2313\",\"subStatus\":\"0xc000006a\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"keyLength\":\"0\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"47164\"}}}\n{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4625\",\"version\":\"0\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8010000000000000\",\"systemTime\":\"2026-11-14T05:53:38.6308067Z\",\"eventRecordID\":\"1696\",\"processID\":\"820\",\"threadID\":\"7800\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_FAILURE\",\"message\":\"\\\"Falha no logon de uma conta.\\r\\n\\r\\nRequerente:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tIdentificação de logon:\\t\\t0x0\\r\\n\\r\\nTipo de logon:\\t\\t\\t3\\r\\n\\r\\nConta cujo logon falhou:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\tjoao.teste\\r\\n\\tDomínio da conta:\\t\\tSOC-WIN11\\r\\n\\r\\nInformações da falha:\\r\\n\\tRazão da falha:\\t\\tNome de usuário desconhecido ou senha incorreta.\\r\\n\\tStatus:\\t\\t\\t0xC000006D\\r\\n\\tSubstatus:\\t\\t0xC000006A\\r\\n\\r\\nInformações do processo:\\r\\n\\tID de processo do chamador:\\t0x0\\r\\n\\tNome de processo do chamador:\\t-\\r\\n\\r\\nInformações da rede:\\r\\n\\tNome da estação de trabalho:\\t-\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\tPorta de origem:\\t\\t47150\\r\\n\\r\\nInformações detalhadas da autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (somente NTLM):\\t-\\r\\n\\tComprimento da chave:\\t\\t0\\r\\n\\r\\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\\r\\n\\r\\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\\r\\n\\r\\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\\r\\n\\r\\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\\r\\n\\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\\r\\n\\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-0-0\",\"targetUserName\":\"joao.teste\",\"targetDomainName\":\"SOC-WIN11\",\"status\":\"0xc000006d\",\"failureReason\":\"%%2313\",\"subStatus\":\"0xc000006a\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"keyLength\":\"0\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"47150\"}}}\n{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4625\",\"version\":\"0\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8010000000000000\",\"systemTime\":\"2026-11-14T05:53:36.5946903Z\",\"eventRecordID\":\"1693\",\"processID\":\"820\",\"threadID\":\"884\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_FAILURE\",\"message\":\"\\\"Falha no logon de uma conta.\\r\\n\\r\\nRequerente:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tIdentificação de logon:\\t\\t0x0\\r\\n\\r\\nTipo de logon:\\t\\t\\t3\\r\\n\\r\\nConta cujo logon falhou:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\tjoao.teste\\r\\n\\tDomínio da conta:\\t\\tSOC-WIN11\\r\\n\\r\\nInformações da falha:\\r\\n\\tRazão da falha:\\t\\tNome de usuário desconhecido ou senha incorreta.\\r\\n\\tStatus:\\t\\t\\t0xC000006D\\r\\n\\tSubstatus:\\t\\t0xC000006A\\r\\n\\r\\nInformações do processo:\\r\\n\\tID de processo do chamador:\\t0x0\\r\\n\\tNome de processo do chamador:\\t-\\r\\n\\r\\nInformações da rede:\\r\\n\\tNome da estação de trabalho:\\t-\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\tPorta de origem:\\t\\t47142\\r\\n\\r\\nInformações detalhadas da autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (somente NTLM):\\t-\\r\\n\\tComprimento da chave:\\t\\t0\\r\\n\\r\\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\\r\\n\\r\\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\\r\\n\\r\\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\\r\\n\\r\\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\\r\\n\\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\\r\\n\\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-0-0\",\"targetUserName\":\"joao.teste\",\"targetDomainName\":\"SOC-WIN11\",\"status\":\"0xc000006d\",\"failureReason\":\"%%2313\",\"subStatus\":\"0xc000006a\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"keyLength\":\"0\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"47142\"}}}\n{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4625\",\"version\":\"0\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8010000000000000\",\"systemTime\":\"2026-11-14T05:53:34.5585947Z\",\"eventRecordID\":\"1692\",\"processID\":\"820\",\"threadID\":\"884\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_FAILURE\",\"message\":\"\\\"Falha no logon de uma conta.\\r\\n\\r\\nRequerente:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tIdentificação de logon:\\t\\t0x0\\r\\n\\r\\nTipo de logon:\\t\\t\\t3\\r\\n\\r\\nConta cujo logon falhou:\\r\\n\\tIdentificação de segurança:\\t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\tjoao.teste\\r\\n\\tDomínio da conta:\\t\\tSOC-WIN11\\r\\n\\r\\nInformações da falha:\\r\\n\\tRazão da falha:\\t\\tNome de usuário desconhecido ou senha incorreta.\\r\\n\\tStatus:\\t\\t\\t0xC000006D\\r\\n\\tSubstatus:\\t\\t0xC000006A\\r\\n\\r\\nInformações do processo:\\r\\n\\tID de processo do chamador:\\t0x0\\r\\n\\tNome de processo do chamador:\\t-\\r\\n\\r\\nInformações da rede:\\r\\n\\tNome da estação de trabalho:\\t-\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\tPorta de origem:\\t\\t47114\\r\\n\\r\\nInformações detalhadas da autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (somente NTLM):\\t-\\r\\n\\tComprimento da chave:\\t\\t0\\r\\n\\r\\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\\r\\n\\r\\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\\r\\n\\r\\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\\r\\n\\r\\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\\r\\n\\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\\r\\n\\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-0-0\",\"targetUserName\":\"joao.teste\",\"targetDomainName\":\"SOC-WIN11\",\"status\":\"0xc000006d\",\"failureReason\":\"%%2313\",\"subStatus\":\"0xc000006a\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"keyLength\":\"0\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"47114\"}}}",
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "39612",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
+    },
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t39612\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:49.0542117Z",
+     "eventRecordID": "1703",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 10,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5",
+    "11.4"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Multiple Windows Logon Failures",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failures"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7",
+    "SI.4"
+   ],
+   "frequency": 8,
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 1,
+   "mitre": {
+    "technique": [
+     "Brute Force"
+    ],
+    "id": [
+     "T1110"
+    ],
+    "tactic": [
+     "Credential Access"
+    ]
+   },
+   "id": "60204"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:57:04.812Z",
+  "location": "EventChannel",
+  "id": "1794635824.2869856",
+  "timestamp": "2026-11-14T05:57:04.812+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "subStatus": "0xc000006a",
+     "logonProcessName": "NtLmSsp",
+     "targetUserName": "joao.teste",
+     "keyLength": "0",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "39634",
+     "failureReason": "%%2313",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-0-0",
+     "logonType": "3",
+     "status": "0xc000006d"
+    },
+    "system": {
+     "eventID": "4625",
+     "keywords": "0x8010000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Falha no logon de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tIdentificação de logon:\t\t0x0\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nConta cujo logon falhou:\r\n\tIdentificação de segurança:\t\tS-1-0-0\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\r\nInformações da falha:\r\n\tRazão da falha:\t\tNome de usuário desconhecido ou senha incorreta.\r\n\tStatus:\t\t\t0xC000006D\r\n\tSubstatus:\t\t0xC000006A\r\n\r\nInformações do processo:\r\n\tID de processo do chamador:\t0x0\r\n\tNome de processo do chamador:\t-\r\n\r\nInformações da rede:\r\n\tNome da estação de trabalho:\t-\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\tPorta de origem:\t\t39634\r\n\r\nInformações detalhadas da autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (somente NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n:Este evento é gerado quando uma solicitação de logon falha. Ele é gerado no computador em houve a tentativa de acesso.\r\n\r\nOs campos do assunto indicam a Conta Sistema Local que solicitou o logon. Comumente, isto é um serviço como o de servidor ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\nO campo tipo de logon indica o tipo de logon ocorrido. Os tipos mais comuns são 2 (interativo) e 3 (em rede).\r\n\r\nOs campos de informações do processo indicam qual conta ou processo do sistema solicitaram o logon.\r\n\r\nOs campos informações de rede indicam onde a solicitação de logon remoto se originou. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- Serviços transitados indicam qual serviço intermediário participou desta solicitação de logon.\r\n\t- Nome de pacote indica qual subprotocolo foi usado, entre os protocolos NTLM.\r\n\t- Comprimento da chave indica o comprimento da chave da sessão gerada. Ele será 0 se nenhuma chave de sessão foi solicitada.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:51.1897499Z",
+     "eventRecordID": "1704",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_FAILURE",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 5,
+   "pci_dss": [
+    "10.2.4",
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.1",
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Logon Failure - Unknown user or bad password",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_failed"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_35.7.d",
+    "IV_32.2"
+   ],
+   "firedtimes": 8,
+   "mitre": {
+    "technique": [
+     "Account Access Removal"
+    ],
+    "id": [
+     "T1531"
+    ],
+    "tactic": [
+     "Impact"
+    ]
+   },
+   "id": "60122",
+   "gpg13": [
+    "7.1"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:57:06.946Z",
+  "location": "EventChannel",
+  "id": "1794635826.2897558",
+  "timestamp": "2026-11-14T05:57:06.946+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x0",
+     "targetLinkedLogonId": "0x0",
+     "impersonationLevel": "%%1833",
+     "ipAddress": "10.0.10.30",
+     "authenticationPackageName": "NTLM",
+     "lmPackageName": "NTLM V2",
+     "targetLogonId": "0x1bf006",
+     "logonProcessName": "NtLmSsp",
+     "logonGuid": "{00000000-0000-0000-0000-000000000000}",
+     "targetUserName": "joao.teste",
+     "keyLength": "128",
+     "elevatedToken": "%%1843",
+     "subjectUserSid": "S-1-0-0",
+     "processId": "0x0",
+     "ipPort": "54498",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-5-21-857845802-4057411952-275794591-1001",
+     "virtualAccount": "%%1843",
+     "logonType": "3"
+    },
+    "system": {
+     "eventID": "4624",
+     "keywords": "0x8020000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Uma conta foi acessada com sucesso.\r\n\r\nEntidade:\r\n\tID de segurança:t\tS-1-0-0\r\n\tNome da conta:\t\t-\r\n\tDomínio da conta:\t\t-\r\n\tID de Logon:\t\t0x0\r\n\r\nInformações de Logon:\r\n\tTipo de Logon:\t\t3\r\n\tModo de administração restrito:\t-\r\n\tCredential Guard Remoto:\t-\r\n\tConta virtual: \t\tNão\r\n\tToken Elevado:\t\tNão\r\n\r\nNível de Falsificação:\t\tRepresentação\r\n\r\nNovo Logon:\r\n\tID de Segurança:\t\tS-1-5-21-857845802-4057411952-275794591-1001\r\n\tNome da Conta:\t\tjoao.teste\r\n\tConta de Domínio:\t\tSOC-WIN11\r\n\tID de Logon:\t\t0x1BF006\r\n\tID de Logon Vinculada:\t\t0x0\r\n\tNome da Conta na Rede: \t-\r\n\tDomínio da Conta de Rede:\t-\r\n\tGUID de Logon:\t\t{00000000-0000-0000-0000-000000000000}\r\n\r\n\r\nInformação do processo:\r\n\t ID do processo:\t\t0x0\r\n\tNome do processo:\t\t-\r\n\r\nInformação da rede:\r\n\tNome da Estação de trabalho:\t-\r\n\r\n\tEndereço da rede de origem:\t10.0.10.30\r\n\r\n\tPorta de origem: \t\t54498\r\n\r\nInformação detalhada de autenticação:\r\n\tProcesso de logon:\t\tNtLmSsp \r\n\tPacote de autenticação:\tNTLM\r\n\tServiços transitados:\t-\r\n\tNome do pacote (apenas NTLM):\tNTLM V2\r\n\tComprimento da chave:\t\t128\r\n\r\n Este evento é gerado quando uma sessão de logon é criada. É gerado no computador que foi acessado.\r\n\r\n Os campos de assunto indicam a conta no sistema local que solicitou o logon. Este é mais comumente um serviço como o serviço do servidor, ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\n\r\nO campo tipo de logon indica o tipo de logon que ocorreu. Os tipos mais comuns são 2 (interativo) e 3 (rede).\r\n\r\nOs campos Novo Logon indicam a conta para a qual o novo logon foi criado, ou seja, a conta que foi logada.\r\n\r\nOs campos rede indicam a origem de uma solicitação de logon remoto. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nO campo nível de falsificação indica até que ponto um processo na sessão de logon pode ser falsificado.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- O GUID de logon é um identificador único que pode ser usado para correlacionar este evento com um evento KDC.\r\n\t- Os serviços transitados indicam quais serviços intermediários participaram desta solicitação de logon.\r\n\t- O nome do pacote indica qual subprotocolo foi usado entre os protocolos NTLM.\r\n\t- O comprimento da chave indica o comprimento da chave de sessão gerada. Este será 0 se nenhuma chave de sessão tiver sido solicitada.\"",
+     "version": "3",
+     "systemTime": "2026-11-14T05:53:53.3199725Z",
+     "eventRecordID": "1705",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_SUCCESS",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 6,
+   "hipaa": [
+    "164.312.b"
+   ],
+   "pci_dss": [
+    "10.2.5"
+   ],
+   "tsc": [
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Successful Remote Logon Detected - User:\\joao.teste - NTLM authentication, possible pass-the-hash attack.",
+   "groups": [
+    "win_evt_channel",
+    "windows",
+    "authentication_success"
+   ],
+   "nist_800_53": [
+    "AC.7",
+    "AU.14"
+   ],
+   "gdpr": [
+    "IV_32.2"
+   ],
+   "firedtimes": 2,
+   "mitre": {
+    "technique": [
+     "Pass the Hash",
+     "Domain Accounts"
+    ],
+    "id": [
+     "T1550.002",
+     "T1078.002"
+    ],
+    "tactic": [
+     "Defense Evasion",
+     "Lateral Movement",
+     "Persistence",
+     "Privilege Escalation",
+     "Initial Access"
+    ]
+   },
+   "id": "92652",
+   "gpg13": [
+    "7.1",
+    "7.2"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Security-Auditing\",\"providerGuid\":\"{54849625-5478-4994-a5ba-3e3b0328c30d}\",\"eventID\":\"4624\",\"version\":\"3\",\"level\":\"0\",\"task\":\"12544\",\"opcode\":\"0\",\"keywords\":\"0x8020000000000000\",\"systemTime\":\"2026-11-14T05:53:53.3199725Z\",\"eventRecordID\":\"1705\",\"processID\":\"820\",\"threadID\":\"7800\",\"channel\":\"Security\",\"computer\":\"soc-win11\",\"severityValue\":\"AUDIT_SUCCESS\",\"message\":\"\\\"Uma conta foi acessada com sucesso.\\r\\n\\r\\nEntidade:\\r\\n\\tID de segurança:t\\tS-1-0-0\\r\\n\\tNome da conta:\\t\\t-\\r\\n\\tDomínio da conta:\\t\\t-\\r\\n\\tID de Logon:\\t\\t0x0\\r\\n\\r\\nInformações de Logon:\\r\\n\\tTipo de Logon:\\t\\t3\\r\\n\\tModo de administração restrito:\\t-\\r\\n\\tCredential Guard Remoto:\\t-\\r\\n\\tConta virtual: \\t\\tNão\\r\\n\\tToken Elevado:\\t\\tNão\\r\\n\\r\\nNível de Falsificação:\\t\\tRepresentação\\r\\n\\r\\nNovo Logon:\\r\\n\\tID de Segurança:\\t\\tS-1-5-21-857845802-4057411952-275794591-1001\\r\\n\\tNome da Conta:\\t\\tjoao.teste\\r\\n\\tConta de Domínio:\\t\\tSOC-WIN11\\r\\n\\tID de Logon:\\t\\t0x1BF006\\r\\n\\tID de Logon Vinculada:\\t\\t0x0\\r\\n\\tNome da Conta na Rede: \\t-\\r\\n\\tDomínio da Conta de Rede:\\t-\\r\\n\\tGUID de Logon:\\t\\t{00000000-0000-0000-0000-000000000000}\\r\\n\\r\\n\\r\\nInformação do processo:\\r\\n\\t ID do processo:\\t\\t0x0\\r\\n\\tNome do processo:\\t\\t-\\r\\n\\r\\nInformação da rede:\\r\\n\\tNome da Estação de trabalho:\\t-\\r\\n\\r\\n\\tEndereço da rede de origem:\\t10.0.10.30\\r\\n\\r\\n\\tPorta de origem: \\t\\t54498\\r\\n\\r\\nInformação detalhada de autenticação:\\r\\n\\tProcesso de logon:\\t\\tNtLmSsp \\r\\n\\tPacote de autenticação:\\tNTLM\\r\\n\\tServiços transitados:\\t-\\r\\n\\tNome do pacote (apenas NTLM):\\tNTLM V2\\r\\n\\tComprimento da chave:\\t\\t128\\r\\n\\r\\n Este evento é gerado quando uma sessão de logon é criada. É gerado no computador que foi acessado.\\r\\n\\r\\n Os campos de assunto indicam a conta no sistema local que solicitou o logon. Este é mais comumente um serviço como o serviço do servidor, ou um processo local como Winlogon.exe ou Services.exe.\\r\\n\\r\\n\\r\\nO campo tipo de logon indica o tipo de logon que ocorreu. Os tipos mais comuns são 2 (interativo) e 3 (rede).\\r\\n\\r\\nOs campos Novo Logon indicam a conta para a qual o novo logon foi criado, ou seja, a conta que foi logada.\\r\\n\\r\\nOs campos rede indicam a origem de uma solicitação de logon remoto. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\\r\\n\\r\\nO campo nível de falsificação indica até que ponto um processo na sessão de logon pode ser falsificado.\\r\\n\\r\\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\\r\\n\\t- O GUID de logon é um identificador único que pode ser usado para correlacionar este evento com um evento KDC.\\r\\n\\t- Os serviços transitados indicam quais serviços intermediários participaram desta solicitação de logon.\\r\\n\\t- O nome do pacote indica qual subprotocolo foi usado entre os protocolos NTLM.\\r\\n\\t- O comprimento da chave indica o comprimento da chave de sessão gerada. Este será 0 se nenhuma chave de sessão tiver sido solicitada.\\\"\"},\"eventdata\":{\"subjectUserSid\":\"S-1-0-0\",\"subjectLogonId\":\"0x0\",\"targetUserSid\":\"S-1-5-21-857845802-4057411952-275794591-1001\",\"targetUserName\":\"joao.teste\",\"targetDomainName\":\"SOC-WIN11\",\"targetLogonId\":\"0x1bf006\",\"logonType\":\"3\",\"logonProcessName\":\"NtLmSsp\",\"authenticationPackageName\":\"NTLM\",\"logonGuid\":\"{00000000-0000-0000-0000-000000000000}\",\"lmPackageName\":\"NTLM V2\",\"keyLength\":\"128\",\"processId\":\"0x0\",\"ipAddress\":\"10.0.10.30\",\"ipPort\":\"54498\",\"impersonationLevel\":\"%%1833\",\"virtualAccount\":\"%%1843\",\"targetLinkedLogonId\":\"0x0\",\"elevatedToken\":\"%%1843\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:57:09.133Z",
+  "location": "EventChannel",
+  "id": "1794635829.2904070",
+  "timestamp": "2026-11-14T05:57:09.133+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "targetLogonId": "0x1bf006",
+     "targetUserName": "joao.teste",
+     "targetDomainName": "SOC-WIN11",
+     "targetUserSid": "S-1-5-21-857845802-4057411952-275794591-1001",
+     "logonType": "3"
+    },
+    "system": {
+     "eventID": "4634",
+     "keywords": "0x8020000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Foi efetuado o logoff de uma conta.\r\n\r\nRequerente:\r\n\tIdentificação de segurança:\t\tS-1-5-21-857845802-4057411952-275794591-1001\r\n\tNome da conta:\t\tjoao.teste\r\n\tDomínio da conta:\t\tSOC-WIN11\r\n\tIdentificação de logon:\t\t0x1BF006\r\n\r\nTipo de logon:\t\t\t3\r\n\r\nEste evento é gerado quando uma sessão de logon é destruída. Ele pode ser positivamente correlacionado com um evento de logon, utilizando o valor Identificação de logon. As identificações de logon são exclusivas apenas entre as reinicializações do mesmo computador.\"",
+     "version": "0",
+     "systemTime": "2026-11-14T05:53:53.4746088Z",
+     "eventRecordID": "1706",
+     "threadID": "884",
+     "computer": "soc-win11",
+     "task": "12545",
+     "processID": "820",
+     "severityValue": "AUDIT_SUCCESS",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 3,
+   "mail": false,
+   "level": 3,
+   "pci_dss": [
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Windows User Logoff",
+   "groups": [
+    "windows",
+    "windows_security"
+   ],
+   "id": "60137",
+   "nist_800_53": [
+    "AU.14",
+    "AC.7"
+   ],
+   "gdpr": [
+    "IV_32.2"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:57:09.149Z",
+  "location": "EventChannel",
+  "id": "1794635829.2911910",
+  "timestamp": "2026-11-14T05:57:09.149+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x3e7",
+     "subjectDomainName": "WORKGROUP",
+     "targetLinkedLogonId": "0x0",
+     "impersonationLevel": "%%1833",
+     "authenticationPackageName": "Negotiate",
+     "targetLogonId": "0x3e7",
+     "logonProcessName": "Advapi",
+     "logonGuid": "{00000000-0000-0000-0000-000000000000}",
+     "targetUserName": "SISTEMA",
+     "keyLength": "0",
+     "elevatedToken": "%%1842",
+     "subjectUserSid": "S-1-5-18",
+     "processId": "0x32c",
+     "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
+     "targetDomainName": "AUTORIDADE NT",
+     "targetUserSid": "S-1-5-18",
+     "virtualAccount": "%%1843",
+     "logonType": "5",
+     "subjectUserName": "SOC-WIN11$"
+    },
+    "system": {
+     "eventID": "4624",
+     "keywords": "0x8020000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Uma conta foi acessada com sucesso.\r\n\r\nEntidade:\r\n\tID de segurança:t\tS-1-5-18\r\n\tNome da conta:\t\tSOC-WIN11$\r\n\tDomínio da conta:\t\tWORKGROUP\r\n\tID de Logon:\t\t0x3E7\r\n\r\nInformações de Logon:\r\n\tTipo de Logon:\t\t5\r\n\tModo de administração restrito:\t-\r\n\tCredential Guard Remoto:\t-\r\n\tConta virtual: \t\tNão\r\n\tToken Elevado:\t\tSim\r\n\r\nNível de Falsificação:\t\tRepresentação\r\n\r\nNovo Logon:\r\n\tID de Segurança:\t\tS-1-5-18\r\n\tNome da Conta:\t\tSISTEMA\r\n\tConta de Domínio:\t\tAUTORIDADE NT\r\n\tID de Logon:\t\t0x3E7\r\n\tID de Logon Vinculada:\t\t0x0\r\n\tNome da Conta na Rede: \t-\r\n\tDomínio da Conta de Rede:\t-\r\n\tGUID de Logon:\t\t{00000000-0000-0000-0000-000000000000}\r\n\r\n\r\nInformação do processo:\r\n\t ID do processo:\t\t0x32c\r\n\tNome do processo:\t\tC:\\Windows\\System32\\services.exe\r\n\r\nInformação da rede:\r\n\tNome da Estação de trabalho:\t-\r\n\r\n\tEndereço da rede de origem:\t-\r\n\r\n\tPorta de origem: \t\t-\r\n\r\nInformação detalhada de autenticação:\r\n\tProcesso de logon:\t\tAdvapi  \r\n\tPacote de autenticação:\tNegotiate\r\n\tServiços transitados:\t-\r\n\tNome do pacote (apenas NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n Este evento é gerado quando uma sessão de logon é criada. É gerado no computador que foi acessado.\r\n\r\n Os campos de assunto indicam a conta no sistema local que solicitou o logon. Este é mais comumente um serviço como o serviço do servidor, ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\n\r\nO campo tipo de logon indica o tipo de logon que ocorreu. Os tipos mais comuns são 2 (interativo) e 3 (rede).\r\n\r\nOs campos Novo Logon indicam a conta para a qual o novo logon foi criado, ou seja, a conta que foi logada.\r\n\r\nOs campos rede indicam a origem de uma solicitação de logon remoto. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nO campo nível de falsificação indica até que ponto um processo na sessão de logon pode ser falsificado.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- O GUID de logon é um identificador único que pode ser usado para correlacionar este evento com um evento KDC.\r\n\t- Os serviços transitados indicam quais serviços intermediários participaram desta solicitação de logon.\r\n\t- O nome do pacote indica qual subprotocolo foi usado entre os protocolos NTLM.\r\n\t- O comprimento da chave indica o comprimento da chave de sessão gerada. Este será 0 se nenhuma chave de sessão tiver sido solicitada.\"",
+     "version": "3",
+     "systemTime": "2026-11-14T05:54:52.0782417Z",
+     "eventRecordID": "1707",
+     "threadID": "7800",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_SUCCESS",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 3,
+   "pci_dss": [
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Windows Logon Success",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_success"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.9"
+   ],
+   "gdpr": [
+    "IV_32.2"
+   ],
+   "firedtimes": 18,
+   "mitre": {
+    "technique": [
+     "Valid Accounts"
+    ],
+    "id": [
+     "T1078"
+    ],
+    "tactic": [
+     "Defense Evasion",
+     "Persistence",
+     "Privilege Escalation",
+     "Initial Access"
+    ]
+   },
+   "id": "60106",
+   "gpg13": [
+    "7.1",
+    "7.2"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:58:07.846Z",
+  "location": "EventChannel",
+  "id": "1794635887.2914634",
+  "timestamp": "2026-11-14T05:58:07.846+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "subjectLogonId": "0x3e7",
+     "subjectDomainName": "WORKGROUP",
+     "targetLinkedLogonId": "0x0",
+     "impersonationLevel": "%%1833",
+     "authenticationPackageName": "Negotiate",
+     "targetLogonId": "0x3e7",
+     "logonProcessName": "Advapi",
+     "logonGuid": "{00000000-0000-0000-0000-000000000000}",
+     "targetUserName": "SISTEMA",
+     "keyLength": "0",
+     "elevatedToken": "%%1842",
+     "subjectUserSid": "S-1-5-18",
+     "processId": "0x32c",
+     "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
+     "targetDomainName": "AUTORIDADE NT",
+     "targetUserSid": "S-1-5-18",
+     "virtualAccount": "%%1843",
+     "logonType": "5",
+     "subjectUserName": "SOC-WIN11$"
+    },
+    "system": {
+     "eventID": "4624",
+     "keywords": "0x8020000000000000",
+     "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+     "level": "0",
+     "channel": "Security",
+     "opcode": "0",
+     "message": "\"Uma conta foi acessada com sucesso.\r\n\r\nEntidade:\r\n\tID de segurança:t\tS-1-5-18\r\n\tNome da conta:\t\tSOC-WIN11$\r\n\tDomínio da conta:\t\tWORKGROUP\r\n\tID de Logon:\t\t0x3E7\r\n\r\nInformações de Logon:\r\n\tTipo de Logon:\t\t5\r\n\tModo de administração restrito:\t-\r\n\tCredential Guard Remoto:\t-\r\n\tConta virtual: \t\tNão\r\n\tToken Elevado:\t\tSim\r\n\r\nNível de Falsificação:\t\tRepresentação\r\n\r\nNovo Logon:\r\n\tID de Segurança:\t\tS-1-5-18\r\n\tNome da Conta:\t\tSISTEMA\r\n\tConta de Domínio:\t\tAUTORIDADE NT\r\n\tID de Logon:\t\t0x3E7\r\n\tID de Logon Vinculada:\t\t0x0\r\n\tNome da Conta na Rede: \t-\r\n\tDomínio da Conta de Rede:\t-\r\n\tGUID de Logon:\t\t{00000000-0000-0000-0000-000000000000}\r\n\r\n\r\nInformação do processo:\r\n\t ID do processo:\t\t0x32c\r\n\tNome do processo:\t\tC:\\Windows\\System32\\services.exe\r\n\r\nInformação da rede:\r\n\tNome da Estação de trabalho:\t-\r\n\r\n\tEndereço da rede de origem:\t-\r\n\r\n\tPorta de origem: \t\t-\r\n\r\nInformação detalhada de autenticação:\r\n\tProcesso de logon:\t\tAdvapi  \r\n\tPacote de autenticação:\tNegotiate\r\n\tServiços transitados:\t-\r\n\tNome do pacote (apenas NTLM):\t-\r\n\tComprimento da chave:\t\t0\r\n\r\n Este evento é gerado quando uma sessão de logon é criada. É gerado no computador que foi acessado.\r\n\r\n Os campos de assunto indicam a conta no sistema local que solicitou o logon. Este é mais comumente um serviço como o serviço do servidor, ou um processo local como Winlogon.exe ou Services.exe.\r\n\r\n\r\nO campo tipo de logon indica o tipo de logon que ocorreu. Os tipos mais comuns são 2 (interativo) e 3 (rede).\r\n\r\nOs campos Novo Logon indicam a conta para a qual o novo logon foi criado, ou seja, a conta que foi logada.\r\n\r\nOs campos rede indicam a origem de uma solicitação de logon remoto. O nome da estação de trabalho nem sempre está disponível e pode ser deixado em branco em alguns casos.\r\n\r\nO campo nível de falsificação indica até que ponto um processo na sessão de logon pode ser falsificado.\r\n\r\nOs campos de informações de autenticação fornecem informações detalhadas sobre esta solicitação específica de logon.\r\n\t- O GUID de logon é um identificador único que pode ser usado para correlacionar este evento com um evento KDC.\r\n\t- Os serviços transitados indicam quais serviços intermediários participaram desta solicitação de logon.\r\n\t- O nome do pacote indica qual subprotocolo foi usado entre os protocolos NTLM.\r\n\t- O comprimento da chave indica o comprimento da chave de sessão gerada. Este será 0 se nenhuma chave de sessão tiver sido solicitada.\"",
+     "version": "3",
+     "systemTime": "2026-11-14T05:55:16.0291731Z",
+     "eventRecordID": "1709",
+     "threadID": "868",
+     "computer": "soc-win11",
+     "task": "12544",
+     "processID": "820",
+     "severityValue": "AUDIT_SUCCESS",
+     "providerName": "Microsoft-Windows-Security-Auditing"
+    }
+   }
+  },
+  "rule": {
+   "mail": false,
+   "level": 3,
+   "pci_dss": [
+    "10.2.5"
+   ],
+   "hipaa": [
+    "164.312.b"
+   ],
+   "tsc": [
+    "CC6.8",
+    "CC7.2",
+    "CC7.3"
+   ],
+   "description": "Windows Logon Success",
+   "groups": [
+    "windows",
+    "windows_security",
+    "authentication_success"
+   ],
+   "nist_800_53": [
+    "AU.14",
+    "AC.9"
+   ],
+   "gdpr": [
+    "IV_32.2"
+   ],
+   "firedtimes": 19,
+   "mitre": {
+    "technique": [
+     "Valid Accounts"
+    ],
+    "id": [
+     "T1078"
+    ],
+    "tactic": [
+     "Defense Evasion",
+     "Persistence",
+     "Privilege Escalation",
+     "Initial Access"
+    ]
+   },
+   "id": "60106",
+   "gpg13": [
+    "7.1",
+    "7.2"
+   ]
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-14T05:58:32.064Z",
+  "location": "EventChannel",
+  "id": "1794635912.2922428",
+  "timestamp": "2026-11-14T05:58:32.064+0000"
+ }
 ]
