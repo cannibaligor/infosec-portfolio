@@ -1,0 +1,645 @@
+[
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "Advapi",
+          "targetUserName": "SISTEMA",
+          "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
+          "authenticationPackageName": "Negotiate",
+          "targetDomainName": "AUTORIDADE NT",
+          "logonType": "5"
+        },
+        "system": {
+          "eventID": "4624"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 16,
+      "level": 3,
+      "description": "Windows Logon Success",
+      "mitre": {
+        "technique": [
+          "Valid Accounts"
+        ],
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ]
+      },
+      "id": "60106"
+    },
+    "timestamp": "2026-11-14T05:55:04.177+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "LOGON ANÃ”NIMO",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "AUTORIDADE NT",
+          "lmPackageName": "NTLM V1",
+          "logonType": "3"
+        },
+        "system": {
+          "eventID": "4624"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 1,
+      "level": 6,
+      "description": "Successful Remote Logon Detected - User:\\LOGON ANÃ”NIMO - NTLM authentication, possible pass-the-hash attack.",
+      "mitre": {
+        "technique": [
+          "Pass the Hash",
+          "Domain Accounts"
+        ],
+        "id": [
+          "T1550.002",
+          "T1078.002"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Lateral Movement",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ]
+      },
+      "id": "92652"
+    },
+    "timestamp": "2026-11-14T05:56:39.976+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "targetUserName": "LOGON ANÃ”NIMO",
+          "targetDomainName": "AUTORIDADE NT",
+          "logonType": "3"
+        },
+        "system": {
+          "eventID": "4634"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 2,
+      "level": 3,
+      "description": "Windows User Logoff",
+      "id": "60137"
+    },
+    "timestamp": "2026-11-14T05:56:39.978+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "7040"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 1,
+      "level": 3,
+      "description": "Service startup type was changed",
+      "id": "61104"
+    },
+    "timestamp": "2026-11-14T05:56:47.689+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 1,
+      "level": 5,
+      "description": "Logon Failure - Unknown user or bad password",
+      "mitre": {
+        "technique": [
+          "Account Access Removal"
+        ],
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "60122"
+    },
+    "timestamp": "2026-11-14T05:56:50.327+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 2,
+      "level": 5,
+      "description": "Logon Failure - Unknown user or bad password",
+      "mitre": {
+        "technique": [
+          "Account Access Removal"
+        ],
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "60122"
+    },
+    "timestamp": "2026-11-14T05:56:52.366+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "7040"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 2,
+      "level": 3,
+      "description": "Service startup type was changed",
+      "id": "61104"
+    },
+    "timestamp": "2026-11-14T05:56:52.367+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "Advapi",
+          "targetUserName": "SISTEMA",
+          "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
+          "authenticationPackageName": "Negotiate",
+          "targetDomainName": "AUTORIDADE NT",
+          "logonType": "5"
+        },
+        "system": {
+          "eventID": "4624"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 17,
+      "level": 3,
+      "description": "Windows Logon Success",
+      "mitre": {
+        "technique": [
+          "Valid Accounts"
+        ],
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ]
+      },
+      "id": "60106"
+    },
+    "timestamp": "2026-11-14T05:56:52.381+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 3,
+      "level": 5,
+      "description": "Logon Failure - Unknown user or bad password",
+      "mitre": {
+        "technique": [
+          "Account Access Removal"
+        ],
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "60122"
+    },
+    "timestamp": "2026-11-14T05:56:54.404+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 4,
+      "level": 5,
+      "description": "Logon Failure - Unknown user or bad password",
+      "mitre": {
+        "technique": [
+          "Account Access Removal"
+        ],
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "60122"
+    },
+    "timestamp": "2026-11-14T05:56:56.443+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 5,
+      "level": 5,
+      "description": "Logon Failure - Unknown user or bad password",
+      "mitre": {
+        "technique": [
+          "Account Access Removal"
+        ],
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "60122"
+    },
+    "timestamp": "2026-11-14T05:56:57.652+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 6,
+      "level": 5,
+      "description": "Logon Failure - Unknown user or bad password",
+      "mitre": {
+        "technique": [
+          "Account Access Removal"
+        ],
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "60122"
+    },
+    "timestamp": "2026-11-14T05:57:00.564+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 7,
+      "level": 5,
+      "description": "Logon Failure - Unknown user or bad password",
+      "mitre": {
+        "technique": [
+          "Account Access Removal"
+        ],
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "60122"
+    },
+    "timestamp": "2026-11-14T05:57:02.699+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 1,
+      "level": 10,
+      "description": "Multiple Windows Logon Failures",
+      "mitre": {
+        "technique": [
+          "Brute Force"
+        ],
+        "id": [
+          "T1110"
+        ],
+        "tactic": [
+          "Credential Access"
+        ]
+      },
+      "id": "60204"
+    },
+    "timestamp": "2026-11-14T05:57:04.812+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "subStatus": "0xc000006a",
+          "logonType": "3",
+          "status": "0xc000006d"
+        },
+        "system": {
+          "eventID": "4625"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 8,
+      "level": 5,
+      "description": "Logon Failure - Unknown user or bad password",
+      "mitre": {
+        "technique": [
+          "Account Access Removal"
+        ],
+        "id": [
+          "T1531"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "60122"
+    },
+    "timestamp": "2026-11-14T05:57:06.946+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "NtLmSsp",
+          "targetUserName": "joao.teste",
+          "ipAddress": "10.0.10.30",
+          "authenticationPackageName": "NTLM",
+          "targetDomainName": "SOC-WIN11",
+          "lmPackageName": "NTLM V2",
+          "logonType": "3"
+        },
+        "system": {
+          "eventID": "4624"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 2,
+      "level": 6,
+      "description": "Successful Remote Logon Detected - User:\\joao.teste - NTLM authentication, possible pass-the-hash attack.",
+      "mitre": {
+        "technique": [
+          "Pass the Hash",
+          "Domain Accounts"
+        ],
+        "id": [
+          "T1550.002",
+          "T1078.002"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Lateral Movement",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ]
+      },
+      "id": "92652"
+    },
+    "timestamp": "2026-11-14T05:57:09.133+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "targetUserName": "joao.teste",
+          "targetDomainName": "SOC-WIN11",
+          "logonType": "3"
+        },
+        "system": {
+          "eventID": "4634"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 3,
+      "level": 3,
+      "description": "Windows User Logoff",
+      "id": "60137"
+    },
+    "timestamp": "2026-11-14T05:57:09.149+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "Advapi",
+          "targetUserName": "SISTEMA",
+          "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
+          "authenticationPackageName": "Negotiate",
+          "targetDomainName": "AUTORIDADE NT",
+          "logonType": "5"
+        },
+        "system": {
+          "eventID": "4624"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 18,
+      "level": 3,
+      "description": "Windows Logon Success",
+      "mitre": {
+        "technique": [
+          "Valid Accounts"
+        ],
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ]
+      },
+      "id": "60106"
+    },
+    "timestamp": "2026-11-14T05:58:07.846+0000"
+  },
+  {
+    "data": {
+      "win": {
+        "eventdata": {
+          "logonProcessName": "Advapi",
+          "targetUserName": "SISTEMA",
+          "processName": "C:\\\\Windows\\\\System32\\\\services.exe",
+          "authenticationPackageName": "Negotiate",
+          "targetDomainName": "AUTORIDADE NT",
+          "logonType": "5"
+        },
+        "system": {
+          "eventID": "4624"
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 19,
+      "level": 3,
+      "description": "Windows Logon Success",
+      "mitre": {
+        "technique": [
+          "Valid Accounts"
+        ],
+        "id": [
+          "T1078"
+        ],
+        "tactic": [
+          "Defense Evasion",
+          "Persistence",
+          "Privilege Escalation",
+          "Initial Access"
+        ]
+      },
+      "id": "60106"
+    },
+    "timestamp": "2026-11-14T05:58:32.064+0000"
+  }
+]
