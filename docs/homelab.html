@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home Lab de SOC · Igor Mendes</title>
+<meta name="description" content="Home lab de SOC com Wazuh, Sysmon e Kali: brute force via SMB detectado e investigado, com replay 3D dos alertas reais.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 5 7v8c0 7 4.6 12 11 14 6.4-2 11-7 11-14V7z' fill='%232554d8'/%3E%3C/svg%3E">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 5 7v8c0 7 4.6 12 11 14 6.4-2 11-7 11-14V7z"/></svg>Igor Mendes</a>
+  <nav class="nav">
+    <a href="index.html#projetos"><span data-l="pt">Projetos</span><span data-l="en">Projects</span></a>
+    <a href="homelab.html" aria-current="page" class="on"><span data-l="pt">Home Lab</span><span data-l="en">Home Lab</span></a>
+    <a href="phishing.html"><span data-l="pt">Phishing</span><span data-l="en">Phishing</span></a>
+    <a href="index.html#sobre"><span data-l="pt">Sobre</span><span data-l="en">About</span></a>
+  </nav>
+  <button class="lang" id="langBtn" type="button" aria-label="Mudar idioma / Change language"><span data-l="pt">EN</span><span data-l="en">PT</span></button>
+</header>
+
+<main id="top">
+
+<nav class="crumb"><a href="index.html#projetos"><span data-l="pt">← Voltar aos projetos</span><span data-l="en">← Back to projects</span></a></nav>
+
+<!-- ================= LAB ================= -->
+<section class="section" id="lab">
+  <p class="eyebrow">02 · Home Lab</p>
+  <h2 class="section-title"><span data-l="pt">O laboratório</span><span data-l="en">The lab</span></h2>
+  <p class="section-lead"><span data-l="pt">Três máquinas virtuais numa rede isolada. O <b>Kali</b> ataca, o <b>Windows 11</b> é a vítima e registra tudo com o Sysmon, e o <b>Wazuh</b> (SIEM) recebe os logs, correlaciona e gera alertas. <b>Gire o modelo com o mouse</b> e clique em cada máquina.</span><span data-l="en">Three virtual machines on an isolated network. <b>Kali</b> attacks, <b>Windows 11</b> is the victim and records everything with Sysmon, and <b>Wazuh</b> (SIEM) receives the logs, correlates them and raises alerts. <b>Drag to rotate</b> and click each machine.</span></p>
+
+  <div class="lab-grid">
+    <div class="viewport" id="archWrap">
+      <canvas id="archCanvas"></canvas>
+      <div class="vp-hint"><span data-l="pt">arraste para girar · role para zoom · clique numa máquina</span><span data-l="en">drag to rotate · scroll to zoom · click a machine</span></div>
+    </div>
+    <aside class="panel" id="archInfo">
+      <div class="node-info" data-node="none">
+        <h4><span data-l="pt">Clique numa máquina</span><span data-l="en">Click a machine</span></h4>
+        <p class="muted-t"><span data-l="pt">Cada uma tem um papel diferente no laboratório.</span><span data-l="en">Each one plays a different role in the lab.</span></p>
+        <h5><span data-l="pt">Por que a rede é isolada?</span><span data-l="en">Why is the network isolated?</span></h5>
+        <p><span data-l="pt">As VMs ficam numa <b>NAT Network</b> (10.0.10.0/24): elas se enxergam, mas não enxergam a rede da minha casa. O painel do Wazuh é acessado por <b>port forwarding</b> (127.0.0.1:8443 → 10.0.10.10:443). O ataque nunca sai do laboratório.</span><span data-l="en">The VMs live on a <b>NAT Network</b> (10.0.10.0/24): they can see each other but not my home network. The Wazuh dashboard is reached through <b>port forwarding</b> (127.0.0.1:8443 → 10.0.10.10:443). The attack never leaves the lab.</span></p>
+      </div>
+      <div class="node-info" data-node="kali" hidden>
+        <span class="pill danger"><span data-l="pt">Atacante</span><span data-l="en">Attacker</span></span>
+        <h4>SOC-Kali · 10.0.10.30</h4>
+        <p><span data-l="pt">Kali Linux 2026.3. Usado para gerar ataques reais contra a vítima, como o brute force de senha com o <code>NetExec</code>.</span><span data-l="en">Kali Linux 2026.3. Used to launch real attacks against the victim, such as password brute force with <code>NetExec</code>.</span></p>
+      </div>
+      <div class="node-info" data-node="win" hidden>
+        <span class="pill accent"><span data-l="pt">Vítima / endpoint</span><span data-l="en">Victim / endpoint</span></span>
+        <h4>SOC-Win11 · 10.0.10.20</h4>
+        <p><span data-l="pt">Windows 11 Enterprise com <b>Sysmon</b> (registra processos, conexões e alterações em detalhe) e o <b>agente Wazuh</b>, que envia os logs <code>Security</code> e <code>Sysmon/Operational</code> para o SIEM.</span><span data-l="en">Windows 11 Enterprise with <b>Sysmon</b> (detailed logging of processes, connections and changes) and the <b>Wazuh agent</b>, which ships the <code>Security</code> and <code>Sysmon/Operational</code> logs to the SIEM.</span></p>
+      </div>
+      <div class="node-info" data-node="wazuh" hidden>
+        <span class="pill ok">SIEM</span>
+        <h4>SOC-Wazuh · 10.0.10.10</h4>
+        <p><span data-l="pt">Wazuh 4.14 (manager + indexer + dashboard). Recebe os eventos, aplica <b>regras de detecção</b>, correlaciona eventos repetidos e mapeia cada alerta para o <b>MITRE ATT&amp;CK</b>.</span><span data-l="en">Wazuh 4.14 (manager + indexer + dashboard). It receives events, applies <b>detection rules</b>, correlates repeated events and maps each alert to <b>MITRE ATT&amp;CK</b>.</span></p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= REPLAY ================= -->
+<section class="section" id="replay">
+  <p class="eyebrow"><span data-l="pt">02 · Cenário 1</span><span data-l="en">02 · Scenario 1</span></p>
+  <h2 class="section-title"><span data-l="pt">Brute force de senha via SMB: replay 3D</span><span data-l="en">SMB password brute force: 3D replay</span></h2>
+  <p class="section-lead"><span data-l="pt">Os <b>19 alertas reais</b> gerados pelo Wazuh em 14/11/2026, entre 05:55 e 05:59 UTC, reproduzidos na ordem em que aconteceram. Aperte <b>▶</b> ou clique em qualquer evento da lista para ver o que ele significa e o log original.</span><span data-l="en">The <b>19 real alerts</b> Wazuh raised on 2026-11-14 between 05:55 and 05:59 UTC, replayed in the order they happened. Press <b>▶</b> or click any event in the list to see what it means and the original log.</span></p>
+
+  <div class="legend">
+    <span><i class="dot recon"></i><span data-l="pt">reconhecimento</span><span data-l="en">reconnaissance</span></span>
+    <span><i class="dot fail"></i><span data-l="pt">falha de login</span><span data-l="en">failed logon</span></span>
+    <span><i class="dot alert"></i><span data-l="pt">alerta correlacionado</span><span data-l="en">correlated alert</span></span>
+    <span><i class="dot success"></i><span data-l="pt">login com sucesso (comprometido)</span><span data-l="en">successful logon (compromised)</span></span>
+    <span><i class="dot noise"></i><span data-l="pt">ruído normal do Windows</span><span data-l="en">normal Windows noise</span></span>
+    <span><i class="dot log"></i><span data-l="pt">log enviado ao SIEM</span><span data-l="en">log shipped to SIEM</span></span>
+  </div>
+
+  <div class="replay-grid">
+    <div class="viewport tall" id="replayWrap">
+      <canvas id="replayCanvas"></canvas>
+      <div class="hud">
+        <div class="hud-clock" id="hudClock">05:55:04 UTC</div>
+        <div class="hud-status" id="hudStatus"></div>
+      </div>
+      <div class="banner" id="banner" hidden></div>
+    </div>
+    <aside class="panel event-panel">
+      <div class="controls">
+        <button class="ctl" id="btnPrev" type="button" aria-label="Anterior">⏮</button>
+        <button class="ctl play" id="btnPlay" type="button" aria-label="Play/Pause">▶</button>
+        <button class="ctl" id="btnNext" type="button" aria-label="Próximo">⏭</button>
+        <select id="speed" aria-label="Velocidade">
+          <option value="0.5">0.5×</option>
+          <option value="1" selected>1×</option>
+          <option value="2">2×</option>
+        </select>
+        <span class="step" id="stepLabel">0 / 19</span>
+      </div>
+      <input type="range" id="scrub" min="0" max="19" value="0" step="1" aria-label="Linha do tempo">
+      <div id="eventDetail" class="event-detail">
+        <p class="muted-t"><span data-l="pt">Nenhum evento selecionado ainda. Aperte ▶ para começar.</span><span data-l="en">No event selected yet. Press ▶ to start.</span></p>
+      </div>
+    </aside>
+  </div>
+
+  <ol class="timeline" id="timeline" aria-label="Linha do tempo dos eventos"></ol>
+</section>
+
+<!-- ================= ANÁLISE ================= -->
+<section class="section" id="analise">
+  <p class="eyebrow"><span data-l="pt">02 · Cenário 1</span><span data-l="en">02 · Scenario 1</span></p>
+  <h2 class="section-title"><span data-l="pt">A investigação</span><span data-l="en">The investigation</span></h2>
+
+  <div class="summary-grid">
+    <div class="kv"><span><span data-l="pt">Atacante</span><span data-l="en">Attacker</span></span><b>10.0.10.30</b></div>
+    <div class="kv"><span><span data-l="pt">Alvo</span><span data-l="en">Target</span></span><b>SOC-WIN11 \ joao.teste</b></div>
+    <div class="kv"><span>MITRE</span><b><a href="https://attack.mitre.org/techniques/T1110/" target="_blank" rel="noopener">T1110</a> → <a href="https://attack.mitre.org/techniques/T1078/" target="_blank" rel="noopener">T1078</a></b></div>
+    <div class="kv danger"><span><span data-l="pt">Veredito</span><span data-l="en">Verdict</span></span><b><span data-l="pt">Conta comprometida</span><span data-l="en">Account compromised</span></b></div>
+  </div>
+
+  <h3 class="sub"><span data-l="pt">As perguntas que um analista N1 responde</span><span data-l="en">The questions a Tier 1 analyst answers</span></h3>
+  <div class="qa">
+    <details open>
+      <summary><span data-l="pt">1. Foi mesmo um brute force?</span><span data-l="en">1. Was it really a brute force?</span></summary>
+      <p><span data-l="pt"><b>Sim.</b> Foram 9 falhas de login (evento <code>4625</code>) em ~16 segundos, todas do mesmo IP e contra a mesma conta, uma a cada ~2 s. Nenhum humano digitando produz esse ritmo: é automação.</span><span data-l="en"><b>Yes.</b> 9 failed logons (event <code>4625</code>) in ~16 seconds, all from the same IP against the same account, one every ~2 s. No human typing produces that rhythm: it is automated.</span></p>
+    </details>
+    <details>
+      <summary><span data-l="pt">2. O ataque teve sucesso?</span><span data-l="en">2. Did the attack succeed?</span></summary>
+      <p><span data-l="pt"><b>Sim, e esse é o ponto mais importante.</b> 2 segundos depois da última falha, o mesmo IP fez login com sucesso (evento <code>4624</code>, <code>logonType 3</code>) na mesma conta. A sequência <i>várias falhas → um sucesso</i> é o indicador clássico de senha descoberta. Deixa de ser "tentativa" e vira <b>incidente</b>.</span><span data-l="en"><b>Yes, and that is the key point.</b> 2 seconds after the last failure, the same IP logged on successfully (event <code>4624</code>, <code>logonType 3</code>) to the same account. The <i>many failures → one success</i> pattern is the classic sign of a guessed password. It stops being an "attempt" and becomes an <b>incident</b>.</span></p>
+    </details>
+    <details>
+      <summary><span data-l="pt">3. Houve preparação antes do ataque?</span><span data-l="en">3. Was there preparation before the attack?</span></summary>
+      <p><span data-l="pt"><b>Sim.</b> Às 05:56:39 aparece um login <b>anônimo</b> (null session, NTLM V1) vindo do atacante. É a ferramenta sondando o serviço SMB antes de testar senhas: a fase de <b>reconhecimento</b>.</span><span data-l="en"><b>Yes.</b> At 05:56:39 there is an <b>anonymous</b> logon (null session, NTLM V1) from the attacker. That is the tool probing the SMB service before trying passwords: the <b>reconnaissance</b> phase.</span></p>
+    </details>
+    <details>
+      <summary><span data-l="pt">4. Os outros "Logon Success" são do atacante?</span><span data-l="en">4. Are the other "Logon Success" events from the attacker?</span></summary>
+      <p><span data-l="pt"><b>Não.</b> Eles são da conta <code>SISTEMA</code>, com <code>logonType 5</code> (serviço), iniciados pelo <code>services.exe</code>. É o Windows funcionando normalmente: <b>falso positivo descartado</b>. Separar ruído de ataque é metade do trabalho de um N1.</span><span data-l="en"><b>No.</b> They belong to the <code>SYSTEM</code> account with <code>logonType 5</code> (service), started by <code>services.exe</code>. That is Windows working normally: <b>false positive ruled out</b>. Telling noise from attack is half of a Tier 1 analyst's job.</span></p>
+    </details>
+  </div>
+
+  <h3 class="sub"><span data-l="pt">Os campos que contam a história</span><span data-l="en">The fields that tell the story</span></h3>
+  <div class="table-wrap">
+  <table class="fields">
+    <thead><tr><th><span data-l="pt">Campo</span><span data-l="en">Field</span></th><th><span data-l="pt">Valor</span><span data-l="en">Value</span></th><th><span data-l="pt">O que significa</span><span data-l="en">What it means</span></th></tr></thead>
+    <tbody>
+      <tr><td><code>ipAddress</code></td><td><code>10.0.10.30</code></td><td><span data-l="pt">Mesma origem nas falhas e no sucesso: é o mesmo ator.</span><span data-l="en">Same source for the failures and the success: same actor.</span></td></tr>
+      <tr><td><code>logonType</code></td><td><code>3</code></td><td><span data-l="pt">Login <b>pela rede</b> (SMB), não no teclado da máquina (que seria 2).</span><span data-l="en">A <b>network</b> logon (SMB), not at the keyboard (that would be 2).</span></td></tr>
+      <tr><td><code>status / subStatus</code></td><td><code>0xC000006D / 0xC000006A</code></td><td><span data-l="pt"><b>Usuário existe, senha errada.</b> O atacante já sabia um nome de conta válido.</span><span data-l="en"><b>User exists, wrong password.</b> The attacker already knew a valid account name.</span></td></tr>
+      <tr><td><code>authenticationPackageName</code></td><td><code>NTLM</code></td><td><span data-l="pt">Autenticação NTLM, típica de ferramentas de ataque contra SMB.</span><span data-l="en">NTLM authentication, typical of attack tools against SMB.</span></td></tr>
+      <tr><td><code>rule.frequency</code></td><td><code>8</code></td><td><span data-l="pt">Limite de correlação: o alerta 60204 dispara depois de 8 falhas na janela de tempo.</span><span data-l="en">Correlation threshold: alert 60204 fires after 8 failures within the time window.</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="two-col">
+    <div class="note">
+      <h4><span data-l="pt">⚠️ O que aprendi além do óbvio</span><span data-l="en">⚠️ What I learned beyond the obvious</span></h4>
+      <ul>
+        <li><span data-l="pt"><b>A etiqueta da regra pode errar.</b> O Wazuh chamou o login de <i>"possible pass-the-hash"</i> (T1550.002), mas o atacante usou a <b>senha</b> descoberta, não um hash. O analista valida o contexto em vez de copiar o rótulo.</span><span data-l="en"><b>Rule labels can be wrong.</b> Wazuh called the logon <i>"possible pass-the-hash"</i> (T1550.002), but the attacker used the guessed <b>password</b>, not a hash. The analyst validates context instead of copying the label.</span></li>
+        <li><span data-l="pt"><b>Detectar não é impedir.</b> O alerta nível 10 disparou, e o atacante entrou 5 segundos depois. Sem resposta automática nem bloqueio de conta, o SIEM só documentou o ataque.</span><span data-l="en"><b>Detecting is not preventing.</b> The level-10 alert fired, and the attacker got in 5 seconds later. With no automated response and no account lockout, the SIEM only documented the attack.</span></li>
+        <li><span data-l="pt"><b>Fuso horário importa.</b> O painel mostra o horário local e o índice guarda UTC. Todo relatório deve citar o fuso.</span><span data-l="en"><b>Time zones matter.</b> The dashboard shows local time while the index stores UTC. Every report should state the time zone.</span></li>
+      </ul>
+    </div>
+    <div class="note">
+      <h4><span data-l="pt">🛡️ Resposta recomendada</span><span data-l="en">🛡️ Recommended response</span></h4>
+      <ol>
+        <li><span data-l="pt"><b>Conter:</b> desabilitar/resetar <code>joao.teste</code> e encerrar sessões.</span><span data-l="en"><b>Contain:</b> disable/reset <code>joao.teste</code> and kill sessions.</span></li>
+        <li><span data-l="pt"><b>Bloquear</b> 10.0.10.30 (manualmente ou via <i>Active Response</i> do Wazuh na regra 60204).</span><span data-l="en"><b>Block</b> 10.0.10.30 (manually or with Wazuh <i>Active Response</i> on rule 60204).</span></li>
+        <li><span data-l="pt"><b>Investigar o pós-login:</b> o que a conta acessou depois das 05:57:09.</span><span data-l="en"><b>Investigate post-logon:</b> what the account accessed after 05:57:09.</span></li>
+        <li><span data-l="pt"><b>Prevenir:</b> política de bloqueio de conta, senhas fortes, SMB restrito.</span><span data-l="en"><b>Prevent:</b> account lockout policy, strong passwords, restricted SMB.</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <h3 class="sub"><span data-l="pt">Prints do Wazuh (clique para ampliar)</span><span data-l="en">Wazuh screenshots (click to enlarge)</span></h3>
+  <div class="gallery" id="socGallery">
+    <figure><img src="assets/img/soc/01-threat-hunting-dashboard.png" alt="Painel Threat Hunting do Wazuh na janela do ataque" loading="lazy"><figcaption><span data-l="pt">Visão geral da janela do ataque: 19 alertas, 9 falhas de autenticação e as técnicas MITRE.</span><span data-l="en">Overview of the attack window: 19 alerts, 9 authentication failures and the MITRE techniques.</span></figcaption></figure>
+    <figure><img src="assets/img/soc/02-eventos-ataque.png" alt="Lista de eventos filtrada pelo IP do atacante" loading="lazy"><figcaption><span data-l="pt">Filtro pelo IP do atacante: o padrão de falhas a cada ~2 s, o alerta 60204 e o sucesso no fim.</span><span data-l="en">Filtered by attacker IP: failures every ~2 s, alert 60204 and the success at the end.</span></figcaption></figure>
+    <figure><img src="assets/img/soc/03-alerta-60204-detalhe.png" alt="Detalhes do alerta 60204" loading="lazy"><figcaption><span data-l="pt">Detalhe do alerta 60204: origem, conta, logonType 3 e os códigos de erro.</span><span data-l="en">Alert 60204 details: source, account, logonType 3 and the error codes.</span></figcaption></figure>
+    <figure><img src="assets/img/soc/05-alerta-60204-regra-mitre.png" alt="Campos da regra e MITRE do alerta 60204" loading="lazy"><figcaption><span data-l="pt">A regra: nível 10, frequência 8, MITRE T1110 (Credential Access → Brute Force).</span><span data-l="en">The rule: level 10, frequency 8, MITRE T1110 (Credential Access → Brute Force).</span></figcaption></figure>
+    <figure><img src="assets/img/soc/04-login-sucesso-92652.png" alt="Detalhes do login bem-sucedido 92652" loading="lazy"><figcaption><span data-l="pt">O login bem-sucedido: mesmo IP, NTLM V2, conta joao.teste.</span><span data-l="en">The successful logon: same IP, NTLM V2, account joao.teste.</span></figcaption></figure>
+  </div>
+
+  <h3 class="sub"><span data-l="pt">Explorador de logs brutos</span><span data-l="en">Raw log explorer</span></h3>
+  <p class="muted-t"><span data-l="pt">Os documentos exatamente como estão no indexador do Wazuh. Clique numa linha para abrir o JSON completo.</span><span data-l="en">The documents exactly as stored in the Wazuh indexer. Click a row to open the full JSON.</span></p>
+  <div class="filters" id="logFilters">
+    <button type="button" data-f="all" class="on"><span data-l="pt">Todos</span><span data-l="en">All</span></button>
+    <button type="button" data-f="attack"><span data-l="pt">Do atacante</span><span data-l="en">From attacker</span></button>
+    <button type="button" data-f="noise"><span data-l="pt">Ruído</span><span data-l="en">Noise</span></button>
+    <input type="search" id="logSearch" placeholder="rule.id, IP, user…" aria-label="Buscar">
+  </div>
+  <div class="table-wrap">
+    <table class="logs" id="logTable">
+      <thead><tr><th>timestamp (UTC)</th><th>rule.id</th><th>lvl</th><th>event</th><th>user</th><th>src IP</th><th>rule.description</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="dl"><a href="assets/data/cenario1.json" download>⬇ cenario1.json</a></p>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p><span data-l="pt">Todos os IPs e contas do laboratório são internos/fictícios (rede isolada 10.0.10.0/24). Nenhum dado pessoal é publicado.</span><span data-l="en">All lab IPs and accounts are internal/fictitious (isolated 10.0.10.0/24 network). No personal data is published.</span></p>
+</footer>
+
+<dialog id="lightbox" class="lightbox">
+  <button type="button" class="close" aria-label="Fechar">×</button>
+  <img alt="">
+  <p class="cap"></p>
+</dialog>
+
+<dialog id="jsonModal" class="json-modal">
+  <div class="jm-head"><b id="jmTitle"></b><button type="button" class="close" aria-label="Fechar">×</button></div>
+  <pre id="jmBody"></pre>
+</dialog>
+
+<script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

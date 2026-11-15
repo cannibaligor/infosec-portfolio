@@ -60,7 +60,7 @@ const URL_PARTS = {
   host: L('<b>Destino real</b>: um app no Google Cloud Run (<code>run.app</code>), região São Paulo. Domínio de boa reputação, HTTPS válido e descartável em minutos.', '<b>Real destination</b>: an app on Google Cloud Run (<code>run.app</code>), São Paulo region. Good-reputation domain, valid HTTPS, disposable in minutes.'),
 };
 const ux = $('#urlExplain');
-document.querySelectorAll('.u-part').forEach(p => {
+if (ux) document.querySelectorAll('.u-part').forEach(p => {
   const on = () => {
     document.querySelectorAll('.u-part').forEach(x => x.classList.toggle('on', x === p));
     ux.innerHTML = `<p>${URL_PARTS[p.dataset.p]}</p>`;
@@ -108,13 +108,19 @@ function fallback(wrap) {
 
 async function boot() {
   let events = [];
-  try {
-    events = await loadEvents();
-    buildLogs(events);
-  } catch (err) {
-    $('#logTable tbody').innerHTML = `<tr><td colspan="7">${L('Não foi possível carregar os logs.', 'Could not load the logs.')}</td></tr>`;
-    console.error(err);
+  // Só carrega os logs nas páginas que usam (Home Lab).
+  if ($('#logTable') || $('#replayWrap')) {
+    try {
+      events = await loadEvents();
+      if ($('#logTable')) buildLogs(events);
+    } catch (err) {
+      if ($('#logTable')) $('#logTable tbody').innerHTML = `<tr><td colspan="7">${L('Não foi possível carregar os logs.', 'Could not load the logs.')}</td></tr>`;
+      console.error(err);
+    }
   }
+
+  // Nenhuma cena 3D nesta página: nem carrega o motor 3D.
+  if (!['#heroCanvas', '#archWrap', '#replayWrap', '#mailWrap'].some(s => $(s))) return;
 
   let S, ok = false;
   try {
@@ -124,14 +130,14 @@ async function boot() {
   } catch (err) { console.error(err); ok = false; }
 
   if (!ok) {
-    ['#archWrap', '#replayWrap', '#mailWrap'].forEach(s => fallback($(s)));
-    $('#heroCanvas').remove();
+    ['#archWrap', '#replayWrap', '#mailWrap'].forEach(s => { if ($(s)) fallback($(s)); });
+    $('#heroCanvas')?.remove();
     return;
   }
   const safe = (fn, wrapSel) => { try { fn(); } catch (e) { console.error(e); if (wrapSel) fallback($(wrapSel)); } };
-  safe(() => S.heroScene($('#heroCanvas')));
-  safe(() => S.archScene($('#archWrap'), $('#archCanvas'), $('#archInfo')), '#archWrap');
-  if (events.length) safe(() => S.replayScene({
+  if ($('#heroCanvas')) safe(() => S.heroScene($('#heroCanvas')));
+  if ($('#archWrap')) safe(() => S.archScene($('#archWrap'), $('#archCanvas'), $('#archInfo')), '#archWrap');
+  if ($('#replayWrap') && events.length) safe(() => S.replayScene({
     wrap: $('#replayWrap'), canvas: $('#replayCanvas'), events, openJson,
     ui: {
       play: $('#btnPlay'), prev: $('#btnPrev'), next: $('#btnNext'), speed: $('#speed'), scrub: $('#scrub'),
@@ -139,6 +145,6 @@ async function boot() {
       clock: $('#hudClock'), status: $('#hudStatus'), banner: $('#banner'),
     },
   }), '#replayWrap');
-  safe(() => S.mailScene($('#mailWrap'), $('#mailCanvas'), $('#mailInfo')), '#mailWrap');
+  if ($('#mailWrap')) safe(() => S.mailScene($('#mailWrap'), $('#mailCanvas'), $('#mailInfo')), '#mailWrap');
 }
 boot();
