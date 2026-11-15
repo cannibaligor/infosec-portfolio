@@ -28,7 +28,7 @@
 1. Exportação do e-mail em `.eml`, sem abrir links ou anexos
 2. Análise dos cabeçalhos: `Received`, `From`, `Return-Path`, `Message-ID`, `Authentication-Results`
 3. Verificação de autenticação: SPF, DKIM e DMARC
-4. Decodificação do corpo (MIME / base64 / HTML) com um script Python, de forma offline
+4. Decodificação do corpo (MIME / base64 / HTML) de forma offline com o script [`analisar_eml.py`](analisar_eml.py), desenvolvido com apoio de IA (só bibliotecas padrão do Python, sem acesso à internet)
 5. Extração e *defang* das URLs
 6. OSINT passivo do IP de origem (RDAP/WHOIS)
 7. Análise de engenharia social e mapeamento MITRE ATT&CK
@@ -268,7 +268,7 @@ Também disponíveis em [`iocs.csv`](iocs.csv).
 ---
 
 ## Ferramentas utilizadas
-Python (`email`, `html.parser`, `hashlib`) · RDAP/ARIN · ipinfo.io · VirusTotal · URLscan.io · AbuseIPDB · MITRE ATT&CK
+Python ([`analisar_eml.py`](analisar_eml.py): `email`, `html.parser`, `urllib.parse`, `hashlib`) · RDAP/ARIN · ipinfo.io · VirusTotal · URLscan.io · AbuseIPDB · MITRE ATT&CK
 
 ## Aprendizados
 - Os cabeçalhos `Received` são lidos **de baixo para cima**; o primeiro salto externo revela a origem real.

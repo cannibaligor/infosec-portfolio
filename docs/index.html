@@ -292,7 +292,7 @@
           <p>Guardar a "prova" intacta antes de mexer nela, como um perito faz numa cena de crime. Tudo o que vem depois é feito sobre essa cópia, e não sobre o e-mail aberto na caixa de entrada.</p>
           <h5>Como fiz</h5>
           <ul>
-            <li>Localizei a mensagem na pasta <b>Lixo Eletrônico</b> do Outlook.com e usei a opção de baixar a mensagem, sem clicar em nada dentro dela.</li>
+            <li>Salvei a mensagem, que estava na pasta <b>Lixo Eletrônico</b> do Outlook.com, como arquivo <code>.eml</code>, sem clicar em nada dentro dela.</li>
             <li>O arquivo <code>.eml</code> é o e-mail completo em <b>texto puro</b>: todos os cabeçalhos técnicos (que o Outlook esconde) e o corpo codificado. Abrir esse arquivo como texto não executa nada.</li>
             <li>Calculei o <b>hash SHA-256</b> do arquivo: <code>3f57a838…943fe82</code>. O hash é uma "impressão digital": se um único caractere do arquivo mudar, o hash muda inteiro. Isso prova que a amostra analisada é a mesma recebida (<i>cadeia de custódia</i>).</li>
             <li>Mantive o arquivo <b>fora do repositório público</b> (bloqueado no <code>.gitignore</code>), porque ele contém meu endereço de e-mail e o link ativo do golpe.</li>
@@ -341,7 +341,7 @@
           <h5>Como fiz</h5>
           <ul>
             <li>O corpo de um e-mail vem no formato <b>MIME</b>, dividido em partes e muitas vezes codificado em <b>base64</b> (um texto embaralhado que não dá para ler a olho).</li>
-            <li>Escrevi um script Python usando apenas as bibliotecas padrão <code>email</code> (separar as partes MIME e decodificar o base64), <code>html.parser</code> (ler o HTML como texto e listar os links) e <code>hashlib</code> (calcular o hash).</li>
+            <li>Com apoio de IA, desenvolvi o script <a href="https://github.com/cannibaligor/infosec-portfolio/blob/main/01-phishing-analysis/analisar_eml.py" target="_blank" rel="noopener"><code>analisar_eml.py</code> ↗</a>, que usa apenas bibliotecas padrão do Python: <code>email</code> (separar as partes MIME e decodificar o base64), <code>html.parser</code> (ler o HTML como texto e listar os links), <code>urllib.parse</code> (dividir a URL e achar o host real) e <code>hashlib</code> (calcular o hash). Rodei o script no <code>.eml</code> e conferi cada resultado com o relatório.</li>
             <li>O script <b>só lê texto</b>: ele não renderiza HTML, não executa scripts, não baixa imagens e não acessa a internet. É a forma mais segura de olhar por dentro de uma mensagem maliciosa.</li>
           </ul>
           <h5>O que encontrei</h5>
@@ -444,7 +444,7 @@
           <p>Keep the "evidence" intact before touching it, as a forensic examiner would at a crime scene. Everything afterwards is done on this copy, not on the email open in the inbox.</p>
           <h5>How</h5>
           <ul>
-            <li>I found the message in the Outlook.com <b>Junk</b> folder and used the option to download it, without clicking anything inside it.</li>
+            <li>I saved the message, which was in the Outlook.com <b>Junk</b> folder, as an <code>.eml</code> file, without clicking anything inside it.</li>
             <li>An <code>.eml</code> file is the full email as <b>plain text</b>: every technical header (which Outlook hides) plus the encoded body. Opening it as text runs nothing.</li>
             <li>I computed the file's <b>SHA-256 hash</b>: <code>3f57a838…943fe82</code>. A hash is a "fingerprint": change a single character and the whole hash changes. It proves the analyzed sample is the one received (<i>chain of custody</i>).</li>
             <li>I kept the file <b>out of the public repository</b> (blocked in <code>.gitignore</code>), because it contains my email address and the live scam link.</li>
@@ -493,7 +493,7 @@
           <h5>How</h5>
           <ul>
             <li>An email body uses the <b>MIME</b> format, split into parts and often encoded in <b>base64</b> (scrambled text you cannot read by eye).</li>
-            <li>I wrote a Python script using only the standard libraries <code>email</code> (split the MIME parts and decode base64), <code>html.parser</code> (read the HTML as text and list the links) and <code>hashlib</code> (compute the hash).</li>
+            <li>With AI support, I developed the script <a href="https://github.com/cannibaligor/infosec-portfolio/blob/main/01-phishing-analysis/analisar_eml.py" target="_blank" rel="noopener"><code>analisar_eml.py</code> ↗</a>, which uses only Python's standard libraries: <code>email</code> (split the MIME parts and decode base64), <code>html.parser</code> (read the HTML as text and list the links), <code>urllib.parse</code> (split the URL and find the real host) and <code>hashlib</code> (compute the hash). I ran it on the <code>.eml</code> and checked every result against the report.</li>
             <li>The script <b>only reads text</b>: it does not render HTML, run scripts, download images or touch the internet. It is the safest way to look inside a malicious message.</li>
           </ul>
           <h5>What I found</h5>
@@ -761,18 +761,18 @@
     <div class="scn-head"><span class="pill ok"><span data-l="pt">O que ocorreu de fato</span><span data-l="en">What actually happened</span></span><h4><span data-l="pt">Eu não cliquei: analisei o arquivo offline</span><span data-l="en">I did not click: I analyzed the file offline</span></h4></div>
     <ol class="flow ok" data-l="pt">
       <li><b class="t">13/10/2026, 00:37: o e-mail chega e é barrado</b>O filtro da Microsoft deu a nota máxima de spam (<code>SCL 9</code>) e entregou a mensagem direto no <b>Lixo Eletrônico</b>. Ela nunca apareceu na minha caixa de entrada principal.</li>
-      <li><b class="t">Reconheço os sinais e não interajo</b>Ao encontrar o e-mail, vi um remetente sem domínio, um tom de ameaça e um prazo curto. <b>Não cliquei no link, não respondi, não carreguei imagens e não baixei nada.</b> Decidi tratá-lo como um caso de estudo de SOC.</li>
+      <li><b class="t">Não interajo com o golpe</b><b>Não cliquei no link.</b> Em vez de abrir o site, decidi investigar o e-mail como um caso de estudo de SOC.</li>
       <li><b class="t">Preservo a evidência</b>Exportei a mensagem como <code>.eml</code>, calculei o hash SHA-256 e guardei o arquivo fora do repositório público.</li>
-      <li><b class="t">Analiso o arquivo offline, com Python</b>O script leu o <code>.eml</code> como <b>texto</b>: separou os cabeçalhos, decodificou o base64 e listou os links. Nada foi renderizado ou executado, e <b>meu computador nunca se comunicou com os servidores do golpista</b>. Foi assim que descobri o IP de origem, a falta de autenticação e o truque do <code>@</code>.</li>
+      <li><b class="t">Analiso o arquivo offline, com Python</b>O script <code>analisar_eml.py</code> leu o <code>.eml</code> como <b>texto</b>: separou os cabeçalhos, decodificou o base64 e listou os links. Nada foi renderizado ou executado, e <b>meu computador nunca se comunicou com os servidores do golpista</b>. Foi assim que descobri o IP de origem, a falta de autenticação e o truque do <code>@</code>.</li>
       <li><b class="t">Consulto a reputação sem tocar no golpe</b>A URL e o IP foram verificados no VirusTotal, urlscan.io, AbuseIPDB, MXToolbox e RDAP. Quem acessou o site foram os <b>servidores desses serviços</b>, e não eu. Resultado: 11/93 detecções de phishing, servidor alugado na Vultr e página fora do ar ou escondida.</li>
       <li><b class="t">13/11/2026: denuncio a infraestrutura</b>Enviei denúncias ao Google Safe Browsing, AbuseIPDB (a primeira denúncia desse IP), Vultr e CERT.br. As duas denúncias ao Google Cloud foram encerradas pela triagem automática, e isso virou um aprendizado registrado no relatório.</li>
       <li><b class="t">Resultado final</b><b>Phishing confirmado e impacto zero:</b> nenhum clique, nenhum dado digitado, nenhum dinheiro perdido e nenhum equipamento infectado. Todos os riscos dos cenários 1 e 2 foram evitados com uma única decisão: <b>não clicar</b> e investigar do jeito certo.</li>
     </ol>
     <ol class="flow ok" data-l="en">
       <li><b class="t">2026-10-13, 00:37: the email arrives and is stopped</b>Microsoft's filter gave it the maximum spam score (<code>SCL 9</code>) and delivered it straight to <b>Junk</b>. It never appeared in my main inbox.</li>
-      <li><b class="t">I recognize the signs and do not interact</b>When I found the email, I saw a sender without a domain, a threatening tone and a short deadline. <b>I did not click the link, reply, load images or download anything.</b> I decided to treat it as a SOC case study.</li>
+      <li><b class="t">I do not interact with the scam</b><b>I did not click the link.</b> Instead of opening the site, I decided to investigate the email as a SOC case study.</li>
       <li><b class="t">I preserve the evidence</b>I exported the message as <code>.eml</code>, computed its SHA-256 hash and stored the file outside the public repository.</li>
-      <li><b class="t">I analyze the file offline, with Python</b>The script read the <code>.eml</code> as <b>text</b>: it split the headers, decoded the base64 and listed the links. Nothing was rendered or run, and <b>my computer never communicated with the scammer's servers</b>. That is how I found the source IP, the missing authentication and the <code>@</code> trick.</li>
+      <li><b class="t">I analyze the file offline, with Python</b>The <code>analisar_eml.py</code> script read the <code>.eml</code> as <b>text</b>: it split the headers, decoded the base64 and listed the links. Nothing was rendered or run, and <b>my computer never communicated with the scammer's servers</b>. That is how I found the source IP, the missing authentication and the <code>@</code> trick.</li>
       <li><b class="t">I check reputation without touching the scam</b>The URL and IP were checked on VirusTotal, urlscan.io, AbuseIPDB, MXToolbox and RDAP. The site was visited by <b>those services' servers</b>, not by me. Result: 11/93 phishing detections, a server rented from Vultr and a page offline or hidden.</li>
       <li><b class="t">2026-11-13: I report the infrastructure</b>I sent reports to Google Safe Browsing, AbuseIPDB (the first report on this IP), Vultr and CERT.br. Both reports to Google Cloud were closed by automated triage, which became a lesson recorded in the report.</li>
       <li><b class="t">Final result</b><b>Confirmed phishing, zero impact:</b> no click, no data typed, no money lost and no infected device. Every risk in scenarios 1 and 2 was avoided with one decision: <b>not clicking</b>, and investigating the right way.</li>
