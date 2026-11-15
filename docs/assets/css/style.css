@@ -207,6 +207,15 @@ tr:last-child td { border-bottom: 0; }
 .scn.ok, .scn.fact { border-top-color: var(--ok); }
 .scn-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 18px; }
 .scn-head h4 { font-size: 19px; margin: 0; }
+details.scn { padding: 0 24px; }
+details.scn > summary { cursor: pointer; list-style: none; padding: 18px 0; margin: 0; }
+details.scn > summary::-webkit-details-marker { display: none; }
+details.scn > summary h4 { flex: 1; min-width: 200px; }
+details.scn[open] > summary { margin-bottom: 4px; }
+details.scn[open] { padding-bottom: 22px; }
+details.scn > summary:hover h4 { color: var(--accent); }
+.chev { flex: none; width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); margin: 0 4px 4px auto; transition: transform .2s; }
+details.scn[open] .chev { transform: rotate(-135deg); margin-bottom: -4px; }
 .scn ul, .scn ol { color: var(--ink-2); font-size: 15px; }
 .scn li { margin-bottom: 6px; }
 .flow { list-style: none; padding: 0; margin: 0 0 4px 14px; counter-reset: f; }
@@ -233,6 +242,8 @@ tr:last-child td { border-bottom: 0; }
 @media (max-width: 640px) {
   .deep .body { padding-left: 0; }
   .scn { padding: 18px 16px; }
+  details.scn { padding: 0 16px; }
+  details.scn[open] { padding-bottom: 18px; }
   .scn td:last-child { white-space: normal; }
 }
 .mitre { list-style: none; padding: 0 !important; }
