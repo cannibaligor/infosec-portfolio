@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-br"><head><meta charset="utf-8">
+<title>Relatório de Incidente — PowerShell codificado</title>
+<style>
+@page{size:A4;margin:11mm 12mm}
+*{box-sizing:border-box}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:8.6pt;color:#1b1f24;margin:0;line-height:1.32}
+h1{font-size:14.5pt;margin:0;color:#0b2545}
+h2{font-size:9.6pt;margin:7px 0 3px;padding-bottom:2px;border-bottom:1.5px solid #0b2545;color:#0b2545;text-transform:uppercase;letter-spacing:.3px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #0b2545;padding-bottom:5px}
+.meta{font-size:7.8pt;color:#555;text-align:right}
+.badge{display:inline-block;background:#c62828;color:#fff;font-weight:700;padding:2px 7px;border-radius:3px;font-size:8.3pt}
+.badge.m{background:#ef6c00}
+.badge.lo{background:#2e7d32}
+.badge.g{background:#455a64}
+table{width:100%;border-collapse:collapse;margin:2px 0}
+td,th{border:1px solid #cfd6de;padding:2px 5px;vertical-align:top;text-align:left}
+th{background:#eef2f6;font-weight:600;white-space:nowrap}
+code{font-family:Consolas,monospace;font-size:7.7pt;background:#f2f4f7;padding:0 2px;word-break:break-all}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.fail{color:#c62828;font-weight:700}
+.ok{color:#2e7d32;font-weight:700}
+ul,ol{margin:2px 0;padding-left:15px} li{margin:1px 0}
+.sum{background:#f6f8fa;border-left:4px solid #ef6c00;padding:5px 8px;margin-top:6px}
+.foot{margin-top:6px;font-size:7.2pt;color:#666;border-top:1px solid #ccc;padding-top:3px}
+</style></head><body>
+
+<div class="head">
+ <div><h1>Relatório de Incidente — PowerShell codificado (Base64)</h1>
+ <div>Home Lab de SOC · Cenário 2 · Wazuh 4.14 + Sysmon (EID 1) + PowerShell Script Block Logging (4104)</div></div>
+ <div class="meta">Analista: <b>Igor Mendes</b> — SOC N1<br>Data: 15/11/2026, 19:21 e 21:07 UTC (tuning em 16/11)<br>Ambiente: laboratório isolado (10.0.10.0/24)</div>
+</div>
+
+<div class="sum"><b>Veredito:</b> <span class="badge m">VERDADEIRO POSITIVO — ATIVIDADE DE TESTE BENIGNA</span> &nbsp; <b>Severidade:</b> <span class="badge lo">BAIXA</span> &nbsp; <b>Status:</b> <span class="badge g">ENCERRADO</span><br>
+<b>Resumo executivo:</b> no computador <b>SOC-WIN11</b>, um PowerShell executou um comando <b>escondido em Base64</b> (<code>-EncodedCommand</code>), técnica usada por atacantes para disfarçar o que estão rodando. O SIEM detectou o comportamento (alerta de nível 12). Decodificado, o comando apenas escrevia uma frase na tela: era um <b>teste controlado</b>, sem dano. A investigação mostrou uma lacuna: o SIEM não registrava o <b>conteúdo</b> do código. Ela foi corrigida com o evento 4104 e duas regras próprias (100210 e 100211).</div>
+
+<div class="grid">
+<div>
+<h2>1. Linha do tempo (UTC, horário do evento)</h2>
+<table>
+<tr><th>15/11 19:21:57</th><td>1ª execução; alerta <span class="fail">92057 (nível 12)</span>: PowerShell criou PowerShell com Base64</td></tr>
+<tr><th>15/11</th><td>Base64 decodificado manualmente; ativado o 4104 e criada a regra 100210</td></tr>
+<tr><th>21:07:12.135</th><td>4104 no PID 5572: <code>powershell.exe -EncodedCommand $enc</code></td></tr>
+<tr><th>21:07:12.336</th><td>Sysmon EID 1: novo <code>powershell.exe</code>, PID 1048, <b>pai 5572</b> (alerta 92057)</td></tr>
+<tr><th>21:07:14.299</th><td>4104 no PID 1048: <code>Write-Host "LAB-SOC Cenario 2…"</code> <b>já decodificado</b></td></tr>
+<tr><th>16/11 04:26</th><td>Regra de tuning 100211 aplicada e validada</td></tr>
+</table>
+<p style="margin:2px 0">Ingestão no SIEM ~3 min após o evento: horários retirados de <code>data.win.system.systemTime</code>.</p>
+
+<h2>2. Ativos e indicadores</h2>
+<table>
+<tr><th>Host</th><td><code>SOC-WIN11</code> (10.0.10.20)</td></tr>
+<tr><th>Usuário</th><td><code>SOC-WIN11\cannibalsec</code>, integridade <b>Medium</b> (sem admin)</td></tr>
+<tr><th>Processos</th><td><code>powershell.exe</code> PID 5572 (pai) → PID 1048 (filho)</td></tr>
+<tr><th>Linha de comando</th><td><code>powershell.exe -EncodedCommand VwByAGkAdABlAC0ASABv…bgA=</code></td></tr>
+<tr><th>Conteúdo real</th><td><code>Write-Host "LAB-SOC Cenario 2 - PowerShell codificado…"</code></td></tr>
+</table>
+
+<h2>3. MITRE ATT&amp;CK</h2>
+<table>
+<tr><td><b>T1059.001</b> Command and Scripting Interpreter: PowerShell</td><td><b>T1027</b> Obfuscated Files or Information</td></tr>
+</table>
+</div>
+
+<div>
+<h2>4. Análise</h2>
+<ul>
+<li><b>Comportamento (Sysmon / 92057):</b> PowerShell gerando PowerShell com Base64, padrão de ofuscação. Mostra <i>que</i> algo escondido rodou, não <i>o quê</i>.</li>
+<li><b>Conteúdo (4104 / 100210):</b> para executar, o PowerShell decodifica na memória, e o Windows registra o código nesse momento. Resultado: apenas um <code>Write-Host</code>, sem download, rede ou alteração no sistema.</li>
+<li><b>Correlação por PID:</b> o pai 5572 é o console interativo do usuário; o filho 1048 executou o código. Pai suspeito (Word, navegador, tarefa agendada) teria levado à escalada.</li>
+</ul>
+
+<h2>5. Triagem dos demais alertas graves</h2>
+<table>
+<tr><th>92213 (15)</th><td><code>__PSScriptPolicyTest_*.ps1</code>: teste de política do próprio PowerShell — <b>falso positivo</b></td></tr>
+<tr><th>92058 (12)</th><td><code>sdbinst.exe</code> como SYSTEM via serviço <code>PcaSvc</code>, recorrente — <b>falso positivo</b></td></tr>
+<tr><th>92055 (12)</th><td><code>FodHelper.exe -Embedding</code> via <code>DcomLaunch</code>, sem alteração de <code>ms-settings</code> — <b>provável falso positivo</b> (abertura das Configurações não confirmada)</td></tr>
+</table>
+
+<h2>6. Melhorias implementadas</h2>
+<ul>
+<li><span class="ok">✓</span> <b>Script Block Logging (4104)</b> ativado e canal <code>PowerShell/Operational</code> coletado pelo agente.</li>
+<li><span class="ok">✓</span> <b>Regra 100210</b> (nível 4): todo script block vira alerta legível.</li>
+<li><span class="ok">✓</span> <b>Regra 100211</b> (nível 0): silencia só o ruído <b>exato</b> do console (<code>prompt</code>, <code>$global:?</code>, <code>$Host</code>). Validada: <code>whoami</code>/<code>Get-Date</code> continuam alertando.</li>
+</ul>
+
+<h2>7. Recomendações</h2>
+<ol>
+<li>Num caso real: <b>decodificar e ler</b> o 4104, montar a <b>árvore de processos</b> e buscar atividade posterior (rede, arquivos, serviços); conter e escalar ao N2 se houver download/execução.</li>
+<li>Manter o 4104 ativo em todos os endpoints; avaliar <b>Constrained Language Mode</b>/AppLocker para usuários comuns.</li>
+<li>Revisar periodicamente o ruído restante (<code>$this.DisplayHint</code>, <code>Set-Alias…Cim</code>) antes de filtrar.</li>
+</ol>
+</div>
+</div>
+
+<div class="foot">Teste controlado em laboratório isolado (VirtualBox, 10.0.10.0/24); contas e IPs são do laboratório. Execução e investigação feitas pelo analista; scripts, regras e redação com apoio de IA. Evidências brutas (69 alertas exportados do indexador do Wazuh), regras e 13 prints: <b>github.com/cannibaligor/infosec-portfolio</b> → 02-soc-home-lab</div>
+</body></html>

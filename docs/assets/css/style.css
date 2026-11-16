@@ -318,3 +318,5 @@ dialog::backdrop { background: rgba(10,10,12,.6); }
   .hero { padding: 40px 16px; min-height: 0; }
   .filters input { margin-left: 0; width: 100%; }
 }
+
+.report-link { margin: 14px 0 4px; }

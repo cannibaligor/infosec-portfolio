@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-br"><head><meta charset="utf-8">
+<title>Relatório de Incidente — Brute force via SMB</title>
+<style>
+@page{size:A4;margin:11mm 12mm}
+*{box-sizing:border-box}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:8.6pt;color:#1b1f24;margin:0;line-height:1.32}
+h1{font-size:14.5pt;margin:0;color:#0b2545}
+h2{font-size:9.6pt;margin:7px 0 3px;padding-bottom:2px;border-bottom:1.5px solid #0b2545;color:#0b2545;text-transform:uppercase;letter-spacing:.3px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #0b2545;padding-bottom:5px}
+.meta{font-size:7.8pt;color:#555;text-align:right}
+.badge{display:inline-block;background:#c62828;color:#fff;font-weight:700;padding:2px 7px;border-radius:3px;font-size:8.3pt}
+.badge.m{background:#ef6c00}
+.badge.g{background:#455a64}
+table{width:100%;border-collapse:collapse;margin:2px 0}
+td,th{border:1px solid #cfd6de;padding:2px 5px;vertical-align:top;text-align:left}
+th{background:#eef2f6;font-weight:600;white-space:nowrap}
+code{font-family:Consolas,monospace;font-size:7.7pt;background:#f2f4f7;padding:0 2px;word-break:break-all}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.fail{color:#c62828;font-weight:700}
+ul,ol{margin:2px 0;padding-left:15px} li{margin:1px 0}
+.sum{background:#f6f8fa;border-left:4px solid #c62828;padding:5px 8px;margin-top:6px}
+.foot{margin-top:6px;font-size:7.2pt;color:#666;border-top:1px solid #ccc;padding-top:3px}
+</style></head><body>
+
+<div class="head">
+ <div><h1>Relatório de Incidente — Brute force de senha via SMB</h1>
+ <div>Home Lab de SOC · Cenário 1 · Wazuh 4.14 + Windows Security Log (4625/4624)</div></div>
+ <div class="meta">Autor: <b>Igor Mendes</b> — SOC N1<br>Data do incidente: 14/11/2026, 05:56–05:57 UTC<br>Ambiente: laboratório isolado (10.0.10.0/24)</div>
+</div>
+
+<div class="sum"><b>Veredito:</b> <span class="badge">VERDADEIRO POSITIVO — CONTA COMPROMETIDA</span> &nbsp; <b>Severidade:</b> <span class="badge">ALTA</span> &nbsp; <b>Status:</b> <span class="badge g">SIMULAÇÃO · CONTENÇÃO RECOMENDADA</span><br>
+<b>Resumo executivo:</b> uma máquina da rede (10.0.10.30) tentou adivinhar a senha da conta <b>joao.teste</b> no computador <b>SOC-WIN11</b>, de forma automatizada: <b>9 tentativas erradas em 16 segundos</b>. Dois segundos depois, <b>acertou a senha e entrou</b>. O SIEM gerou um alerta de nível 10, mas como não havia bloqueio de conta nem resposta automática, o acesso não foi impedido. A conta deve ser considerada comprometida até que a senha seja trocada e o acesso investigado.</div>
+
+<div class="grid">
+<div>
+<h2>1. Linha do tempo (UTC)</h2>
+<table>
+<tr><th>05:56:39</th><td>Login <b>anônimo</b> (null session, NTLM V1) de 10.0.10.30: sondagem do SMB (regra 92652)</td></tr>
+<tr><th>05:56:50</th><td>1ª falha de login em <code>joao.teste</code> (4625, regra 60122)</td></tr>
+<tr><th>05:57:04</th><td><span class="fail">Alerta 60204, nível 10</span>: <i>Multiple Windows Logon Failures</i> (8ª falha, correlação)</td></tr>
+<tr><th>05:57:06</th><td>9ª e última falha</td></tr>
+<tr><th>05:57:09</th><td><span class="fail">Login com sucesso</span> como <code>joao.teste</code>, de 10.0.10.30 (4624, logonType 3, NTLM V2)</td></tr>
+<tr><th>05:57:09</th><td>Logoff imediato (4634): a credencial foi apenas validada</td></tr>
+</table>
+
+<h2>2. Ativos e indicadores</h2>
+<table>
+<tr><th>Origem (atacante)</th><td><code>10.0.10.30</code> (SOC-Kali)</td></tr>
+<tr><th>Alvo</th><td><code>SOC-WIN11</code> (10.0.10.20), serviço SMB</td></tr>
+<tr><th>Conta afetada</th><td><code>joao.teste</code> (local, sem privilégio elevado)</td></tr>
+<tr><th>Sessão</th><td><code>targetLogonId 0x1bf006</code></td></tr>
+<tr><th>Ferramenta</th><td>NetExec (<code>nxc smb</code>) com lista de senhas</td></tr>
+</table>
+
+<h2>3. Evidências-chave</h2>
+<table>
+<tr><th>Mesma origem</th><td><code>ipAddress 10.0.10.30</code> nas 9 falhas e no sucesso</td></tr>
+<tr><th>Ritmo</th><td>1 tentativa a cada ~2 s: automação, não digitação humana</td></tr>
+<tr><th>subStatus</th><td><code>0xC000006A</code>: usuário <b>existe</b>, senha errada</td></tr>
+<tr><th>logonType</th><td><code>3</code>: login pela rede (SMB)</td></tr>
+<tr><th>Correlação</th><td>Regra 60204, <code>frequency 8</code>, MITRE T1110</td></tr>
+</table>
+</div>
+
+<div>
+<h2>4. Análise</h2>
+<ul>
+<li><b>Brute force confirmado:</b> várias falhas rápidas, da mesma origem, contra a mesma conta.</li>
+<li><b>Ataque bem-sucedido:</b> a sequência <i>falhas → sucesso</i> da mesma origem indica senha descoberta. Deixa de ser tentativa e passa a ser <b>incidente</b>.</li>
+<li><b>Reconhecimento prévio:</b> o login anônimo às 05:56:39 é a enumeração do SMB antes das tentativas.</li>
+<li><b>Falsos positivos descartados:</b> os demais "Logon Success" (60106) são da conta SISTEMA, <code>logonType 5</code>, via <code>services.exe</code>.</li>
+<li><b>Rótulo incorreto da regra:</b> a 92652 sugere <i>pass-the-hash</i> (T1550.002), mas o contexto mostra senha adivinhada (T1110 → T1078).</li>
+</ul>
+
+<h2>5. MITRE ATT&amp;CK</h2>
+<table>
+<tr><td><b>T1110</b> Brute Force (Credential Access)</td><td><b>T1078</b> Valid Accounts (login com a senha descoberta)</td></tr>
+</table>
+
+<h2>6. Lacunas de controle</h2>
+<ul>
+<li>Sem <b>política de bloqueio de conta</b>: 9 tentativas sem lockout.</li>
+<li>Sem <b>resposta automática</b>: o alerta disparou 5 s antes do acesso, mas nada foi bloqueado.</li>
+<li>SMB acessível a qualquer máquina da rede.</li>
+</ul>
+
+<h2>7. Resposta e recomendações</h2>
+<ol>
+<li><b>Contenção:</b> desabilitar/resetar a senha de <code>joao.teste</code> e encerrar sessões abertas.</li>
+<li><b>Bloqueio:</b> isolar/bloquear 10.0.10.30 no firewall (ou via <i>Active Response</i> do Wazuh na regra 60204).</li>
+<li><b>Escopo:</b> investigar o que a sessão <code>0x1bf006</code> fez; buscar logins de 10.0.10.30 em outras máquinas.</li>
+<li><b>Prevenção:</b> lockout (ex.: 5 tentativas / 15 min), senhas fortes, SMB restrito a quem precisa.</li>
+</ol>
+</div>
+</div>
+
+<div class="foot">Ataque simulado em laboratório isolado (VirtualBox, rede 10.0.10.0/24); contas e IPs são do laboratório. Simulação, investigação e redação realizadas com apoio de IA. Evidências brutas (19 alertas exportados do indexador do Wazuh) e prints: <b>github.com/cannibaligor/infosec-portfolio</b> → 02-soc-home-lab</div>
+</body></html>

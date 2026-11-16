@@ -19,6 +19,8 @@ Laboratório de detecção montado em VirtualBox para simular ataques reais e in
 
 ## Cenário 1 — Brute force de senha via SMB
 
+📄 **Relatório de incidente (1 página):** [relatorios/relatorio-cenario1-bruteforce-smb.pdf](relatorios/relatorio-cenario1-bruteforce-smb.pdf)
+
 | | |
 |---|---|
 | **Data** | 14/11/2026, 05:56–05:57 **UTC** |
@@ -149,6 +151,8 @@ Consulta `rule.id:92652 and data.win.eventdata.targetUserName:joao.teste`:
 ---
 
 ## Cenário 2 — PowerShell codificado (`-EncodedCommand`)
+
+📄 **Relatório de incidente (1 página):** [relatorios/relatorio-cenario2-powershell-codificado.pdf](relatorios/relatorio-cenario2-powershell-codificado.pdf)
 
 | | |
 |---|---|
