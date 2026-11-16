@@ -183,13 +183,244 @@
     </div>
   </div>
 
-  <h3 class="sub"><span data-l="pt">Prints do Wazuh (clique para ampliar)</span><span data-l="en">Wazuh screenshots (click to enlarge)</span></h3>
-  <div class="gallery" id="socGallery">
-    <figure><img src="assets/img/soc/01-threat-hunting-dashboard.png" alt="Painel Threat Hunting do Wazuh na janela do ataque" loading="lazy"><figcaption><span data-l="pt">Visão geral da janela do ataque: 19 alertas, 9 falhas de autenticação e as técnicas MITRE.</span><span data-l="en">Overview of the attack window: 19 alerts, 9 authentication failures and the MITRE techniques.</span></figcaption></figure>
-    <figure><img src="assets/img/soc/02-eventos-ataque.png" alt="Lista de eventos filtrada pelo IP do atacante" loading="lazy"><figcaption><span data-l="pt">Filtro pelo IP do atacante: o padrão de falhas a cada ~2 s, o alerta 60204 e o sucesso no fim.</span><span data-l="en">Filtered by attacker IP: failures every ~2 s, alert 60204 and the success at the end.</span></figcaption></figure>
-    <figure><img src="assets/img/soc/03-alerta-60204-detalhe.png" alt="Detalhes do alerta 60204" loading="lazy"><figcaption><span data-l="pt">Detalhe do alerta 60204: origem, conta, logonType 3 e os códigos de erro.</span><span data-l="en">Alert 60204 details: source, account, logonType 3 and the error codes.</span></figcaption></figure>
-    <figure><img src="assets/img/soc/05-alerta-60204-regra-mitre.png" alt="Campos da regra e MITRE do alerta 60204" loading="lazy"><figcaption><span data-l="pt">A regra: nível 10, frequência 8, MITRE T1110 (Credential Access → Brute Force).</span><span data-l="en">The rule: level 10, frequency 8, MITRE T1110 (Credential Access → Brute Force).</span></figcaption></figure>
-    <figure><img src="assets/img/soc/04-login-sucesso-92652.png" alt="Detalhes do login bem-sucedido 92652" loading="lazy"><figcaption><span data-l="pt">O login bem-sucedido: mesmo IP, NTLM V2, conta joao.teste.</span><span data-l="en">The successful logon: same IP, NTLM V2, account joao.teste.</span></figcaption></figure>
+  <h3 class="sub"><span data-l="pt">Prints do Wazuh: tela por tela</span><span data-l="en">Wazuh screenshots: screen by screen</span></h3>
+
+  <!-- ===== PT ===== -->
+  <div data-l="pt">
+    <p class="muted-t">O caminho da investigação no painel do Wazuh, na ordem em que um analista N1 faria: da visão geral até o alerta que prova o comprometimento. Cada passo explica <b>como chegar</b> na tela, <b>o que cada número ou campo significa</b> e <b>o que concluir</b>. Clique nos prints para ampliar.</p>
+    <div class="deep">
+      <details open>
+        <summary><span class="n">1</span>Visão geral: o painel Threat Hunting na janela do ataque</summary>
+        <div class="body">
+          <h5>Como chegar</h5>
+          <p>Menu ☰ → <b>Threat Hunting</b> → aba <b>Dashboard</b>. No seletor de tempo (📅), período absoluto <b>14/11/2026, 05:55:00 → 05:59:00</b>. O painel mostra o horário em UTC−4; o relatório usa UTC.</p>
+          <h5>O que a tela mostra</h5>
+          <ul>
+            <li><b>19 Total</b>: todos os alertas gerados nesses 4 minutos.</li>
+            <li><b>0 Level 12 or above</b>: nenhum alerta "crítico". O ataque <b>não</b> aparece no topo da fila de severidade. Quem olhasse só para nível 12+ deixaria passar.</li>
+            <li><b>9 Authentication failure</b>: 9 falhas de login (8 da regra 60122 + 1 que virou o alerta correlacionado 60204).</li>
+            <li><b>6 Authentication success</b>: 4 são logins normais da conta <code>SISTEMA</code> (regra 60106) e 2 são da regra 92652. Um deles é o login do atacante.</li>
+            <li><b>Top 10 Alert level evolution</b>: o "pente" de picos entre 05:56:50 e 05:57:10 é a rajada de tentativas, um padrão de máquina, não de pessoa.</li>
+            <li><b>Top 10 MITRE ATT&amp;CKs</b>: Brute Force, Valid Accounts, Pass the Hash, Domain Accounts e Account Access Removal. Algumas dessas etiquetas estão erradas (veja o passo 5).</li>
+          </ul>
+          <h5>O que concluir</h5>
+          <p>Algo concentrado e repetitivo aconteceu às 05:57. O próximo passo é descobrir <b>de onde</b> veio.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/01-threat-hunting-dashboard.png" alt="Painel Threat Hunting do Wazuh na janela do ataque" loading="lazy"><figcaption>19 alertas, 9 falhas, 6 sucessos e as técnicas MITRE da janela.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">2</span>Filtrar pelo IP de origem e ler a sequência dos eventos</summary>
+        <div class="body">
+          <h5>Como chegar</h5>
+          <p>Aba <b>Events</b>, com esta consulta DQL na barra de busca e o período <b>05:56:30 → 05:57:15</b>:</p>
+          <p><code>agent.name:SOC-Win11 and data.win.eventdata.ipAddress:10.0.10.30</code></p>
+          <p>A consulta pede: "eventos da máquina SOC-Win11 <b>e</b> cujo IP de origem seja 10.0.10.30". O resultado cai de 19 para <b>11 hits</b>, todos ligados ao atacante.</p>
+          <h5>Como ler (de baixo para cima, do mais antigo ao mais novo)</h5>
+          <ul>
+            <li><b>05:56:39</b>, regra 92652: login com <code>LOGON ANÔNIMO</code>, NTLM V1. É a ferramenta sondando o SMB antes de testar senhas (reconhecimento).</li>
+            <li><b>05:56:50 → 05:57:06</b>, regra 60122 (nível 5): <i>Logon Failure - Unknown user or bad password</i>, uma a cada ~2 segundos. O gráfico de barras igualmente espaçadas mostra o ritmo automatizado.</li>
+            <li><b>05:57:04</b>, regra <b>60204</b> (nível 10): <i>Multiple Windows Logon Failures</i>. Esse alerta é a <b>8ª falha</b>: o Wazuh contou 8 falhas na janela de tempo e transformou aquela em alerta correlacionado.</li>
+            <li><b>05:57:09</b>, regra 92652: <i>Successful Remote Logon</i> como <code>joao.teste</code>. É o sucesso logo depois das falhas.</li>
+          </ul>
+          <h5>O que concluir</h5>
+          <p>A sequência <b>reconhecimento → várias falhas → um sucesso</b>, toda da mesma origem, é a assinatura de um brute force <b>que funcionou</b>.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/02-eventos-ataque.png" alt="Lista de eventos filtrada pelo IP do atacante" loading="lazy"><figcaption>11 eventos do IP 10.0.10.30: sondagem, falhas a cada ~2 s, alerta 60204 e o sucesso.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">3</span>Abrir o alerta 60204: os campos do evento Windows</summary>
+        <div class="body">
+          <h5>Como chegar</h5>
+          <p>Consulta <code>rule.id:60204</code>, depois clicar no ícone 🔍 à esquerda da linha. Abre o painel <b>Document Details</b>, aba <b>Table</b>: o evento original do Windows (4625) já separado em campos.</p>
+          <h5>Campo a campo</h5>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Campo</th><th>Valor</th><th>O que significa</th></tr></thead>
+            <tbody>
+              <tr><td><code>agent.name</code> / <code>agent.ip</code></td><td>SOC-Win11 / 10.0.10.20</td><td>A máquina <b>atacada</b>, onde o agente Wazuh coletou o log.</td></tr>
+              <tr><td><code>ipAddress</code> / <code>ipPort</code></td><td>10.0.10.30 / 39612</td><td>De onde veio a tentativa: o Kali. A porta alta é aleatória, do lado do cliente.</td></tr>
+              <tr><td><code>targetUserName</code></td><td>joao.teste</td><td>A conta que estava sendo atacada.</td></tr>
+              <tr><td><code>logonType</code></td><td>3</td><td>Login <b>pela rede</b> (SMB, compartilhamento). Teclado local seria 2; RDP seria 10.</td></tr>
+              <tr><td><code>authenticationPackageName</code></td><td>NTLM</td><td>Protocolo de autenticação. NTLM é o padrão das ferramentas de ataque contra SMB.</td></tr>
+              <tr><td><code>status</code></td><td>0xC000006D</td><td>"Falha de logon": código genérico.</td></tr>
+              <tr><td><code>subStatus</code></td><td>0xC000006A</td><td>O detalhe que importa: <b>o usuário existe, a senha está errada</b>. Se o usuário não existisse, seria 0xC0000064. O atacante já sabia um nome válido.</td></tr>
+              <tr><td><code>failureReason</code></td><td>%%2313</td><td>Código de mensagem do Windows para "nome de usuário desconhecido ou senha incorreta".</td></tr>
+              <tr><td><code>system.channel</code> / <code>eventID</code></td><td>Security / 4625</td><td>Veio do log de Segurança do Windows; 4625 = "uma conta falhou ao fazer logon".</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="gallery"><figure><img src="assets/img/soc/03-alerta-60204-detalhe.png" alt="Detalhes do alerta 60204" loading="lazy"><figcaption>Document Details do 60204: origem, conta, logonType 3 e os códigos de erro.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">4</span>A regra por trás do alerta: correlação e MITRE</summary>
+        <div class="body">
+          <h5>Como chegar</h5>
+          <p>No mesmo Document Details, rolando até os campos que começam com <code>rule.</code>.</p>
+          <h5>Campo a campo</h5>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Campo</th><th>Valor</th><th>O que significa</th></tr></thead>
+            <tbody>
+              <tr><td><code>rule.level</code></td><td>10</td><td>Severidade de 0 a 15. Uma falha sozinha é nível 5; a <b>repetição</b> sobe para 10.</td></tr>
+              <tr><td><code>rule.frequency</code></td><td>8</td><td>A regra só dispara depois de <b>8 eventos</b> parecidos na janela de tempo. Isso é <b>correlação</b>: o alerta não olha um evento, olha um padrão.</td></tr>
+              <tr><td><code>rule.firedtimes</code></td><td>1</td><td>Quantas vezes a regra disparou nesse ciclo.</td></tr>
+              <tr><td><code>previous_output</code></td><td>(JSON)</td><td>Os eventos anteriores que somaram para o disparo. É a "prova" da correlação.</td></tr>
+              <tr><td><code>rule.groups</code></td><td>authentication_failures</td><td>Categoria usada pelo painel para contar o card "Authentication failure".</td></tr>
+              <tr><td><code>rule.mitre.*</code></td><td>T1110 · Credential Access · Brute Force</td><td>Mapeamento para o MITRE ATT&amp;CK: a tática (o objetivo do atacante) e a técnica (como ele faz).</td></tr>
+              <tr><td><code>rule.pci_dss</code>, <code>gdpr</code>, <code>hipaa</code>, <code>nist_800_53</code>, <code>tsc</code></td><td>10.2.4, 10.2.5…</td><td>Requisitos de <b>conformidade</b> ligados ao alerta. Em auditoria, mostram que a empresa monitora tentativas de acesso inválidas.</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="gallery"><figure><img src="assets/img/soc/05-alerta-60204-regra-mitre.png" alt="Campos da regra e MITRE do alerta 60204" loading="lazy"><figcaption>Nível 10, frequência 8, MITRE T1110 e os mapeamentos de conformidade.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">5</span>O login com sucesso: a prova do comprometimento</summary>
+        <div class="body">
+          <h5>Como chegar</h5>
+          <p>Consulta <code>rule.id:92652 and data.win.eventdata.targetUserName:joao.teste</code>, depois 🔍 na linha das 05:57:09.</p>
+          <h5>Campo a campo</h5>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Campo</th><th>Valor</th><th>O que significa</th></tr></thead>
+            <tbody>
+              <tr><td><code>ipAddress</code></td><td>10.0.10.30</td><td><b>O mesmo IP</b> das 9 falhas: é o mesmo ator.</td></tr>
+              <tr><td><code>targetUserName</code></td><td>joao.teste</td><td><b>A mesma conta</b> que estava sendo atacada.</td></tr>
+              <tr><td><code>logonType</code></td><td>3</td><td>Login pela rede, igual às tentativas.</td></tr>
+              <tr><td><code>lmPackageName</code> / <code>keyLength</code></td><td>NTLM V2 / 128</td><td>Autenticação completa. Compare com a sondagem anônima das 05:56:39 (NTLM V1, chave 0).</td></tr>
+              <tr><td><code>elevatedToken</code></td><td>%%1843 ("Não")</td><td>A sessão <b>não</b> recebeu privilégio de administrador.</td></tr>
+              <tr><td><code>targetLogonId</code></td><td>0x1bf006</td><td>O ID desta sessão. Com ele dá para rastrear tudo o que a sessão fez depois (e o logoff 4634 logo em seguida).</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <h5>Atenção à etiqueta</h5>
+          <p>A regra 92652 descreve o evento como <i>"possible pass-the-hash attack"</i> (T1550.002). Os campos mostram outra coisa: houve 9 senhas erradas e depois um acerto, ou seja, a <b>senha</b> foi descoberta. O analista valida o contexto em vez de copiar o rótulo da regra.</p>
+          <h5>O que concluir</h5>
+          <p><b>Conta comprometida.</b> O caso deixa de ser "tentativa" e vira <b>incidente</b>, que exige contenção (resetar a senha, bloquear o IP) e investigação do que a sessão 0x1bf006 fez.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/04-login-sucesso-92652.png" alt="Detalhes do login bem-sucedido 92652" loading="lazy"><figcaption>O sucesso: mesmo IP, mesma conta, NTLM V2, sem privilégio elevado.</figcaption></figure></div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== EN ===== -->
+  <div data-l="en">
+    <p class="muted-t">The investigation path in the Wazuh dashboard, in the order a Tier 1 analyst would follow: from the overview to the alert that proves the compromise. Each step explains <b>how to get</b> to the screen, <b>what each number or field means</b> and <b>what to conclude</b>. Click the screenshots to enlarge.</p>
+    <div class="deep">
+      <details open>
+        <summary><span class="n">1</span>Overview: the Threat Hunting dashboard during the attack window</summary>
+        <div class="body">
+          <h5>How to get there</h5>
+          <p>Menu ☰ → <b>Threat Hunting</b> → <b>Dashboard</b> tab. In the time picker (📅), absolute range <b>2026-11-14, 05:55:00 → 05:59:00</b>. The dashboard shows UTC−4; the report uses UTC.</p>
+          <h5>What the screen shows</h5>
+          <ul>
+            <li><b>19 Total</b>: every alert raised in those 4 minutes.</li>
+            <li><b>0 Level 12 or above</b>: no "critical" alert. The attack does <b>not</b> reach the top of the severity queue. Anyone looking only at level 12+ would miss it.</li>
+            <li><b>9 Authentication failure</b>: 9 failed logons (8 from rule 60122 + 1 that became the correlated alert 60204).</li>
+            <li><b>6 Authentication success</b>: 4 are normal <code>SYSTEM</code> logons (rule 60106) and 2 come from rule 92652. One of them is the attacker's logon.</li>
+            <li><b>Top 10 Alert level evolution</b>: the "comb" of spikes between 05:56:50 and 05:57:10 is the burst of attempts, a machine pattern, not a human one.</li>
+            <li><b>Top 10 MITRE ATT&amp;CKs</b>: Brute Force, Valid Accounts, Pass the Hash, Domain Accounts and Account Access Removal. Some of these labels are wrong (see step 5).</li>
+          </ul>
+          <h5>What to conclude</h5>
+          <p>Something concentrated and repetitive happened at 05:57. The next step is finding out <b>where</b> it came from.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/01-threat-hunting-dashboard.png" alt="Wazuh Threat Hunting dashboard during the attack window" loading="lazy"><figcaption>19 alerts, 9 failures, 6 successes and the MITRE techniques in the window.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">2</span>Filter by source IP and read the sequence of events</summary>
+        <div class="body">
+          <h5>How to get there</h5>
+          <p><b>Events</b> tab, with this DQL query in the search bar and the range <b>05:56:30 → 05:57:15</b>:</p>
+          <p><code>agent.name:SOC-Win11 and data.win.eventdata.ipAddress:10.0.10.30</code></p>
+          <p>The query asks for "events from the SOC-Win11 machine <b>and</b> whose source IP is 10.0.10.30". The result drops from 19 to <b>11 hits</b>, all tied to the attacker.</p>
+          <h5>How to read it (bottom to top, oldest to newest)</h5>
+          <ul>
+            <li><b>05:56:39</b>, rule 92652: logon as <code>ANONYMOUS LOGON</code>, NTLM V1. The tool probing SMB before trying passwords (reconnaissance).</li>
+            <li><b>05:56:50 → 05:57:06</b>, rule 60122 (level 5): <i>Logon Failure - Unknown user or bad password</i>, one every ~2 seconds. The evenly spaced bars show the automated rhythm.</li>
+            <li><b>05:57:04</b>, rule <b>60204</b> (level 10): <i>Multiple Windows Logon Failures</i>. This alert is the <b>8th failure</b>: Wazuh counted 8 failures within the time window and turned that one into a correlated alert.</li>
+            <li><b>05:57:09</b>, rule 92652: <i>Successful Remote Logon</i> as <code>joao.teste</code>. The success right after the failures.</li>
+          </ul>
+          <h5>What to conclude</h5>
+          <p>The sequence <b>reconnaissance → many failures → one success</b>, all from the same source, is the signature of a brute force <b>that worked</b>.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/02-eventos-ataque.png" alt="Event list filtered by the attacker IP" loading="lazy"><figcaption>11 events from 10.0.10.30: probing, failures every ~2 s, alert 60204 and the success.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">3</span>Open alert 60204: the Windows event fields</summary>
+        <div class="body">
+          <h5>How to get there</h5>
+          <p>Query <code>rule.id:60204</code>, then click the 🔍 icon on the left of the row. The <b>Document Details</b> panel opens on the <b>Table</b> tab: the original Windows event (4625) already split into fields.</p>
+          <h5>Field by field</h5>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Field</th><th>Value</th><th>What it means</th></tr></thead>
+            <tbody>
+              <tr><td><code>agent.name</code> / <code>agent.ip</code></td><td>SOC-Win11 / 10.0.10.20</td><td>The <b>attacked</b> machine, where the Wazuh agent collected the log.</td></tr>
+              <tr><td><code>ipAddress</code> / <code>ipPort</code></td><td>10.0.10.30 / 39612</td><td>Where the attempt came from: Kali. The high port is a random client-side port.</td></tr>
+              <tr><td><code>targetUserName</code></td><td>joao.teste</td><td>The account under attack.</td></tr>
+              <tr><td><code>logonType</code></td><td>3</td><td><b>Network</b> logon (SMB, file sharing). Local keyboard would be 2; RDP would be 10.</td></tr>
+              <tr><td><code>authenticationPackageName</code></td><td>NTLM</td><td>Authentication protocol. NTLM is the default for attack tools against SMB.</td></tr>
+              <tr><td><code>status</code></td><td>0xC000006D</td><td>"Logon failure": a generic code.</td></tr>
+              <tr><td><code>subStatus</code></td><td>0xC000006A</td><td>The detail that matters: <b>the user exists, the password is wrong</b>. A nonexistent user would be 0xC0000064. The attacker already knew a valid name.</td></tr>
+              <tr><td><code>failureReason</code></td><td>%%2313</td><td>Windows message code for "unknown user name or bad password".</td></tr>
+              <tr><td><code>system.channel</code> / <code>eventID</code></td><td>Security / 4625</td><td>From the Windows Security log; 4625 = "an account failed to log on".</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="gallery"><figure><img src="assets/img/soc/03-alerta-60204-detalhe.png" alt="Alert 60204 details" loading="lazy"><figcaption>Document Details of 60204: source, account, logonType 3 and the error codes.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">4</span>The rule behind the alert: correlation and MITRE</summary>
+        <div class="body">
+          <h5>How to get there</h5>
+          <p>In the same Document Details, scroll down to the fields starting with <code>rule.</code>.</p>
+          <h5>Field by field</h5>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Field</th><th>Value</th><th>What it means</th></tr></thead>
+            <tbody>
+              <tr><td><code>rule.level</code></td><td>10</td><td>Severity from 0 to 15. A single failure is level 5; the <b>repetition</b> raises it to 10.</td></tr>
+              <tr><td><code>rule.frequency</code></td><td>8</td><td>The rule fires only after <b>8 similar events</b> within the time window. That is <b>correlation</b>: the alert looks at a pattern, not at one event.</td></tr>
+              <tr><td><code>rule.firedtimes</code></td><td>1</td><td>How many times the rule fired in this cycle.</td></tr>
+              <tr><td><code>previous_output</code></td><td>(JSON)</td><td>The previous events that added up to the trigger. The "proof" of the correlation.</td></tr>
+              <tr><td><code>rule.groups</code></td><td>authentication_failures</td><td>Category the dashboard uses to count the "Authentication failure" card.</td></tr>
+              <tr><td><code>rule.mitre.*</code></td><td>T1110 · Credential Access · Brute Force</td><td>MITRE ATT&amp;CK mapping: the tactic (the attacker's goal) and the technique (how it is done).</td></tr>
+              <tr><td><code>rule.pci_dss</code>, <code>gdpr</code>, <code>hipaa</code>, <code>nist_800_53</code>, <code>tsc</code></td><td>10.2.4, 10.2.5…</td><td><b>Compliance</b> requirements tied to the alert. In an audit they show the company monitors invalid access attempts.</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="gallery"><figure><img src="assets/img/soc/05-alerta-60204-regra-mitre.png" alt="Rule and MITRE fields of alert 60204" loading="lazy"><figcaption>Level 10, frequency 8, MITRE T1110 and the compliance mappings.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">5</span>The successful logon: proof of compromise</summary>
+        <div class="body">
+          <h5>How to get there</h5>
+          <p>Query <code>rule.id:92652 and data.win.eventdata.targetUserName:joao.teste</code>, then 🔍 on the 05:57:09 row.</p>
+          <h5>Field by field</h5>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Field</th><th>Value</th><th>What it means</th></tr></thead>
+            <tbody>
+              <tr><td><code>ipAddress</code></td><td>10.0.10.30</td><td><b>The same IP</b> as the 9 failures: the same actor.</td></tr>
+              <tr><td><code>targetUserName</code></td><td>joao.teste</td><td><b>The same account</b> that was under attack.</td></tr>
+              <tr><td><code>logonType</code></td><td>3</td><td>Network logon, like the attempts.</td></tr>
+              <tr><td><code>lmPackageName</code> / <code>keyLength</code></td><td>NTLM V2 / 128</td><td>A full authentication. Compare with the anonymous probe at 05:56:39 (NTLM V1, key 0).</td></tr>
+              <tr><td><code>elevatedToken</code></td><td>%%1843 ("No")</td><td>The session did <b>not</b> get administrator privileges.</td></tr>
+              <tr><td><code>targetLogonId</code></td><td>0x1bf006</td><td>This session's ID. It lets you trace everything the session did afterwards (and the 4634 logoff right after).</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <h5>Watch the label</h5>
+          <p>Rule 92652 describes the event as <i>"possible pass-the-hash attack"</i> (T1550.002). The fields tell a different story: 9 wrong passwords and then a hit, meaning the <b>password</b> was guessed. The analyst validates the context instead of copying the rule's label.</p>
+          <h5>What to conclude</h5>
+          <p><b>Account compromised.</b> The case stops being an "attempt" and becomes an <b>incident</b>, which calls for containment (reset the password, block the IP) and investigating what session 0x1bf006 did.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/04-login-sucesso-92652.png" alt="Successful logon 92652 details" loading="lazy"><figcaption>The success: same IP, same account, NTLM V2, no elevated privilege.</figcaption></figure></div>
+        </div>
+      </details>
+    </div>
   </div>
 
   <h3 class="sub"><span data-l="pt">Explorador de logs brutos</span><span data-l="en">Raw log explorer</span></h3>

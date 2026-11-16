@@ -80,34 +80,68 @@ Evidência bruta (19 alertas da janela do ataque, documentos completos exportado
 
 🎬 **Replay 3D interativo deste ataque:** [cannibaligor.github.io/infosec-portfolio](https://cannibaligor.github.io/infosec-portfolio/#replay)
 
-### Prints do Wazuh
+### Prints do Wazuh: tela por tela
 
 <details open>
-<summary><b>Threat Hunting</b>: 19 alertas, 9 falhas de autenticação e as técnicas MITRE da janela do ataque</summary>
+<summary><b>1. Visão geral (Threat Hunting → Dashboard, 05:55 → 05:59)</b></summary>
+
+- **19 Total**: todos os alertas da janela. **0 Level 12+**: o ataque **não** aparece no filtro de severidade crítica. Quem olhasse só para nível 12+ deixaria passar.
+- **9 Authentication failure**: 8 alertas da regra 60122 + 1 que virou o alerta correlacionado 60204.
+- **6 Authentication success**: 4 logins normais da conta `SISTEMA` (60106) e 2 da regra 92652. Um deles é o atacante.
+- O "pente" de picos entre 05:56:50 e 05:57:10 no gráfico de níveis é a rajada automatizada de tentativas.
 
 ![Dashboard](evidencias/01-threat-hunting-dashboard.png)
 </details>
 
 <details>
-<summary><b>Eventos filtrados pelo IP do atacante</b>: falhas a cada ~2 s, alerta 60204 e o sucesso no fim</summary>
+<summary><b>2. Filtro pelo IP de origem (Events)</b></summary>
+
+Consulta `agent.name:SOC-Win11 and data.win.eventdata.ipAddress:10.0.10.30`, período 05:56:30 → 05:57:15: **11 hits**. Lendo de baixo para cima:
+
+- 05:56:39, **92652**: login anônimo (NTLM V1), a sondagem do SMB.
+- 05:56:50 → 05:57:06, **60122** (nível 5): uma falha a cada ~2 s.
+- 05:57:04, **60204** (nível 10): é a **8ª falha**, transformada em alerta pela correlação.
+- 05:57:09, **92652**: login com sucesso como `joao.teste`.
 
 ![Eventos](evidencias/02-eventos-ataque.png)
 </details>
 
 <details>
-<summary><b>Alerta 60204</b>: origem, conta, logonType 3 e códigos de erro</summary>
+<summary><b>3. Detalhe do alerta 60204 (Document Details → Table)</b></summary>
+
+| Campo | Valor | Significado |
+|---|---|---|
+| `ipAddress` / `ipPort` | 10.0.10.30 / 39612 | Origem: o Kali (porta aleatória do cliente). |
+| `targetUserName` | joao.teste | Conta atacada. |
+| `logonType` | 3 | Login pela rede (SMB). Teclado seria 2; RDP, 10. |
+| `status` / `subStatus` | 0xC000006D / 0xC000006A | Usuário **existe**, senha errada (usuário inexistente seria 0xC0000064). |
+| `failureReason` | %%2313 | "Nome de usuário desconhecido ou senha incorreta". |
+| `channel` / `eventID` | Security / 4625 | "Uma conta falhou ao fazer logon". |
 
 ![60204](evidencias/03-alerta-60204-detalhe.png)
 </details>
 
 <details>
-<summary><b>Alerta 60204, regra</b>: nível 10, frequência 8, MITRE T1110</summary>
+<summary><b>4. A regra por trás do alerta: correlação e MITRE</b></summary>
+
+- `rule.level` **10**: uma falha sozinha é nível 5; a repetição sobe para 10.
+- `rule.frequency` **8**: só dispara depois de 8 eventos parecidos na janela de tempo (**correlação**). `previous_output` guarda os eventos que somaram.
+- `rule.mitre`: **T1110**, Credential Access → Brute Force.
+- `rule.pci_dss` / `gdpr` / `hipaa` / `nist_800_53` / `tsc`: requisitos de conformidade ligados ao monitoramento de acessos inválidos.
 
 ![60204 regra](evidencias/05-alerta-60204-regra-mitre.png)
 </details>
 
 <details>
-<summary><b>Alerta 92652</b>: login bem-sucedido de 10.0.10.30 como joao.teste</summary>
+<summary><b>5. O login com sucesso: a prova do comprometimento</b></summary>
+
+Consulta `rule.id:92652 and data.win.eventdata.targetUserName:joao.teste`:
+
+- **Mesmo IP** (10.0.10.30) e **mesma conta** das 9 falhas, `logonType 3`.
+- `lmPackageName` NTLM V2 / `keyLength` 128: autenticação completa (a sondagem anônima era NTLM V1, chave 0).
+- `elevatedToken` %%1843 ("Não"): sem privilégio de administrador.
+- `targetLogonId` 0x1bf006: o ID da sessão, para rastrear o que ela fez depois.
+- A regra chama de *"possible pass-the-hash"*, mas o contexto (9 erros e depois 1 acerto) mostra **senha descoberta**.
 
 ![92652](evidencias/04-login-sucesso-92652.png)
 </details>
