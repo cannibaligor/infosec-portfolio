@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home Lab de SOC · Igor Mendes</title>
-<meta name="description" content="Home lab de SOC com Wazuh, Sysmon e Kali: brute force via SMB detectado e investigado, com replay 3D dos alertas reais.">
+<meta name="description" content="Home lab de SOC com Wazuh, Sysmon e Kali: brute force via SMB com replay 3D e PowerShell codificado (-EncodedCommand) detectado, decodificado e ajustado com regras próprias.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -207,6 +207,349 @@
     </table>
   </div>
   <p class="dl"><a href="assets/data/cenario1.json" download>⬇ cenario1.json</a></p>
+</section>
+
+<!-- ================= CENÁRIO 2 ================= -->
+<section class="section" id="cenario2">
+  <p class="eyebrow"><span data-l="pt">02 · Cenário 2</span><span data-l="en">02 · Scenario 2</span></p>
+  <h2 class="section-title"><span data-l="pt">PowerShell codificado: o comando escondido em Base64</span><span data-l="en">Encoded PowerShell: the command hidden in Base64</span></h2>
+
+  <div class="summary-grid">
+    <div class="kv"><span><span data-l="pt">Técnica</span><span data-l="en">Technique</span></span><b><code>powershell -EncodedCommand</code></b></div>
+    <div class="kv"><span>MITRE</span><b><a href="https://attack.mitre.org/techniques/T1059/001/" target="_blank" rel="noopener">T1059.001</a> · <a href="https://attack.mitre.org/techniques/T1027/" target="_blank" rel="noopener">T1027</a></b></div>
+    <div class="kv"><span><span data-l="pt">Regras</span><span data-l="en">Rules</span></span><b>92057 · <span data-l="pt">minhas:</span><span data-l="en">mine:</span> 100210 · 100211</b></div>
+    <div class="kv ok"><span><span data-l="pt">Resultado</span><span data-l="en">Result</span></span><b><span data-l="pt">Detectado e decodificado</span><span data-l="en">Detected and decoded</span></b></div>
+  </div>
+
+  <!-- ===== PT ===== -->
+  <div data-l="pt">
+    <p class="section-lead">Atacantes escondem comandos PowerShell em <b>Base64</b> e os executam com <code>-EncodedCommand</code>. Quem olha a linha de comando vê só uma sopa de letras, e filtros simples por palavra-chave não encontram nada. Neste cenário eu executei uma versão <b>benigna</b> dessa técnica (o comando escondido só escreve uma frase verde na tela), investiguei o alerta, decodifiquei o comando, <b>melhorei a visibilidade</b> do SIEM com uma regra minha e depois <b>ajustei o ruído</b> que ela criou. Clique em cada passo.</p>
+    <p class="disclaimer">ℹ️ Os scripts e as regras do Wazuh foram escritos <b>com apoio de IA</b>. Executei, investiguei e validei cada passo no meu laboratório. Os arquivos estão no <a href="https://github.com/cannibaligor/infosec-portfolio/tree/main/02-soc-home-lab/configuracoes" target="_blank" rel="noopener">GitHub ↗</a>.</p>
+
+    <div class="deep">
+      <details open>
+        <summary><span class="n">1</span>Executar o ataque simulado</summary>
+        <div class="body">
+          <h5>O que fiz</h5>
+          <p>Na VM Windows 11, como <b>usuário comum</b> (sem administrador), colei três linhas no PowerShell:</p>
+          <ul>
+            <li><code>$cmd = 'Write-Host "LAB-SOC Cenario 2 ..."'</code>: o comando legível.</li>
+            <li><code>$enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($cmd))</code>: converte o texto para UTF-16LE e depois para Base64.</li>
+            <li><code>powershell.exe -EncodedCommand $enc</code>: abre um <b>novo</b> PowerShell que recebe só o Base64.</li>
+          </ul>
+          <h5>Por que importa</h5>
+          <p>Base64 <b>não é criptografia</b>: não tem chave, qualquer um reverte. É só um disfarce para a linha de comando, e é exatamente isso que o analista precisa desfazer.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/01-execucao-encodedcommand.png" alt="PowerShell executando o comando codificado" loading="lazy"><figcaption>A frase verde prova que o comando escondido rodou.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">2</span>Encontrar o alerta no meio do ruído</summary>
+        <div class="body">
+          <h5>O que fiz</h5>
+          <p>No Wazuh (<b>Threat Hunting → Events</b>, últimas 24 h) havia <b>214 eventos</b>, quase todos normais: atualização do Defender, serviços criados, logins do sistema. Em vez de ler um por um, filtrei por severidade com <code>rule.level &gt;= 12</code>, e a lista caiu para <b>5 alertas</b>.</p>
+          <h5>Por que importa</h5>
+          <p>Um analista N1 recebe centenas de eventos por hora. Começar pelo que é mais grave é a primeira habilidade de triagem.</p>
+          <div class="gallery">
+            <figure><img src="assets/img/soc/cenario2/02-eventos-ruido-defender.png" alt="214 eventos, a maioria ruído do Windows" loading="lazy"><figcaption>214 eventos: a maior parte é ruído normal do Windows.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/03-triagem-nivel-12.png" alt="5 alertas de nível 12 ou mais" loading="lazy"><figcaption><code>rule.level &gt;= 12</code>: 5 alertas para triar.</figcaption></figure>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">3</span>Ler o alerta 92057: o que ele mostra e o que ele esconde</summary>
+        <div class="body">
+          <h5>O que encontrei</h5>
+          <ul>
+            <li><b>Regra 92057, nível 12:</b> <i>"Powershell.exe spawned a powershell process which executed a base64 encoded command"</i>, MITRE T1059.001.</li>
+            <li><code>commandLine</code>: <code>powershell.exe -EncodedCommand VwByAGkAdABlAC0ASABv…</code>. O comando real continua escondido.</li>
+            <li><code>parentImage</code>: <code>powershell.exe</code>. Um PowerShell abriu outro PowerShell.</li>
+            <li><code>integrityLevel</code>: <b>Medium</b>. Rodou como usuário comum, sem privilégio de administrador.</li>
+          </ul>
+          <h5>Por que importa</h5>
+          <p>O alerta mostra o <b>comportamento</b> suspeito, mas não o <b>conteúdo</b>. Para decidir se é grave, preciso saber o que estava escondido.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/04-alerta-92057-commandline.png" alt="Detalhes do alerta 92057 com o Base64 na linha de comando" loading="lazy"><figcaption>O Base64 na <code>commandLine</code>, o pai <code>powershell.exe</code> e a integridade Medium.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">4</span>Decodificar o Base64 à mão</summary>
+        <div class="body">
+          <h5>O que fiz</h5>
+          <p>Copiei o Base64 do alerta e o decodifiquei no PowerShell, fazendo o caminho inverso: <code>[Text.Encoding]::Unicode.GetString([Convert]::FromBase64String('…'))</code>. Apareceu o <code>Write-Host "LAB-SOC Cenario 2 …"</code> original.</p>
+          <h5>Por que <code>Unicode</code> e não <code>UTF8</code>?</h5>
+          <p>O <code>-EncodedCommand</code> exige texto em <b>UTF-16LE</b>, que o .NET chama de <code>Unicode</code>. Por isso o Base64 tem tantos <code>A</code>: cada letra vira dois bytes, e o segundo é zero.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/05-base64-decodificado.png" alt="Base64 decodificado no PowerShell" loading="lazy"><figcaption>O Base64 decodificado: só um <code>Write-Host</code>.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">5</span>Melhorar a visibilidade: ativar o evento 4104</summary>
+        <div class="body">
+          <h5>O problema</h5>
+          <p>Decodificar à mão funciona com um alerta. Com cem, não. E um atacante pode codificar em camadas.</p>
+          <h5>O que fiz</h5>
+          <ul>
+            <li>Ativei o <b>Script Block Logging</b> do PowerShell (registro <code>EnableScriptBlockLogging = 1</code>). Com ele, o Windows grava o evento <b>4104</b> com o código que o PowerShell vai executar, <b>já decodificado</b>.</li>
+            <li>Fiz o agente Wazuh ler o canal <code>Microsoft-Windows-PowerShell/Operational</code> (com backup do <code>ossec.conf</code> antes) e reiniciei o agente.</li>
+          </ul>
+          <h5>Por que funciona</h5>
+          <p>O PowerShell não consegue executar Base64. Ele <b>precisa</b> decodificar na memória primeiro, e é nesse momento que o 4104 registra o código.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/06-ativando-scriptblock-logging.png" alt="Script de ativação do Script Block Logging" loading="lazy"><figcaption>Ativação do 4104 e do canal no agente Wazuh, como administrador.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">6</span>Criar a regra personalizada 100210</summary>
+        <div class="body">
+          <h5>O problema</h5>
+          <p>O Wazuh já reconhece o 4104 (regra oficial <b>91802</b>), mas com <b>nível 0</b>: o evento chega e não vira alerta.</p>
+          <h5>O que fiz</h5>
+          <p>Adicionei no <code>local_rules.xml</code> a regra <b>100210</b> (IDs acima de 100000 são reservados para regras próprias), "filha" da 91802 via <code>&lt;if_sid&gt;</code>, com nível 4 e MITRE T1059.001. Salvei, recarreguei o manager e conferi pela API que ela carregou sem erros.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/07-regra-personalizada-100210.png" alt="Regra 100210 no editor do Wazuh" loading="lazy"><figcaption>A regra 100210 no <code>local_rules.xml</code>.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">7</span>Repetir o ataque e ligar os eventos pelo PID</summary>
+        <div class="body">
+          <h5>O que fiz</h5>
+          <p>Executei o mesmo ataque de novo e coloquei lado a lado as colunas <code>scriptBlockText</code>, <code>commandLine</code> e <code>parentProcessId</code>. Lendo de baixo para cima (UTC, horário do evento):</p>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Horário</th><th>Regra</th><th>PID</th><th>O que foi registrado</th></tr></thead>
+            <tbody>
+              <tr><td>21:07:12.135</td><td>100210</td><td>5572</td><td><code>powershell.exe -EncodedCommand $enc</code></td></tr>
+              <tr><td>21:07:12.336</td><td><b>92057</b></td><td>1048 <small>(pai 5572)</small></td><td>novo PowerShell com o Base64</td></tr>
+              <tr><td>21:07:14.299</td><td>100210</td><td>1048</td><td><code>Write-Host "LAB-SOC Cenario 2 …"</code>: <b>já decodificado</b></td></tr>
+            </tbody>
+          </table>
+          </div>
+          <h5>O que isso prova</h5>
+          <p>O <b>5572</b> é o PowerShell onde colei os comandos (o pai). O <b>1048</b> é o filho criado com o Base64, que registrou o código decodificado. Essa <b>correlação por PID</b> monta a árvore de processos. Num caso real, se o pai fosse o <code>WINWORD.EXE</code>, seria forte indício de documento com macro maliciosa.</p>
+          <p>Os alertas chegaram ao índice cerca de <b>3 minutos depois</b> do evento. Por isso o horário do relatório vem de <code>data.win.system.systemTime</code>, não do <code>@timestamp</code>.</p>
+          <div class="gallery">
+            <figure><img src="assets/img/soc/cenario2/08-segunda-execucao.png" alt="Segunda execução do ataque" loading="lazy"><figcaption>Segunda execução, com o 4104 ativo.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/09-dashboard-regra-100210.png" alt="Painel com alertas 100210 e 92057" loading="lazy"><figcaption>Os alertas 100210 (nível 4) e 92057 (nível 12) juntos.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/10-correlacao-4104-sysmon.png" alt="Tabela com scriptBlockText, commandLine e parentProcessId" loading="lazy"><figcaption>A correlação: o código decodificado, o Base64 e o PID do pai.</figcaption></figure>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">8</span>Tuning: silenciar o ruído sem criar ponto cego</summary>
+        <div class="body">
+          <h5>O problema</h5>
+          <p>Com a 100210 ativa, <b>todo</b> script block vira alerta, inclusive o que o próprio console executa a cada comando: <code>prompt</code>, <code>$global:?</code>, <code>$Host</code>. No boot também apareceram PowerShells do SYSTEM executando trechos inofensivos e criando <code>__PSScriptPolicyTest_*.ps1</code>.</p>
+          <h5>Um erro de raciocínio que corrigi</h5>
+          <p>Minha primeira resposta foi "não é ataque porque rodou sozinho, sem o usuário confirmar". A conclusão estava certa, mas o motivo não: <b>persistência de atacante também roda sozinha, no boot, como SYSTEM</b>. O que fecha o caso é a evidência: o <b>conteúdo</b> inofensivo (sem download, rede ou Base64) e um <b>padrão conhecido</b> do próprio PowerShell.</p>
+          <h5>O que fiz</h5>
+          <p>Criei a regra <b>100211</b>, nível 0 (não gera alerta), filha da 100210, com a expressão <code>^\s*(?:prompt|\$global:\?|\$Host)\s*$</code>. Os <code>^</code> e <code>$</code> exigem que o texto <b>inteiro</b> seja exatamente um desses três: um código malicioso que só <i>contenha</i> a palavra <code>prompt</code> continua alertando.</p>
+          <h5>Validação</h5>
+          <p>Abri um PowerShell novo e rodei <code>whoami</code> e <code>Get-Date</code>. Os dois continuaram gerando o 100210, e os <code>prompt</code> / <code>$global:?</code> que antes acompanhavam cada comando sumiram. O ruído que ainda aparece (<code>$this.DisplayHint</code>, <code>Set-Alias … Cim…</code>) ficou documentado e <b>não</b> foi filtrado: tuning é contínuo e só se filtra o que foi comprovado.</p>
+          <div class="gallery">
+            <figure><img src="assets/img/soc/cenario2/11-regra-tuning-100211.png" alt="Regra 100211 abaixo da 100210" loading="lazy"><figcaption>A regra 100211 (nível 0) abaixo da 100210.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/12-teste-do-tuning.png" alt="whoami e Get-Date numa janela nova" loading="lazy"><figcaption>O teste: <code>whoami</code> e <code>Get-Date</code>.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/13-tuning-validado.png" alt="Alertas depois do tuning" loading="lazy"><figcaption>Os comandos aparecem; o <code>prompt</code> e o <code>$global:?</code>, não.</figcaption></figure>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <h3 class="sub">Triagem dos outros alertas graves da janela</h3>
+    <div class="table-wrap">
+    <table class="fields">
+      <thead><tr><th>Regra</th><th>Nível</th><th>O que era</th><th>Veredito</th></tr></thead>
+      <tbody>
+        <tr><td>92057</td><td>12</td><td>O PowerShell codificado simulado.</td><td><b>Atividade simulada</b></td></tr>
+        <tr><td>92213</td><td>15</td><td><code>__PSScriptPolicyTest_*.ps1</code> criado pelo PowerShell do usuário: é o teste de política de execução que o próprio PowerShell faz ao iniciar.</td><td><b>Falso positivo</b></td></tr>
+        <tr><td>92058</td><td>12</td><td><code>sdbinst.exe</code> como SYSTEM, iniciado pelo serviço de Compatibilidade de Programas (<code>PcaSvc</code>), repetindo ao longo do dia.</td><td><b>Falso positivo</b></td></tr>
+        <tr><td>92055</td><td>12</td><td><code>FodHelper.exe -Embedding</code> com pai <code>svchost -k DcomLaunch</code> e <b>sem</b> alteração de registro em <code>ms-settings</code>/<code>DelegateExecute</code>, que é o que o bypass de UAC usa.</td><td><b>Provável falso positivo</b>: não consegui confirmar se as Configurações do Windows foram abertas nesse horário.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="two-col">
+      <div class="note">
+        <h4>⚠️ O que aprendi</h4>
+        <ul>
+          <li><b>O Sysmon me diz <i>que</i> um PowerShell executou código escondido; o Script Block Logging me diz <i>qual</i> foi o código.</b> Os dois se completam.</li>
+          <li><b>O PID liga fontes diferentes</b> (Sysmon e PowerShell) numa mesma história.</li>
+          <li><b>Horário do evento ≠ horário do alerta.</b> Aqui houve ~3 min de atraso de ingestão.</li>
+          <li><b>Descartar um alerta exige evidência</b>, não suposição sobre como ataques "costumam" ser.</li>
+        </ul>
+      </div>
+      <div class="note">
+        <h4>🛡️ Se fosse real</h4>
+        <ol>
+          <li><b>Decodificar e ler</b> o código (4104) antes de qualquer decisão.</li>
+          <li><b>Montar a árvore de processos</b>: quem é o pai? Word, navegador, tarefa agendada?</li>
+          <li><b>Procurar o que veio depois</b>: conexões de rede, arquivos criados, novos serviços.</li>
+          <li><b>Conter</b> a máquina se o código baixar ou executar algo, e escalar para o N2.</li>
+        </ol>
+      </div>
+    </div>
+    <p class="dl"><a href="https://github.com/cannibaligor/infosec-portfolio/blob/main/02-soc-home-lab/evidencias/cenario2-alertas-wazuh.json" target="_blank" rel="noopener">⬇ cenario2-alertas-wazuh.json (69 alertas, GitHub ↗)</a></p>
+  </div>
+
+  <!-- ===== EN ===== -->
+  <div data-l="en">
+    <p class="section-lead">Attackers hide PowerShell commands in <b>Base64</b> and run them with <code>-EncodedCommand</code>. Anyone reading the command line sees only a jumble of letters, and simple keyword filters find nothing. In this scenario I ran a <b>benign</b> version of the technique (the hidden command only prints a green sentence), investigated the alert, decoded the command, <b>improved the SIEM's visibility</b> with a rule of my own and then <b>tuned the noise</b> it created. Click each step.</p>
+    <p class="disclaimer">ℹ️ The scripts and Wazuh rules were written <b>with AI assistance</b>. I ran, investigated and validated every step in my lab. The files are on <a href="https://github.com/cannibaligor/infosec-portfolio/tree/main/02-soc-home-lab/configuracoes" target="_blank" rel="noopener">GitHub ↗</a>.</p>
+
+    <div class="deep">
+      <details open>
+        <summary><span class="n">1</span>Run the simulated attack</summary>
+        <div class="body">
+          <h5>What I did</h5>
+          <p>On the Windows 11 VM, as a <b>standard user</b> (no admin), I pasted three lines into PowerShell:</p>
+          <ul>
+            <li><code>$cmd = 'Write-Host "LAB-SOC Cenario 2 ..."'</code>: the readable command.</li>
+            <li><code>$enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($cmd))</code>: converts the text to UTF-16LE and then to Base64.</li>
+            <li><code>powershell.exe -EncodedCommand $enc</code>: starts a <b>new</b> PowerShell that receives only the Base64.</li>
+          </ul>
+          <h5>Why it matters</h5>
+          <p>Base64 is <b>not encryption</b>: there is no key and anyone can reverse it. It only disguises the command line, and that is exactly what the analyst has to undo.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/01-execucao-encodedcommand.png" alt="PowerShell running the encoded command" loading="lazy"><figcaption>The green sentence proves the hidden command ran.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">2</span>Find the alert in the noise</summary>
+        <div class="body">
+          <h5>What I did</h5>
+          <p>In Wazuh (<b>Threat Hunting → Events</b>, last 24 h) there were <b>214 events</b>, nearly all normal: Defender updates, services created, system logons. Instead of reading them one by one, I filtered by severity with <code>rule.level &gt;= 12</code>, and the list dropped to <b>5 alerts</b>.</p>
+          <h5>Why it matters</h5>
+          <p>A Tier 1 analyst gets hundreds of events per hour. Starting with the most severe is the first triage skill.</p>
+          <div class="gallery">
+            <figure><img src="assets/img/soc/cenario2/02-eventos-ruido-defender.png" alt="214 events, mostly Windows noise" loading="lazy"><figcaption>214 events: most are normal Windows noise.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/03-triagem-nivel-12.png" alt="5 alerts of level 12 or higher" loading="lazy"><figcaption><code>rule.level &gt;= 12</code>: 5 alerts to triage.</figcaption></figure>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">3</span>Read alert 92057: what it shows and what it hides</summary>
+        <div class="body">
+          <h5>What I found</h5>
+          <ul>
+            <li><b>Rule 92057, level 12:</b> <i>"Powershell.exe spawned a powershell process which executed a base64 encoded command"</i>, MITRE T1059.001.</li>
+            <li><code>commandLine</code>: <code>powershell.exe -EncodedCommand VwByAGkAdABlAC0ASABv…</code>. The real command is still hidden.</li>
+            <li><code>parentImage</code>: <code>powershell.exe</code>. A PowerShell started another PowerShell.</li>
+            <li><code>integrityLevel</code>: <b>Medium</b>. It ran as a standard user, without admin rights.</li>
+          </ul>
+          <h5>Why it matters</h5>
+          <p>The alert shows the suspicious <b>behavior</b>, not the <b>content</b>. To judge severity I need to know what was hidden.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/04-alerta-92057-commandline.png" alt="Alert 92057 details with Base64 in the command line" loading="lazy"><figcaption>The Base64 in <code>commandLine</code>, the <code>powershell.exe</code> parent and Medium integrity.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">4</span>Decode the Base64 by hand</summary>
+        <div class="body">
+          <h5>What I did</h5>
+          <p>I copied the Base64 from the alert and decoded it in PowerShell, doing the reverse path: <code>[Text.Encoding]::Unicode.GetString([Convert]::FromBase64String('…'))</code>. The original <code>Write-Host "LAB-SOC Cenario 2 …"</code> appeared.</p>
+          <h5>Why <code>Unicode</code> and not <code>UTF8</code>?</h5>
+          <p><code>-EncodedCommand</code> requires <b>UTF-16LE</b> text, which .NET calls <code>Unicode</code>. That is why the Base64 has so many <code>A</code>s: each letter takes two bytes, and the second one is zero.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/05-base64-decodificado.png" alt="Base64 decoded in PowerShell" loading="lazy"><figcaption>The decoded Base64: just a <code>Write-Host</code>.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">5</span>Improve visibility: enable event 4104</summary>
+        <div class="body">
+          <h5>The problem</h5>
+          <p>Decoding by hand works for one alert, not for a hundred. And an attacker can encode in layers.</p>
+          <h5>What I did</h5>
+          <ul>
+            <li>I enabled PowerShell <b>Script Block Logging</b> (registry <code>EnableScriptBlockLogging = 1</code>). With it, Windows writes event <b>4104</b> with the code PowerShell is about to run, <b>already decoded</b>.</li>
+            <li>I made the Wazuh agent read the <code>Microsoft-Windows-PowerShell/Operational</code> channel (backing up <code>ossec.conf</code> first) and restarted the agent.</li>
+          </ul>
+          <h5>Why it works</h5>
+          <p>PowerShell cannot execute Base64. It <b>has</b> to decode it in memory first, and that is when 4104 records the code.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/06-ativando-scriptblock-logging.png" alt="Script enabling Script Block Logging" loading="lazy"><figcaption>Enabling 4104 and the channel in the Wazuh agent, as administrator.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">6</span>Write custom rule 100210</summary>
+        <div class="body">
+          <h5>The problem</h5>
+          <p>Wazuh already recognizes 4104 (built-in rule <b>91802</b>), but at <b>level 0</b>: the event arrives and never becomes an alert.</p>
+          <h5>What I did</h5>
+          <p>I added rule <b>100210</b> to <code>local_rules.xml</code> (IDs above 100000 are reserved for custom rules) as a "child" of 91802 via <code>&lt;if_sid&gt;</code>, with level 4 and MITRE T1059.001. I saved it, reloaded the manager and checked through the API that it loaded without errors.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario2/07-regra-personalizada-100210.png" alt="Rule 100210 in the Wazuh editor" loading="lazy"><figcaption>Rule 100210 in <code>local_rules.xml</code>.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">7</span>Repeat the attack and link the events by PID</summary>
+        <div class="body">
+          <h5>What I did</h5>
+          <p>I ran the same attack again and put the <code>scriptBlockText</code>, <code>commandLine</code> and <code>parentProcessId</code> columns side by side. Reading bottom to top (UTC, event time):</p>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Time</th><th>Rule</th><th>PID</th><th>What was recorded</th></tr></thead>
+            <tbody>
+              <tr><td>21:07:12.135</td><td>100210</td><td>5572</td><td><code>powershell.exe -EncodedCommand $enc</code></td></tr>
+              <tr><td>21:07:12.336</td><td><b>92057</b></td><td>1048 <small>(parent 5572)</small></td><td>new PowerShell with the Base64</td></tr>
+              <tr><td>21:07:14.299</td><td>100210</td><td>1048</td><td><code>Write-Host "LAB-SOC Cenario 2 …"</code>: <b>already decoded</b></td></tr>
+            </tbody>
+          </table>
+          </div>
+          <h5>What this proves</h5>
+          <p><b>5572</b> is the PowerShell where I pasted the commands (the parent). <b>1048</b> is the child started with the Base64, which recorded the decoded code. This <b>PID correlation</b> builds the process tree. In a real case, if the parent were <code>WINWORD.EXE</code>, that would strongly suggest a malicious macro document.</p>
+          <p>The alerts reached the index about <b>3 minutes after</b> the event. That is why the report uses <code>data.win.system.systemTime</code> rather than <code>@timestamp</code>.</p>
+          <div class="gallery">
+            <figure><img src="assets/img/soc/cenario2/08-segunda-execucao.png" alt="Second run of the attack" loading="lazy"><figcaption>Second run, with 4104 enabled.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/09-dashboard-regra-100210.png" alt="Dashboard with alerts 100210 and 92057" loading="lazy"><figcaption>Alerts 100210 (level 4) and 92057 (level 12) together.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/10-correlacao-4104-sysmon.png" alt="Table with scriptBlockText, commandLine and parentProcessId" loading="lazy"><figcaption>The correlation: decoded code, the Base64 and the parent PID.</figcaption></figure>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">8</span>Tuning: silence the noise without creating a blind spot</summary>
+        <div class="body">
+          <h5>The problem</h5>
+          <p>With 100210 active, <b>every</b> script block becomes an alert, including what the console itself runs after each command: <code>prompt</code>, <code>$global:?</code>, <code>$Host</code>. At boot, SYSTEM PowerShells also ran harmless snippets and created <code>__PSScriptPolicyTest_*.ps1</code>.</p>
+          <h5>A reasoning mistake I corrected</h5>
+          <p>My first answer was "it's not an attack because it ran by itself, without the user confirming". The conclusion was right, but the reason was not: <b>attacker persistence also runs by itself, at boot, as SYSTEM</b>. What closes the case is evidence: the harmless <b>content</b> (no download, network or Base64) and a <b>known pattern</b> of PowerShell itself.</p>
+          <h5>What I did</h5>
+          <p>I created rule <b>100211</b>, level 0 (no alert), a child of 100210, with the expression <code>^\s*(?:prompt|\$global:\?|\$Host)\s*$</code>. The <code>^</code> and <code>$</code> require the <b>whole</b> text to be exactly one of those three: malicious code that merely <i>contains</i> the word <code>prompt</code> still alerts.</p>
+          <h5>Validation</h5>
+          <p>I opened a new PowerShell and ran <code>whoami</code> and <code>Get-Date</code>. Both still raised 100210, and the <code>prompt</code> / <code>$global:?</code> that used to follow every command were gone. The remaining noise (<code>$this.DisplayHint</code>, <code>Set-Alias … Cim…</code>) was documented and <b>not</b> filtered: tuning is ongoing, and only what has been proven benign gets filtered.</p>
+          <div class="gallery">
+            <figure><img src="assets/img/soc/cenario2/11-regra-tuning-100211.png" alt="Rule 100211 below 100210" loading="lazy"><figcaption>Rule 100211 (level 0) below 100210.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/12-teste-do-tuning.png" alt="whoami and Get-Date in a new window" loading="lazy"><figcaption>The test: <code>whoami</code> and <code>Get-Date</code>.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario2/13-tuning-validado.png" alt="Alerts after tuning" loading="lazy"><figcaption>The commands show up; <code>prompt</code> and <code>$global:?</code> don't.</figcaption></figure>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <h3 class="sub">Triage of the other high-severity alerts in the window</h3>
+    <div class="table-wrap">
+    <table class="fields">
+      <thead><tr><th>Rule</th><th>Level</th><th>What it was</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>92057</td><td>12</td><td>The simulated encoded PowerShell.</td><td><b>Simulated activity</b></td></tr>
+        <tr><td>92213</td><td>15</td><td><code>__PSScriptPolicyTest_*.ps1</code> created by the user's PowerShell: the execution-policy test PowerShell itself runs at startup.</td><td><b>False positive</b></td></tr>
+        <tr><td>92058</td><td>12</td><td><code>sdbinst.exe</code> as SYSTEM, started by the Program Compatibility service (<code>PcaSvc</code>), recurring throughout the day.</td><td><b>False positive</b></td></tr>
+        <tr><td>92055</td><td>12</td><td><code>FodHelper.exe -Embedding</code> with parent <code>svchost -k DcomLaunch</code> and <b>no</b> <code>ms-settings</code>/<code>DelegateExecute</code> registry change, which is what the UAC bypass relies on.</td><td><b>Probable false positive</b>: I could not confirm whether Windows Settings was opened at that time.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="two-col">
+      <div class="note">
+        <h4>⚠️ What I learned</h4>
+        <ul>
+          <li><b>Sysmon tells me <i>that</i> a PowerShell ran hidden code; Script Block Logging tells me <i>which</i> code.</b> They complement each other.</li>
+          <li><b>The PID links different sources</b> (Sysmon and PowerShell) into one story.</li>
+          <li><b>Event time ≠ alert time.</b> There was ~3 min of ingestion lag here.</li>
+          <li><b>Dismissing an alert takes evidence</b>, not assumptions about what attacks "usually" look like.</li>
+        </ul>
+      </div>
+      <div class="note">
+        <h4>🛡️ If it were real</h4>
+        <ol>
+          <li><b>Decode and read</b> the code (4104) before any decision.</li>
+          <li><b>Build the process tree</b>: who is the parent? Word, a browser, a scheduled task?</li>
+          <li><b>Look at what came next</b>: network connections, files created, new services.</li>
+          <li><b>Contain</b> the host if the code downloads or runs anything, and escalate to Tier 2.</li>
+        </ol>
+      </div>
+    </div>
+    <p class="dl"><a href="https://github.com/cannibaligor/infosec-portfolio/blob/main/02-soc-home-lab/evidencias/cenario2-alertas-wazuh.json" target="_blank" rel="noopener">⬇ cenario2-alertas-wazuh.json (69 alerts, GitHub ↗)</a></p>
+  </div>
 </section>
 
 </main>

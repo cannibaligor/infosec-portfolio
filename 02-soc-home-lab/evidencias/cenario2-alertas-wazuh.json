@@ -1,0 +1,5282 @@
+[
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-0485-6afa-8d00-000000000700}",
+     "processId": "7472",
+     "utcTime": "2026-11-15 19:14:39.927",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_pnoziapg.3ae.ps1",
+     "creationUtcTime": "2026-11-15 19:14:39.927",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:14:39.927\r\nProcessGuid: {1ab4e09f-0485-6afa-8d00-000000000700}\r\nProcessId: 7472\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_pnoziapg.3ae.ps1\r\nCreationUtcTime: 2026-11-15 19:14:39.927\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:14:39.9337783Z",
+     "eventRecordID": "1089",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:14:40.819Z",
+  "location": "EventChannel",
+  "id": "1794770080.131903",
+  "timestamp": "2026-11-15T19:14:40.819+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-04a3-6afa-9b00-000000000700}",
+     "processId": "2544",
+     "utcTime": "2026-11-15 19:14:48.878",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_wufc0puw.dpn.ps1",
+     "creationUtcTime": "2026-11-15 19:14:48.848",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:14:48.878\r\nProcessGuid: {1ab4e09f-04a3-6afa-9b00-000000000700}\r\nProcessId: 2544\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_wufc0puw.dpn.ps1\r\nCreationUtcTime: 2026-11-15 19:14:48.848\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:14:48.8802050Z",
+     "eventRecordID": "1093",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:14:49.798Z",
+  "location": "EventChannel",
+  "id": "1794770089.140967",
+  "timestamp": "2026-11-15T19:14:49.798+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-04b3-6afa-a100-000000000700}",
+     "processId": "800",
+     "utcTime": "2026-11-15 19:15:01.499",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_zcmisori.3uv.ps1",
+     "creationUtcTime": "2026-11-15 19:15:01.495",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:15:01.499\r\nProcessGuid: {1ab4e09f-04b3-6afa-a100-000000000700}\r\nProcessId: 800\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_zcmisori.3uv.ps1\r\nCreationUtcTime: 2026-11-15 19:15:01.495\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:15:01.4998023Z",
+     "eventRecordID": "1100",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 3,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:15:02.410Z",
+  "location": "EventChannel",
+  "id": "1794770102.156598",
+  "timestamp": "2026-11-15T19:15:02.410+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-04cf-6afa-ba00-000000000700}",
+     "processId": "2872",
+     "utcTime": "2026-11-15 19:15:28.601",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_irb3i1q5.q2v.ps1",
+     "creationUtcTime": "2026-11-15 19:15:28.599",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:15:28.601\r\nProcessGuid: {1ab4e09f-04cf-6afa-ba00-000000000700}\r\nProcessId: 2872\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_irb3i1q5.q2v.ps1\r\nCreationUtcTime: 2026-11-15 19:15:28.599\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:15:28.6017069Z",
+     "eventRecordID": "1163",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 4,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:15:31.673Z",
+  "location": "EventChannel",
+  "id": "1794770131.251476",
+  "timestamp": "2026-11-15T19:15:31.673+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-04d5-6afa-bd00-000000000700}",
+     "processId": "4108",
+     "utcTime": "2026-11-15 19:15:35.035",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_jao1ufa4.5ob.ps1",
+     "creationUtcTime": "2026-11-15 19:15:35.033",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:15:35.035\r\nProcessGuid: {1ab4e09f-04d5-6afa-bd00-000000000700}\r\nProcessId: 4108\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_jao1ufa4.5ob.ps1\r\nCreationUtcTime: 2026-11-15 19:15:35.033\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:15:35.0367980Z",
+     "eventRecordID": "1166",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 5,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:15:40.548Z",
+  "location": "EventChannel",
+  "id": "1794770140.267111",
+  "timestamp": "2026-11-15T19:15:40.548+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-04de-6afa-c000-000000000700}",
+     "processId": "7680",
+     "utcTime": "2026-11-15 19:15:44.898",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_3jy4x4e3.yx5.ps1",
+     "creationUtcTime": "2026-11-15 19:15:44.898",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:15:44.898\r\nProcessGuid: {1ab4e09f-04de-6afa-c000-000000000700}\r\nProcessId: 7680\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_3jy4x4e3.yx5.ps1\r\nCreationUtcTime: 2026-11-15 19:15:44.898\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:15:44.9005568Z",
+     "eventRecordID": "1172",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 6,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:15:48.468Z",
+  "location": "EventChannel",
+  "id": "1794770148.284308",
+  "timestamp": "2026-11-15T19:15:48.468+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-04e5-6afa-ca00-000000000700}",
+     "processId": "8144",
+     "utcTime": "2026-11-15 19:15:51.111",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_ly25ekvr.hf4.ps1",
+     "creationUtcTime": "2026-11-15 19:15:51.096",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:15:51.111\r\nProcessGuid: {1ab4e09f-04e5-6afa-ca00-000000000700}\r\nProcessId: 8144\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_ly25ekvr.hf4.ps1\r\nCreationUtcTime: 2026-11-15 19:15:51.096\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:15:51.1132200Z",
+     "eventRecordID": "1176",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 7,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:15:55.857Z",
+  "location": "EventChannel",
+  "id": "1794770155.299927",
+  "timestamp": "2026-11-15T19:15:55.857+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-04eb-6afa-ce00-000000000700}",
+     "processId": "7648",
+     "utcTime": "2026-11-15 19:15:56.945",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_ur31ci2z.2js.ps1",
+     "creationUtcTime": "2026-11-15 19:15:56.945",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:15:56.945\r\nProcessGuid: {1ab4e09f-04eb-6afa-ce00-000000000700}\r\nProcessId: 7648\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_ur31ci2z.2js.ps1\r\nCreationUtcTime: 2026-11-15 19:15:56.945\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:15:56.9485071Z",
+     "eventRecordID": "1179",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 8,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:16:02.320Z",
+  "location": "EventChannel",
+  "id": "1794770162.309201",
+  "timestamp": "2026-11-15T19:16:02.320+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-04eb-6afa-ce00-000000000700}",
+     "processId": "7648",
+     "utcTime": "2026-11-15 19:16:00.803",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_pca0c4ox.tvy.ps1",
+     "creationUtcTime": "2026-11-15 19:16:00.800",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:16:00.803\r\nProcessGuid: {1ab4e09f-04eb-6afa-ce00-000000000700}\r\nProcessId: 7648\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_pca0c4ox.tvy.ps1\r\nCreationUtcTime: 2026-11-15 19:16:00.800\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:16:00.8046938Z",
+     "eventRecordID": "1180",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 9,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:16:06.510Z",
+  "location": "EventChannel",
+  "id": "1794770166.311908",
+  "timestamp": "2026-11-15T19:16:06.510+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "sdbinst.exe",
+     "image": "C:\\\\Windows\\\\System32\\\\sdbinst.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-05b0-6afa-2701-000000000700}",
+     "description": "Application Compatibility Database Installer",
+     "logonGuid": "{1ab4e09f-f618-6af9-e703-000000000000}",
+     "parentCommandLine": "\\\"C:\\\\WINDOWS\\\\system32\\\\rundll32.exe\\\" C:\\\\WINDOWS\\\\system32\\\\PcaSvc.dll,PcaPatchSdbTask",
+     "processGuid": "{1ab4e09f-05b9-6afa-3501-000000000700}",
+     "logonId": "0x3e7",
+     "parentProcessId": "8152",
+     "processId": "6928",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-15 19:19:21.293",
+     "hashes": "MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\rundll32.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\system32\\\\sdbinst.exe  -q C:\\\\WINDOWS\\\\appcompat\\\\cloudsdb\\\\apppatch.sdb",
+     "integrityLevel": "System",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "AUTORIDADE NT\\\\SISTEMA",
+     "terminalSessionId": "0",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:19:21.293\r\nProcessGuid: {1ab4e09f-05b9-6afa-3501-000000000700}\r\nProcessId: 6928\r\nImage: C:\\Windows\\System32\\sdbinst.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Application Compatibility Database Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: sdbinst.exe\r\nCommandLine: C:\\WINDOWS\\system32\\sdbinst.exe  -q C:\\WINDOWS\\appcompat\\cloudsdb\\apppatch.sdb\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: AUTORIDADE NT\\SISTEMA\r\nLogonGuid: {1ab4e09f-f618-6af9-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E\r\nParentProcessGuid: {1ab4e09f-05b0-6afa-2701-000000000700}\r\nParentProcessId: 8152\r\nParentImage: C:\\Windows\\System32\\rundll32.exe\r\nParentCommandLine: \"C:\\WINDOWS\\system32\\rundll32.exe\" C:\\WINDOWS\\system32\\PcaSvc.dll,PcaPatchSdbTask\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-15T19:19:21.4218541Z",
+     "eventRecordID": "1245",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Application Compatibility Database launched",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Application Shimming"
+    ],
+    "id": [
+     "T1546.011"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Persistence"
+    ]
+   },
+   "id": "92058"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:19:42.828Z",
+  "location": "EventChannel",
+  "id": "1794770382.395539",
+  "timestamp": "2026-11-15T19:19:42.828+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-05e5-6afa-3f01-000000000700}",
+     "processId": "3472",
+     "utcTime": "2026-11-15 19:20:10.676",
+     "targetFilename": "C:\\\\Users\\\\cannibalsec\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_iscu1vbz.paj.ps1",
+     "creationUtcTime": "2026-11-15 19:20:10.676",
+     "user": "SOC-WIN11\\\\cannibalsec"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:20:10.676\r\nProcessGuid: {1ab4e09f-05e5-6afa-3f01-000000000700}\r\nProcessId: 3472\r\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Users\\cannibalsec\\AppData\\Local\\Temp\\__PSScriptPolicyTest_iscu1vbz.paj.ps1\r\nCreationUtcTime: 2026-11-15 19:20:10.676\r\nUser: SOC-WIN11\\cannibalsec\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:20:10.9413349Z",
+     "eventRecordID": "1295",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 15,
+   "description": "Executable file dropped in folder commonly used by malware",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92213"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:20:37.471Z",
+  "location": "EventChannel",
+  "id": "1794770437.424944",
+  "timestamp": "2026-11-15T19:20:37.471+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "PowerShell.EXE",
+     "image": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-05e5-6afa-3f01-000000000700}",
+     "description": "Windows PowerShell",
+     "logonGuid": "{1ab4e09f-0441-6afa-059d-040000000000}",
+     "parentCommandLine": "\\\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\\"",
+     "processGuid": "{1ab4e09f-0655-6afa-4d01-000000000700}",
+     "logonId": "0x49d05",
+     "parentProcessId": "3472",
+     "processId": "8104",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-15 19:21:57.548",
+     "hashes": "MD5=61F649A6FDC374A6BF36C860519E017C,SHA256=8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E,IMPHASH=2F87CE4617F593D7148B739BBF06D059",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "\\\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\\" -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACIATABBAEIALQBTAE8AQwAgAEMAZQBuAGEAcgBpAG8AIAAyACAALQAgAFAAbwB3AGUAcgBTAGgAZQBsAGwAIABjAG8AZABpAGYAaQBjAGEAZABvACAAKABUADEAMAA1ADkALgAwADAAMQApACAAZQB4AGUAYwB1AHQAYQBkAG8AIABlAG0AIAAkACgARwBlAHQALQBEAGEAdABlACAALQBGAG8AcgBtAGEAdAAgAG8AKQAiACAALQBGAG8AcgBlAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEcAcgBlAGUAbgA=",
+     "integrityLevel": "Medium",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "SOC-WIN11\\\\cannibalsec",
+     "terminalSessionId": "1",
+     "parentUser": "SOC-WIN11\\\\cannibalsec"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:21:57.548\r\nProcessGuid: {1ab4e09f-0655-6afa-4d01-000000000700}\r\nProcessId: 8104\r\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Windows PowerShell\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: PowerShell.EXE\r\nCommandLine: \"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACIATABBAEIALQBTAE8AQwAgAEMAZQBuAGEAcgBpAG8AIAAyACAALQAgAFAAbwB3AGUAcgBTAGgAZQBsAGwAIABjAG8AZABpAGYAaQBjAGEAZABvACAAKABUADEAMAA1ADkALgAwADAAMQApACAAZQB4AGUAYwB1AHQAYQBkAG8AIABlAG0AIAAkACgARwBlAHQALQBEAGEAdABlACAALQBGAG8AcgBtAGEAdAAgAG8AKQAiACAALQBGAG8AcgBlAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEcAcgBlAGUAbgA=\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: SOC-WIN11\\cannibalsec\r\nLogonGuid: {1ab4e09f-0441-6afa-059d-040000000000}\r\nLogonId: 0x49D05\r\nTerminalSessionId: 1\r\nIntegrityLevel: Medium\r\nHashes: MD5=61F649A6FDC374A6BF36C860519E017C,SHA256=8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E,IMPHASH=2F87CE4617F593D7148B739BBF06D059\r\nParentProcessGuid: {1ab4e09f-05e5-6afa-3f01-000000000700}\r\nParentProcessId: 3472\r\nParentImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nParentCommandLine: \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" \r\nParentUser: SOC-WIN11\\cannibalsec\"",
+     "version": "5",
+     "systemTime": "2026-11-15T19:21:57.7308041Z",
+     "eventRecordID": "1383",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Powershell.exe spawned a powershell process which executed a base64 encoded command",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "92057"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:22:30.681Z",
+  "location": "EventChannel",
+  "id": "1794770550.439069",
+  "timestamp": "2026-11-15T19:22:30.681+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-0655-6afa-4d01-000000000700}",
+     "processId": "8104",
+     "utcTime": "2026-11-15 19:21:59.390",
+     "targetFilename": "C:\\\\Users\\\\cannibalsec\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_f2bqcfuz.hg4.ps1",
+     "creationUtcTime": "2026-11-15 19:21:59.386",
+     "user": "SOC-WIN11\\\\cannibalsec"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:21:59.390\r\nProcessGuid: {1ab4e09f-0655-6afa-4d01-000000000700}\r\nProcessId: 8104\r\nImage: C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Users\\cannibalsec\\AppData\\Local\\Temp\\__PSScriptPolicyTest_f2bqcfuz.hg4.ps1\r\nCreationUtcTime: 2026-11-15 19:21:59.386\r\nUser: SOC-WIN11\\cannibalsec\"",
+     "version": "2",
+     "systemTime": "2026-11-15T19:21:59.4240388Z",
+     "eventRecordID": "1384",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": true,
+   "level": 15,
+   "description": "Executable file dropped in folder commonly used by malware",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92213"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:22:33.056Z",
+  "location": "EventChannel",
+  "id": "1794770553.446506",
+  "timestamp": "2026-11-15T19:22:33.056+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "FodHelper.EXE",
+     "image": "C:\\\\Windows\\\\System32\\\\fodhelper.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-f61a-6af9-0d00-000000000700}",
+     "description": "Features On Demand Helper",
+     "logonGuid": "{1ab4e09f-0441-6afa-ca9b-040000000000}",
+     "parentCommandLine": "C:\\\\WINDOWS\\\\system32\\\\svchost.exe -k DcomLaunch -p",
+     "processGuid": "{1ab4e09f-07da-6afa-1802-000000000700}",
+     "logonId": "0x49bca",
+     "parentProcessId": "952",
+     "processId": "1620",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-15 19:28:26.849",
+     "hashes": "MD5=1D5D85D9F34ED7536F791E557C627DCD,SHA256=EC9B0D09B56F46F0308D594CD9D595EB492A67ED0024A9B7A13FA995966932F7,IMPHASH=DBF7EE2D74DF21B22A4262589616FD47",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\System32\\\\FodHelper.exe -Embedding",
+     "integrityLevel": "High",
+     "fileVersion": "10.0.26100.1150 (WinBuild.160101.0800)",
+     "user": "SOC-WIN11\\\\cannibalsec",
+     "terminalSessionId": "1",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:28:26.849\r\nProcessGuid: {1ab4e09f-07da-6afa-1802-000000000700}\r\nProcessId: 1620\r\nImage: C:\\Windows\\System32\\fodhelper.exe\r\nFileVersion: 10.0.26100.1150 (WinBuild.160101.0800)\r\nDescription: Features On Demand Helper\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: FodHelper.EXE\r\nCommandLine: C:\\WINDOWS\\System32\\FodHelper.exe -Embedding\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: SOC-WIN11\\cannibalsec\r\nLogonGuid: {1ab4e09f-0441-6afa-ca9b-040000000000}\r\nLogonId: 0x49BCA\r\nTerminalSessionId: 1\r\nIntegrityLevel: High\r\nHashes: MD5=1D5D85D9F34ED7536F791E557C627DCD,SHA256=EC9B0D09B56F46F0308D594CD9D595EB492A67ED0024A9B7A13FA995966932F7,IMPHASH=DBF7EE2D74DF21B22A4262589616FD47\r\nParentProcessGuid: {1ab4e09f-f61a-6af9-0d00-000000000700}\r\nParentProcessId: 952\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\WINDOWS\\system32\\svchost.exe -k DcomLaunch -p\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-15T19:28:26.8668643Z",
+     "eventRecordID": "1841",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Known auto-elevated utility FodHelper.EXE may have been used to bypass UAC",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Bypass User Account Control"
+    ],
+    "id": [
+     "T1548.002"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Defense Evasion"
+    ]
+   },
+   "id": "92055"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:29:57.267Z",
+  "location": "EventChannel",
+  "id": "1794770997.820112",
+  "timestamp": "2026-11-15T19:29:57.267+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "sdbinst.exe",
+     "image": "C:\\\\Windows\\\\System32\\\\sdbinst.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-04bb-6afa-ae00-000000000700}",
+     "description": "Application Compatibility Database Installer",
+     "logonGuid": "{1ab4e09f-f618-6af9-e703-000000000000}",
+     "parentCommandLine": "C:\\\\WINDOWS\\\\system32\\\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc",
+     "processGuid": "{1ab4e09f-0c2e-6afa-b002-000000000700}",
+     "logonId": "0x3e7",
+     "parentProcessId": "2884",
+     "processId": "9072",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-15 19:46:54.124",
+     "hashes": "MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\system32\\\\sdbinst.exe -mm \\\"C:\\\\Program Files\\\\WindowsApps\\\\Microsoft.ApplicationCompatibilityEnhancements_1.2511.9.0_x64__8wekyb3d8bbwe\\\\sdb\\\\sysMergeInboxStoreApp.sdb\\\"",
+     "integrityLevel": "System",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "AUTORIDADE NT\\\\SISTEMA",
+     "terminalSessionId": "0",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:46:54.124\r\nProcessGuid: {1ab4e09f-0c2e-6afa-b002-000000000700}\r\nProcessId: 9072\r\nImage: C:\\Windows\\System32\\sdbinst.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Application Compatibility Database Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: sdbinst.exe\r\nCommandLine: C:\\WINDOWS\\system32\\sdbinst.exe -mm \"C:\\Program Files\\WindowsApps\\Microsoft.ApplicationCompatibilityEnhancements_1.2511.9.0_x64__8wekyb3d8bbwe\\sdb\\sysMergeInboxStoreApp.sdb\"\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: AUTORIDADE NT\\SISTEMA\r\nLogonGuid: {1ab4e09f-f618-6af9-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E\r\nParentProcessGuid: {1ab4e09f-04bb-6afa-ae00-000000000700}\r\nParentProcessId: 2884\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\WINDOWS\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-15T19:46:54.1453009Z",
+     "eventRecordID": "2018",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": true,
+   "level": 12,
+   "description": "Application Compatibility Database launched",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Application Shimming"
+    ],
+    "id": [
+     "T1546.011"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Persistence"
+    ]
+   },
+   "id": "92058"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:50:58.202Z",
+  "location": "EventChannel",
+  "id": "1794772258.1070352",
+  "timestamp": "2026-11-15T19:50:58.202+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "sdbinst.exe",
+     "image": "C:\\\\Windows\\\\System32\\\\sdbinst.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-04bb-6afa-ae00-000000000700}",
+     "description": "Application Compatibility Database Installer",
+     "logonGuid": "{1ab4e09f-f618-6af9-e703-000000000000}",
+     "parentCommandLine": "C:\\\\WINDOWS\\\\system32\\\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc",
+     "processGuid": "{1ab4e09f-0c30-6afa-b202-000000000700}",
+     "logonId": "0x3e7",
+     "parentProcessId": "2884",
+     "processId": "2292",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-15 19:46:56.324",
+     "hashes": "MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\System32\\\\sdbinst.exe -mm",
+     "integrityLevel": "System",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "AUTORIDADE NT\\\\SISTEMA",
+     "terminalSessionId": "0",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-15 19:46:56.324\r\nProcessGuid: {1ab4e09f-0c30-6afa-b202-000000000700}\r\nProcessId: 2292\r\nImage: C:\\Windows\\System32\\sdbinst.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Application Compatibility Database Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: sdbinst.exe\r\nCommandLine: C:\\WINDOWS\\System32\\sdbinst.exe -mm\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: AUTORIDADE NT\\SISTEMA\r\nLogonGuid: {1ab4e09f-f618-6af9-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E\r\nParentProcessGuid: {1ab4e09f-04bb-6afa-ae00-000000000700}\r\nParentProcessId: 2884\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\WINDOWS\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-15T19:46:56.3453420Z",
+     "eventRecordID": "2022",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 3,
+   "mail": true,
+   "level": 12,
+   "description": "Application Compatibility Database launched",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Application Shimming"
+    ],
+    "id": [
+     "T1546.011"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Persistence"
+    ]
+   },
+   "id": "92058"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T19:51:00.918Z",
+  "location": "EventChannel",
+  "id": "1794772260.1076727",
+  "timestamp": "2026-11-15T19:51:00.918+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-16a5-6afa-4603-000000000700}",
+     "processId": "3616",
+     "utcTime": "2026-11-15 20:31:37.326",
+     "targetFilename": "C:\\\\Users\\\\cannibalsec\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_yq03ckeh.bcl.ps1",
+     "creationUtcTime": "2026-11-15 20:31:37.324",
+     "user": "SOC-WIN11\\\\cannibalsec"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 20:31:37.326\r\nProcessGuid: {1ab4e09f-16a5-6afa-4603-000000000700}\r\nProcessId: 3616\r\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Users\\cannibalsec\\AppData\\Local\\Temp\\__PSScriptPolicyTest_yq03ckeh.bcl.ps1\r\nCreationUtcTime: 2026-11-15 20:31:37.324\r\nUser: SOC-WIN11\\cannibalsec\"",
+     "version": "2",
+     "systemTime": "2026-11-15T20:31:37.3311272Z",
+     "eventRecordID": "2391",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 15,
+   "description": "Executable file dropped in folder commonly used by malware",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92213"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T20:34:44.764Z",
+  "location": "EventChannel",
+  "id": "1794774884.1547414",
+  "timestamp": "2026-11-15T20:34:44.764+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "sdbinst.exe",
+     "image": "C:\\\\Windows\\\\System32\\\\sdbinst.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-04bb-6afa-ae00-000000000700}",
+     "description": "Application Compatibility Database Installer",
+     "logonGuid": "{1ab4e09f-f618-6af9-e703-000000000000}",
+     "parentCommandLine": "C:\\\\WINDOWS\\\\system32\\\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc",
+     "processGuid": "{1ab4e09f-1a73-6afa-b003-000000000700}",
+     "logonId": "0x3e7",
+     "parentProcessId": "2884",
+     "processId": "7428",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-15 20:47:47.138",
+     "hashes": "MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\System32\\\\sdbinst.exe -m -bg",
+     "integrityLevel": "System",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "AUTORIDADE NT\\\\SISTEMA",
+     "terminalSessionId": "0",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-15 20:47:47.138\r\nProcessGuid: {1ab4e09f-1a73-6afa-b003-000000000700}\r\nProcessId: 7428\r\nImage: C:\\Windows\\System32\\sdbinst.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Application Compatibility Database Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: sdbinst.exe\r\nCommandLine: C:\\WINDOWS\\System32\\sdbinst.exe -m -bg\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: AUTORIDADE NT\\SISTEMA\r\nLogonGuid: {1ab4e09f-f618-6af9-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E\r\nParentProcessGuid: {1ab4e09f-04bb-6afa-ae00-000000000700}\r\nParentProcessId: 2884\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\WINDOWS\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-15T20:47:47.1557254Z",
+     "eventRecordID": "2564",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Application Compatibility Database launched",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Application Shimming"
+    ],
+    "id": [
+     "T1546.011"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Persistence"
+    ]
+   },
+   "id": "92058"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T20:51:33.245Z",
+  "location": "EventChannel",
+  "id": "1794775893.1868059",
+  "timestamp": "2026-11-15T20:51:33.245+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-1eb2-6afa-ea03-000000000700}",
+     "processId": "5572",
+     "utcTime": "2026-11-15 21:06:02.056",
+     "targetFilename": "C:\\\\Users\\\\cannibalsec\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_lbqrf4dn.b05.ps1",
+     "creationUtcTime": "2026-11-15 21:06:02.056",
+     "user": "SOC-WIN11\\\\cannibalsec"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 21:06:02.056\r\nProcessGuid: {1ab4e09f-1eb2-6afa-ea03-000000000700}\r\nProcessId: 5572\r\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Users\\cannibalsec\\AppData\\Local\\Temp\\__PSScriptPolicyTest_lbqrf4dn.b05.ps1\r\nCreationUtcTime: 2026-11-15 21:06:02.056\r\nUser: SOC-WIN11\\cannibalsec\"",
+     "version": "2",
+     "systemTime": "2026-11-15T21:06:02.0811744Z",
+     "eventRecordID": "2769",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 15,
+   "description": "Executable file dropped in folder commonly used by malware",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92213"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:09:16.314Z",
+  "location": "EventChannel",
+  "id": "1794776956.2184983",
+  "timestamp": "2026-11-15T21:09:16.314+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "prompt",
+     "scriptBlockId": "73f0cafb-8b00-4770-9d47-66e45eb6f2ff"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nprompt\r\n\r\nID de ScriptBlock: 73f0cafb-8b00-4770-9d47-66e45eb6f2ff\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:06:07.7591538Z",
+     "eventRecordID": "419",
+     "threadID": "5296",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "5572",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:06:07.7591538Z\",\"eventRecordID\":\"419\",\"processID\":\"5572\",\"threadID\":\"5296\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nprompt\\r\\n\\r\\nID de ScriptBlock: 73f0cafb-8b00-4770-9d47-66e45eb6f2ff\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"prompt\",\"scriptBlockId\":\"73f0cafb-8b00-4770-9d47-66e45eb6f2ff\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:09:20.155Z",
+  "location": "EventChannel",
+  "id": "1794776960.2187775",
+  "timestamp": "2026-11-15T21:09:20.155+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$Host",
+     "scriptBlockId": "b8f29989-9c3a-4f02-8be0-8f20a68178f2"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$Host\r\n\r\nID de ScriptBlock: b8f29989-9c3a-4f02-8be0-8f20a68178f2\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:06:08.8536236Z",
+     "eventRecordID": "420",
+     "threadID": "5296",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "5572",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:06:08.8536236Z\",\"eventRecordID\":\"420\",\"processID\":\"5572\",\"threadID\":\"5296\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$Host\\r\\n\\r\\nID de ScriptBlock: b8f29989-9c3a-4f02-8be0-8f20a68178f2\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$Host\",\"scriptBlockId\":\"b8f29989-9c3a-4f02-8be0-8f20a68178f2\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:09:21.130Z",
+  "location": "EventChannel",
+  "id": "1794776961.2189517",
+  "timestamp": "2026-11-15T21:09:21.130+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$cmd = 'Write-Host \\\"LAB-SOC Cenario 2 - PowerShell codificado (T1059.001) executado em $(Get-Date -Format o)\\\" -ForegroundColor Green'",
+     "scriptBlockId": "2d4a574f-d52a-4457-87f5-5c11815f9aad"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$cmd = 'Write-Host \"LAB-SOC Cenario 2 - PowerShell codificado (T1059.001) executado em $(Get-Date -Format o)\" -ForegroundColor Green'\r\n\r\nID de ScriptBlock: 2d4a574f-d52a-4457-87f5-5c11815f9aad\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:06:17.5385321Z",
+     "eventRecordID": "421",
+     "threadID": "5296",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "5572",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 3,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:06:17.5385321Z\",\"eventRecordID\":\"421\",\"processID\":\"5572\",\"threadID\":\"5296\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$cmd = 'Write-Host \\\"LAB-SOC Cenario 2 - PowerShell codificado (T1059.001) executado em $(Get-Date -Format o)\\\" -ForegroundColor Green'\\r\\n\\r\\nID de ScriptBlock: 2d4a574f-d52a-4457-87f5-5c11815f9aad\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$cmd = 'Write-Host \\\\\\\"LAB-SOC Cenario 2 - PowerShell codificado (T1059.001) executado em $(Get-Date -Format o)\\\\\\\" -ForegroundColor Green'\",\"scriptBlockId\":\"2d4a574f-d52a-4457-87f5-5c11815f9aad\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:09:28.124Z",
+  "location": "EventChannel",
+  "id": "1794776968.2191255",
+  "timestamp": "2026-11-15T21:09:28.124+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "prompt",
+     "scriptBlockId": "66d3ccc2-7fe5-4179-9199-b6cb4eb22c26"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nprompt\r\n\r\nID de ScriptBlock: 66d3ccc2-7fe5-4179-9199-b6cb4eb22c26\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:06:17.6990738Z",
+     "eventRecordID": "422",
+     "threadID": "5296",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "5572",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 4,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:06:17.6990738Z\",\"eventRecordID\":\"422\",\"processID\":\"5572\",\"threadID\":\"5296\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nprompt\\r\\n\\r\\nID de ScriptBlock: 66d3ccc2-7fe5-4179-9199-b6cb4eb22c26\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"prompt\",\"scriptBlockId\":\"66d3ccc2-7fe5-4179-9199-b6cb4eb22c26\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:09:28.163Z",
+  "location": "EventChannel",
+  "id": "1794776968.2193515",
+  "timestamp": "2026-11-15T21:09:28.163+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($cmd))",
+     "scriptBlockId": "7774d7ed-115a-4e8f-be05-788ddd8680f0"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($cmd))\r\n\r\nID de ScriptBlock: 7774d7ed-115a-4e8f-be05-788ddd8680f0\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:06:17.9383302Z",
+     "eventRecordID": "423",
+     "threadID": "5296",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "5572",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 5,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:06:17.9383302Z\",\"eventRecordID\":\"423\",\"processID\":\"5572\",\"threadID\":\"5296\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($cmd))\\r\\n\\r\\nID de ScriptBlock: 7774d7ed-115a-4e8f-be05-788ddd8680f0\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($cmd))\",\"scriptBlockId\":\"7774d7ed-115a-4e8f-be05-788ddd8680f0\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:09:28.170Z",
+  "location": "EventChannel",
+  "id": "1794776968.2195257",
+  "timestamp": "2026-11-15T21:09:28.170+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "prompt",
+     "scriptBlockId": "e8c774c5-5a65-4f6d-bd4c-f75fd48957fd"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nprompt\r\n\r\nID de ScriptBlock: e8c774c5-5a65-4f6d-bd4c-f75fd48957fd\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:06:17.9922355Z",
+     "eventRecordID": "424",
+     "threadID": "5296",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "5572",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 6,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:06:17.9922355Z\",\"eventRecordID\":\"424\",\"processID\":\"5572\",\"threadID\":\"5296\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nprompt\\r\\n\\r\\nID de ScriptBlock: e8c774c5-5a65-4f6d-bd4c-f75fd48957fd\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"prompt\",\"scriptBlockId\":\"e8c774c5-5a65-4f6d-bd4c-f75fd48957fd\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:09:28.174Z",
+  "location": "EventChannel",
+  "id": "1794776968.2197267",
+  "timestamp": "2026-11-15T21:09:28.174+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "powershell.exe -EncodedCommand $enc",
+     "scriptBlockId": "83575fce-d3a6-4e8e-b7ba-dff76b2742a1"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\npowershell.exe -EncodedCommand $enc\r\n\r\nID de ScriptBlock: 83575fce-d3a6-4e8e-b7ba-dff76b2742a1\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:07:12.1350373Z",
+     "eventRecordID": "425",
+     "threadID": "5296",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "5572",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 7,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:07:12.1350373Z\",\"eventRecordID\":\"425\",\"processID\":\"5572\",\"threadID\":\"5296\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\npowershell.exe -EncodedCommand $enc\\r\\n\\r\\nID de ScriptBlock: 83575fce-d3a6-4e8e-b7ba-dff76b2742a1\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"powershell.exe -EncodedCommand $enc\",\"scriptBlockId\":\"83575fce-d3a6-4e8e-b7ba-dff76b2742a1\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:10:30.218Z",
+  "location": "EventChannel",
+  "id": "1794777030.2250499",
+  "timestamp": "2026-11-15T21:10:30.218+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "PowerShell.EXE",
+     "image": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-1eb2-6afa-ea03-000000000700}",
+     "description": "Windows PowerShell",
+     "logonGuid": "{1ab4e09f-0441-6afa-059d-040000000000}",
+     "parentCommandLine": "\\\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\\"",
+     "processGuid": "{1ab4e09f-1f00-6afa-f703-000000000700}",
+     "logonId": "0x49d05",
+     "parentProcessId": "5572",
+     "processId": "1048",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-15 21:07:12.178",
+     "hashes": "MD5=61F649A6FDC374A6BF36C860519E017C,SHA256=8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E,IMPHASH=2F87CE4617F593D7148B739BBF06D059",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "\\\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\\" -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACIATABBAEIALQBTAE8AQwAgAEMAZQBuAGEAcgBpAG8AIAAyACAALQAgAFAAbwB3AGUAcgBTAGgAZQBsAGwAIABjAG8AZABpAGYAaQBjAGEAZABvACAAKABUADEAMAA1ADkALgAwADAAMQApACAAZQB4AGUAYwB1AHQAYQBkAG8AIABlAG0AIAAkACgARwBlAHQALQBEAGEAdABlACAALQBGAG8AcgBtAGEAdAAgAG8AKQAiACAALQBGAG8AcgBlAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEcAcgBlAGUAbgA=",
+     "integrityLevel": "Medium",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "SOC-WIN11\\\\cannibalsec",
+     "terminalSessionId": "1",
+     "parentUser": "SOC-WIN11\\\\cannibalsec"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-15 21:07:12.178\r\nProcessGuid: {1ab4e09f-1f00-6afa-f703-000000000700}\r\nProcessId: 1048\r\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Windows PowerShell\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: PowerShell.EXE\r\nCommandLine: \"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACIATABBAEIALQBTAE8AQwAgAEMAZQBuAGEAcgBpAG8AIAAyACAALQAgAFAAbwB3AGUAcgBTAGgAZQBsAGwAIABjAG8AZABpAGYAaQBjAGEAZABvACAAKABUADEAMAA1ADkALgAwADAAMQApACAAZQB4AGUAYwB1AHQAYQBkAG8AIABlAG0AIAAkACgARwBlAHQALQBEAGEAdABlACAALQBGAG8AcgBtAGEAdAAgAG8AKQAiACAALQBGAG8AcgBlAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEcAcgBlAGUAbgA=\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: SOC-WIN11\\cannibalsec\r\nLogonGuid: {1ab4e09f-0441-6afa-059d-040000000000}\r\nLogonId: 0x49D05\r\nTerminalSessionId: 1\r\nIntegrityLevel: Medium\r\nHashes: MD5=61F649A6FDC374A6BF36C860519E017C,SHA256=8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E,IMPHASH=2F87CE4617F593D7148B739BBF06D059\r\nParentProcessGuid: {1ab4e09f-1eb2-6afa-ea03-000000000700}\r\nParentProcessId: 5572\r\nParentImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nParentCommandLine: \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" \r\nParentUser: SOC-WIN11\\cannibalsec\"",
+     "version": "5",
+     "systemTime": "2026-11-15T21:07:12.3365849Z",
+     "eventRecordID": "2781",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Powershell.exe spawned a powershell process which executed a base64 encoded command",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "92057"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:10:30.656Z",
+  "location": "EventChannel",
+  "id": "1794777030.2252357",
+  "timestamp": "2026-11-15T21:10:30.656+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-1f00-6afa-f703-000000000700}",
+     "processId": "1048",
+     "utcTime": "2026-11-15 21:07:12.858",
+     "targetFilename": "C:\\\\Users\\\\cannibalsec\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_lyitakqo.dls.ps1",
+     "creationUtcTime": "2026-11-15 21:07:12.858",
+     "user": "SOC-WIN11\\\\cannibalsec"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-15 21:07:12.858\r\nProcessGuid: {1ab4e09f-1f00-6afa-f703-000000000700}\r\nProcessId: 1048\r\nImage: C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Users\\cannibalsec\\AppData\\Local\\Temp\\__PSScriptPolicyTest_lyitakqo.dls.ps1\r\nCreationUtcTime: 2026-11-15 21:07:12.858\r\nUser: SOC-WIN11\\cannibalsec\"",
+     "version": "2",
+     "systemTime": "2026-11-15T21:07:12.9146659Z",
+     "eventRecordID": "2782",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": true,
+   "level": 15,
+   "description": "Executable file dropped in folder commonly used by malware",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92213"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:10:30.687Z",
+  "location": "EventChannel",
+  "id": "1794777030.2259795",
+  "timestamp": "2026-11-15T21:10:30.687+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Write-Host \\\"LAB-SOC Cenario 2 - PowerShell codificado (T1059.001) executado em $(Get-Date -Format o)\\\" -ForegroundColor Green",
+     "scriptBlockId": "cc829c85-f418-490a-9b86-33c72f957ada"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nWrite-Host \"LAB-SOC Cenario 2 - PowerShell codificado (T1059.001) executado em $(Get-Date -Format o)\" -ForegroundColor Green\r\n\r\nID de ScriptBlock: cc829c85-f418-490a-9b86-33c72f957ada\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:07:14.2996834Z",
+     "eventRecordID": "429",
+     "threadID": "9716",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "1048",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 8,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:07:14.2996834Z\",\"eventRecordID\":\"429\",\"processID\":\"1048\",\"threadID\":\"9716\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nWrite-Host \\\"LAB-SOC Cenario 2 - PowerShell codificado (T1059.001) executado em $(Get-Date -Format o)\\\" -ForegroundColor Green\\r\\n\\r\\nID de ScriptBlock: cc829c85-f418-490a-9b86-33c72f957ada\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Write-Host \\\\\\\"LAB-SOC Cenario 2 - PowerShell codificado (T1059.001) executado em $(Get-Date -Format o)\\\\\\\" -ForegroundColor Green\",\"scriptBlockId\":\"cc829c85-f418-490a-9b86-33c72f957ada\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:10:33.374Z",
+  "location": "EventChannel",
+  "id": "1794777033.2262587",
+  "timestamp": "2026-11-15T21:10:33.374+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$global:?",
+     "scriptBlockId": "07880382-0bfa-485f-8855-93fae28534c7"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$global:?\r\n\r\nID de ScriptBlock: 07880382-0bfa-485f-8855-93fae28534c7\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:07:15.0900702Z",
+     "eventRecordID": "430",
+     "threadID": "9716",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "1048",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 9,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:07:15.0900702Z\",\"eventRecordID\":\"430\",\"processID\":\"1048\",\"threadID\":\"9716\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$global:?\\r\\n\\r\\nID de ScriptBlock: 07880382-0bfa-485f-8855-93fae28534c7\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$global:?\",\"scriptBlockId\":\"07880382-0bfa-485f-8855-93fae28534c7\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:10:35.158Z",
+  "location": "EventChannel",
+  "id": "1794777035.2264811",
+  "timestamp": "2026-11-15T21:10:35.158+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "prompt",
+     "scriptBlockId": "aba268aa-db81-4f86-bb59-dce292b33542"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nprompt\r\n\r\nID de ScriptBlock: aba268aa-db81-4f86-bb59-dce292b33542\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-15T21:07:15.2182489Z",
+     "eventRecordID": "431",
+     "threadID": "5296",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "5572",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 10,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-15T21:07:15.2182489Z\",\"eventRecordID\":\"431\",\"processID\":\"5572\",\"threadID\":\"5296\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nprompt\\r\\n\\r\\nID de ScriptBlock: aba268aa-db81-4f86-bb59-dce292b33542\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"prompt\",\"scriptBlockId\":\"aba268aa-db81-4f86-bb59-dce292b33542\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:10:35.219Z",
+  "location": "EventChannel",
+  "id": "1794777035.2266565",
+  "timestamp": "2026-11-15T21:10:35.219+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "sdbinst.exe",
+     "image": "C:\\\\Windows\\\\System32\\\\sdbinst.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-04bb-6afa-ae00-000000000700}",
+     "description": "Application Compatibility Database Installer",
+     "logonGuid": "{1ab4e09f-f618-6af9-e703-000000000000}",
+     "parentCommandLine": "C:\\\\WINDOWS\\\\system32\\\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc",
+     "processGuid": "{1ab4e09f-28b8-6afa-ab04-000000000700}",
+     "logonId": "0x3e7",
+     "parentProcessId": "2884",
+     "processId": "6108",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-15 21:48:40.337",
+     "hashes": "MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\System32\\\\sdbinst.exe -m -bg",
+     "integrityLevel": "System",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "AUTORIDADE NT\\\\SISTEMA",
+     "terminalSessionId": "0",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-15 21:48:40.337\r\nProcessGuid: {1ab4e09f-28b8-6afa-ab04-000000000700}\r\nProcessId: 6108\r\nImage: C:\\Windows\\System32\\sdbinst.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Application Compatibility Database Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: sdbinst.exe\r\nCommandLine: C:\\WINDOWS\\System32\\sdbinst.exe -m -bg\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: AUTORIDADE NT\\SISTEMA\r\nLogonGuid: {1ab4e09f-f618-6af9-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E\r\nParentProcessGuid: {1ab4e09f-04bb-6afa-ae00-000000000700}\r\nParentProcessId: 2884\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\WINDOWS\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-15T21:48:40.3496461Z",
+     "eventRecordID": "10332",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Application Compatibility Database launched",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Application Shimming"
+    ],
+    "id": [
+     "T1546.011"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Persistence"
+    ]
+   },
+   "id": "92058"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-15T21:51:57.223Z",
+  "location": "EventChannel",
+  "id": "1794779517.2774762",
+  "timestamp": "2026-11-15T21:51:57.223+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "sdbinst.exe",
+     "image": "C:\\\\Windows\\\\System32\\\\sdbinst.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-04bb-6afa-ae00-000000000700}",
+     "description": "Application Compatibility Database Installer",
+     "logonGuid": "{1ab4e09f-f618-6af9-e703-000000000000}",
+     "parentCommandLine": "C:\\\\WINDOWS\\\\system32\\\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc",
+     "processGuid": "{1ab4e09f-4bc8-6afa-2106-000000000700}",
+     "logonId": "0x3e7",
+     "parentProcessId": "2884",
+     "processId": "12172",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-16 00:18:16.945",
+     "hashes": "MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\System32\\\\sdbinst.exe -m -bg",
+     "integrityLevel": "System",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "AUTORIDADE NT\\\\SISTEMA",
+     "terminalSessionId": "0",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-16 00:18:16.945\r\nProcessGuid: {1ab4e09f-4bc8-6afa-2106-000000000700}\r\nProcessId: 12172\r\nImage: C:\\Windows\\System32\\sdbinst.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Application Compatibility Database Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: sdbinst.exe\r\nCommandLine: C:\\WINDOWS\\System32\\sdbinst.exe -m -bg\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: AUTORIDADE NT\\SISTEMA\r\nLogonGuid: {1ab4e09f-f618-6af9-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E\r\nParentProcessGuid: {1ab4e09f-04bb-6afa-ae00-000000000700}\r\nParentProcessId: 2884\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\WINDOWS\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-16T00:18:19.8621190Z",
+     "eventRecordID": "10500",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Application Compatibility Database launched",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Application Shimming"
+    ],
+    "id": [
+     "T1546.011"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Persistence"
+    ]
+   },
+   "id": "92058"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T00:21:43.917Z",
+  "location": "EventChannel",
+  "id": "1794788503.18801",
+  "timestamp": "2026-11-16T00:21:43.917+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-7120-6afa-a406-000000000700}",
+     "processId": "11508",
+     "utcTime": "2026-11-16 02:57:37.329",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_pxrpepoa.oe4.ps1",
+     "creationUtcTime": "2026-11-16 02:57:37.329",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 02:57:37.329\r\nProcessGuid: {1ab4e09f-7120-6afa-a406-000000000700}\r\nProcessId: 11508\r\nImage: C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_pxrpepoa.oe4.ps1\r\nCreationUtcTime: 2026-11-16 02:57:37.329\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-16T02:57:37.3309455Z",
+     "eventRecordID": "10579",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T03:00:52.421Z",
+  "location": "EventChannel",
+  "id": "1794798052.201881",
+  "timestamp": "2026-11-16T03:00:52.421+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "{ [regex]::Escape($_) }",
+     "scriptBlockId": "a2c0d7b9-f1e2-44d2-a846-9f3626c22b35"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n{ [regex]::Escape($_) }\r\n\r\nID de ScriptBlock: a2c0d7b9-f1e2-44d2-a846-9f3626c22b35\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T02:57:38.2805742Z",
+     "eventRecordID": "436",
+     "threadID": "9904",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "11508",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T02:57:38.2805742Z\",\"eventRecordID\":\"436\",\"processID\":\"11508\",\"threadID\":\"9904\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n{ [regex]::Escape($_) }\\r\\n\\r\\nID de ScriptBlock: a2c0d7b9-f1e2-44d2-a846-9f3626c22b35\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"{ [regex]::Escape($_) }\",\"scriptBlockId\":\"a2c0d7b9-f1e2-44d2-a846-9f3626c22b35\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T03:00:53.173Z",
+  "location": "EventChannel",
+  "id": "1794798053.204594",
+  "timestamp": "2026-11-16T03:00:53.173+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$global:?",
+     "scriptBlockId": "5320436d-f64e-4fda-bf04-c00ceaa0881d"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$global:?\r\n\r\nID de ScriptBlock: 5320436d-f64e-4fda-bf04-c00ceaa0881d\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T02:57:40.2333875Z",
+     "eventRecordID": "437",
+     "threadID": "9904",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "11508",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T02:57:40.2333875Z\",\"eventRecordID\":\"437\",\"processID\":\"11508\",\"threadID\":\"9904\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$global:?\\r\\n\\r\\nID de ScriptBlock: 5320436d-f64e-4fda-bf04-c00ceaa0881d\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$global:?\",\"scriptBlockId\":\"5320436d-f64e-4fda-bf04-c00ceaa0881d\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T03:00:55.851Z",
+  "location": "EventChannel",
+  "id": "1794798055.206405",
+  "timestamp": "2026-11-16T03:00:55.851+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-7124-6afa-a606-000000000700}",
+     "processId": "2292",
+     "utcTime": "2026-11-16 02:57:40.592",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_0cn5q5zy.5yh.ps1",
+     "creationUtcTime": "2026-11-16 02:57:40.592",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 02:57:40.592\r\nProcessGuid: {1ab4e09f-7124-6afa-a606-000000000700}\r\nProcessId: 2292\r\nImage: C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_0cn5q5zy.5yh.ps1\r\nCreationUtcTime: 2026-11-16 02:57:40.592\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-16T02:57:40.6110534Z",
+     "eventRecordID": "10581",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T03:00:56.513Z",
+  "location": "EventChannel",
+  "id": "1794798056.208160",
+  "timestamp": "2026-11-16T03:00:56.513+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Write-Host 'Final result: 1';",
+     "scriptBlockId": "ce6bd4f5-7d51-426e-b9a6-21b279113af8"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nWrite-Host 'Final result: 1';\r\n\r\nID de ScriptBlock: ce6bd4f5-7d51-426e-b9a6-21b279113af8\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T02:57:40.8213525Z",
+     "eventRecordID": "441",
+     "threadID": "7172",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "2292",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 3,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T02:57:40.8213525Z\",\"eventRecordID\":\"441\",\"processID\":\"2292\",\"threadID\":\"7172\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nWrite-Host 'Final result: 1';\\r\\n\\r\\nID de ScriptBlock: ce6bd4f5-7d51-426e-b9a6-21b279113af8\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Write-Host 'Final result: 1';\",\"scriptBlockId\":\"ce6bd4f5-7d51-426e-b9a6-21b279113af8\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T03:00:56.900Z",
+  "location": "EventChannel",
+  "id": "1794798056.210869",
+  "timestamp": "2026-11-16T03:00:56.900+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$global:?",
+     "scriptBlockId": "6a129175-8e43-4c84-a7c1-a46d1224f139"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$global:?\r\n\r\nID de ScriptBlock: 6a129175-8e43-4c84-a7c1-a46d1224f139\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T02:57:41.1005459Z",
+     "eventRecordID": "442",
+     "threadID": "7172",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "2292",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 4,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T02:57:41.1005459Z\",\"eventRecordID\":\"442\",\"processID\":\"2292\",\"threadID\":\"7172\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$global:?\\r\\n\\r\\nID de ScriptBlock: 6a129175-8e43-4c84-a7c1-a46d1224f139\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$global:?\",\"scriptBlockId\":\"6a129175-8e43-4c84-a7c1-a46d1224f139\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T03:00:56.920Z",
+  "location": "EventChannel",
+  "id": "1794798056.212702",
+  "timestamp": "2026-11-16T03:00:56.920+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "sdbinst.exe",
+     "image": "C:\\\\Windows\\\\System32\\\\sdbinst.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-04bb-6afa-ae00-000000000700}",
+     "description": "Application Compatibility Database Installer",
+     "logonGuid": "{1ab4e09f-f618-6af9-e703-000000000000}",
+     "parentCommandLine": "C:\\\\WINDOWS\\\\system32\\\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc",
+     "processGuid": "{1ab4e09f-7455-6afa-ca06-000000000700}",
+     "logonId": "0x3e7",
+     "parentProcessId": "2884",
+     "processId": "688",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-16 03:11:17.933",
+     "hashes": "MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\System32\\\\sdbinst.exe -m -bg",
+     "integrityLevel": "System",
+     "fileVersion": "10.0.26100.9278 (WinBuild.160101.0800)",
+     "user": "AUTORIDADE NT\\\\SISTEMA",
+     "terminalSessionId": "0",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-16 03:11:17.933\r\nProcessGuid: {1ab4e09f-7455-6afa-ca06-000000000700}\r\nProcessId: 688\r\nImage: C:\\Windows\\System32\\sdbinst.exe\r\nFileVersion: 10.0.26100.9278 (WinBuild.160101.0800)\r\nDescription: Application Compatibility Database Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: sdbinst.exe\r\nCommandLine: C:\\WINDOWS\\System32\\sdbinst.exe -m -bg\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: AUTORIDADE NT\\SISTEMA\r\nLogonGuid: {1ab4e09f-f618-6af9-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=238B5B4FB1010D1458D874AF21C32890,SHA256=8F67CBBDB8250CEDA1E5DB21DF87AD870576229B8FD729E80F9092EB578B6915,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E\r\nParentProcessGuid: {1ab4e09f-04bb-6afa-ae00-000000000700}\r\nParentProcessId: 2884\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\WINDOWS\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-16T03:11:17.9406084Z",
+     "eventRecordID": "10612",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Application Compatibility Database launched",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Application Shimming"
+    ],
+    "id": [
+     "T1546.011"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Persistence"
+    ]
+   },
+   "id": "92058"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T03:14:38.805Z",
+  "location": "EventChannel",
+  "id": "1794798878.252727",
+  "timestamp": "2026-11-16T03:14:38.805+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "originalFileName": "sdbinst.exe",
+     "image": "C:\\\\Windows\\\\System32\\\\sdbinst.exe",
+     "product": "Microsoft® Windows® Operating System",
+     "parentProcessGuid": "{1ab4e09f-04bb-6afa-ae00-000000000700}",
+     "description": "Application Compatibility Database Installer",
+     "logonGuid": "{1ab4e09f-f618-6af9-e703-000000000000}",
+     "parentCommandLine": "C:\\\\WINDOWS\\\\system32\\\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc",
+     "processGuid": "{1ab4e09f-8267-6afa-0807-000000000700}",
+     "logonId": "0x3e7",
+     "parentProcessId": "2884",
+     "processId": "12128",
+     "currentDirectory": "C:\\\\WINDOWS\\\\system32\\\\",
+     "utcTime": "2026-11-16 04:11:19.501",
+     "hashes": "MD5=4CD8525C2AB9F31502301CE7D89596E7,SHA256=12CD20D87A62F4A8B2D26149A58664EF32581565813CE90D2BE103C27A784930,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E",
+     "parentImage": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+     "company": "Microsoft Corporation",
+     "commandLine": "C:\\\\WINDOWS\\\\System32\\\\sdbinst.exe -m -bg",
+     "integrityLevel": "System",
+     "fileVersion": "10.0.26100.9818 (WinBuild.160101.0800)",
+     "user": "AUTORIDADE NT\\\\SISTEMA",
+     "terminalSessionId": "0",
+     "parentUser": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "1",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-11-16 04:11:19.501\r\nProcessGuid: {1ab4e09f-8267-6afa-0807-000000000700}\r\nProcessId: 12128\r\nImage: C:\\Windows\\System32\\sdbinst.exe\r\nFileVersion: 10.0.26100.9818 (WinBuild.160101.0800)\r\nDescription: Application Compatibility Database Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: sdbinst.exe\r\nCommandLine: C:\\WINDOWS\\System32\\sdbinst.exe -m -bg\r\nCurrentDirectory: C:\\WINDOWS\\system32\\\r\nUser: AUTORIDADE NT\\SISTEMA\r\nLogonGuid: {1ab4e09f-f618-6af9-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=4CD8525C2AB9F31502301CE7D89596E7,SHA256=12CD20D87A62F4A8B2D26149A58664EF32581565813CE90D2BE103C27A784930,IMPHASH=1B6EE3C1899EA90A8A3811555E1DA64E\r\nParentProcessGuid: {1ab4e09f-04bb-6afa-ae00-000000000700}\r\nParentProcessId: 2884\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\WINDOWS\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc\r\nParentUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "5",
+     "systemTime": "2026-11-16T04:11:19.5302256Z",
+     "eventRecordID": "11289",
+     "threadID": "4152",
+     "computer": "soc-win11",
+     "task": "1",
+     "processID": "3308",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 12,
+   "description": "Application Compatibility Database launched",
+   "groups": [
+    "sysmon",
+    "sysmon_eid1_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Application Shimming"
+    ],
+    "id": [
+     "T1546.011"
+    ],
+    "tactic": [
+     "Privilege Escalation",
+     "Persistence"
+    ]
+   },
+   "id": "92058"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:14:39.487Z",
+  "location": "EventChannel",
+  "id": "1794802479.2209463",
+  "timestamp": "2026-11-16T04:14:39.487+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-847e-6afa-e000-000000000900}",
+     "processId": "4088",
+     "utcTime": "2026-11-16 04:20:25.261",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_tjnq1se3.sqw.ps1",
+     "creationUtcTime": "2026-11-16 04:20:25.258",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 04:20:25.261\r\nProcessGuid: {1ab4e09f-847e-6afa-e000-000000000900}\r\nProcessId: 4088\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_tjnq1se3.sqw.ps1\r\nCreationUtcTime: 2026-11-16 04:20:25.258\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-16T04:20:25.2623899Z",
+     "eventRecordID": "12198",
+     "threadID": "3900",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3212",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:04.294Z",
+  "location": "EventChannel",
+  "id": "1794803044.2794614",
+  "timestamp": "2026-11-16T04:24:04.294+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-84a2-6afa-e700-000000000900}",
+     "processId": "9176",
+     "utcTime": "2026-11-16 04:20:57.400",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_crixwcir.0xf.ps1",
+     "creationUtcTime": "2026-11-16 04:20:57.400",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 04:20:57.400\r\nProcessGuid: {1ab4e09f-84a2-6afa-e700-000000000900}\r\nProcessId: 9176\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_crixwcir.0xf.ps1\r\nCreationUtcTime: 2026-11-16 04:20:57.400\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-16T04:20:57.4020984Z",
+     "eventRecordID": "12250",
+     "threadID": "3900",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3212",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:17.849Z",
+  "location": "EventChannel",
+  "id": "1794803057.2808451",
+  "timestamp": "2026-11-16T04:24:17.849+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$global:?",
+     "scriptBlockId": "56bde308-4ecc-428b-bf9d-442eaf29de8f"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$global:?\r\n\r\nID de ScriptBlock: 56bde308-4ecc-428b-bf9d-442eaf29de8f\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:09.7546433Z",
+     "eventRecordID": "448",
+     "threadID": "1260",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "9176",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:09.7546433Z\",\"eventRecordID\":\"448\",\"processID\":\"9176\",\"threadID\":\"1260\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$global:?\\r\\n\\r\\nID de ScriptBlock: 56bde308-4ecc-428b-bf9d-442eaf29de8f\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$global:?\",\"scriptBlockId\":\"56bde308-4ecc-428b-bf9d-442eaf29de8f\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:30.773Z",
+  "location": "EventChannel",
+  "id": "1794803070.2834460",
+  "timestamp": "2026-11-16T04:24:30.773+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-84b5-6afa-ed00-000000000900}",
+     "processId": "8844",
+     "utcTime": "2026-11-16 04:21:10.719",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_hs0ff2md.lf1.ps1",
+     "creationUtcTime": "2026-11-16 04:21:10.719",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 04:21:10.719\r\nProcessGuid: {1ab4e09f-84b5-6afa-ed00-000000000900}\r\nProcessId: 8844\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_hs0ff2md.lf1.ps1\r\nCreationUtcTime: 2026-11-16 04:21:10.719\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-16T04:21:10.7211556Z",
+     "eventRecordID": "12276",
+     "threadID": "3900",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3212",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 3,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:32.228Z",
+  "location": "EventChannel",
+  "id": "1794803072.2836214",
+  "timestamp": "2026-11-16T04:24:32.228+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$global:?",
+     "scriptBlockId": "80864d81-8d58-44f8-8d45-6955d6e5922f"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$global:?\r\n\r\nID de ScriptBlock: 80864d81-8d58-44f8-8d45-6955d6e5922f\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:15.3657091Z",
+     "eventRecordID": "453",
+     "threadID": "5056",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "8844",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:15.3657091Z\",\"eventRecordID\":\"453\",\"processID\":\"8844\",\"threadID\":\"5056\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$global:?\\r\\n\\r\\nID de ScriptBlock: 80864d81-8d58-44f8-8d45-6955d6e5922f\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$global:?\",\"scriptBlockId\":\"80864d81-8d58-44f8-8d45-6955d6e5922f\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:37.630Z",
+  "location": "EventChannel",
+  "id": "1794803077.2854099",
+  "timestamp": "2026-11-16T04:24:37.630+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-84bb-6afa-f100-000000000900}",
+     "processId": "4144",
+     "utcTime": "2026-11-16 04:21:15.920",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_unp5zq0p.3cm.ps1",
+     "creationUtcTime": "2026-11-16 04:21:15.908",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 04:21:15.920\r\nProcessGuid: {1ab4e09f-84bb-6afa-f100-000000000900}\r\nProcessId: 4144\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_unp5zq0p.3cm.ps1\r\nCreationUtcTime: 2026-11-16 04:21:15.908\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-16T04:21:15.9206397Z",
+     "eventRecordID": "12280",
+     "threadID": "3900",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3212",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 4,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:38.338Z",
+  "location": "EventChannel",
+  "id": "1794803078.2855853",
+  "timestamp": "2026-11-16T04:24:38.338+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$global:?",
+     "scriptBlockId": "28990d99-27b6-464a-a9ee-ec66b6f0a30b"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$global:?\r\n\r\nID de ScriptBlock: 28990d99-27b6-464a-a9ee-ec66b6f0a30b\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:19.0593991Z",
+     "eventRecordID": "458",
+     "threadID": "2596",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "4144",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 3,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:19.0593991Z\",\"eventRecordID\":\"458\",\"processID\":\"4144\",\"threadID\":\"2596\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$global:?\\r\\n\\r\\nID de ScriptBlock: 28990d99-27b6-464a-a9ee-ec66b6f0a30b\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$global:?\",\"scriptBlockId\":\"28990d99-27b6-464a-a9ee-ec66b6f0a30b\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:41.470Z",
+  "location": "EventChannel",
+  "id": "1794803081.2867382",
+  "timestamp": "2026-11-16T04:24:41.470+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-84bf-6afa-f400-000000000900}",
+     "processId": "6476",
+     "utcTime": "2026-11-16 04:21:19.670",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_5dobzsea.gcc.ps1",
+     "creationUtcTime": "2026-11-16 04:21:19.670",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 04:21:19.670\r\nProcessGuid: {1ab4e09f-84bf-6afa-f400-000000000900}\r\nProcessId: 6476\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_5dobzsea.gcc.ps1\r\nCreationUtcTime: 2026-11-16 04:21:19.670\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-16T04:21:19.6751769Z",
+     "eventRecordID": "12283",
+     "threadID": "3900",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3212",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 5,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:42.354Z",
+  "location": "EventChannel",
+  "id": "1794803082.2869136",
+  "timestamp": "2026-11-16T04:24:42.354+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "[bool](Get-CimInstance -Query 'SELECT * FROM Win32_UserAccount WHERE LocalAccount = TRUE AND SID LIKE ''S-1-5-21-%-501''' | Where-Object -Property Disabled)",
+     "scriptBlockId": "4220ce90-f428-4912-93fc-0e43c7608634"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n[bool](Get-CimInstance -Query 'SELECT * FROM Win32_UserAccount WHERE LocalAccount = TRUE AND SID LIKE ''S-1-5-21-%-501''' | Where-Object -Property Disabled)\r\n\r\nID de ScriptBlock: 4220ce90-f428-4912-93fc-0e43c7608634\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:21.8564207Z",
+     "eventRecordID": "462",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 4,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:21.8564207Z\",\"eventRecordID\":\"462\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n[bool](Get-CimInstance -Query 'SELECT * FROM Win32_UserAccount WHERE LocalAccount = TRUE AND SID LIKE ''S-1-5-21-%-501''' | Where-Object -Property Disabled)\\r\\n\\r\\nID de ScriptBlock: 4220ce90-f428-4912-93fc-0e43c7608634\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"[bool](Get-CimInstance -Query 'SELECT * FROM Win32_UserAccount WHERE LocalAccount = TRUE AND SID LIKE ''S-1-5-21-%-501''' | Where-Object -Property Disabled)\",\"scriptBlockId\":\"4220ce90-f428-4912-93fc-0e43c7608634\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:44.832Z",
+  "location": "EventChannel",
+  "id": "1794803084.2871846",
+  "timestamp": "2026-11-16T04:24:44.832+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\WINDOWS\\\\SysWOW64\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-84bf-6afa-f400-000000000900}",
+     "processId": "6476",
+     "utcTime": "2026-11-16 04:21:22.830",
+     "targetFilename": "C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_ai2bftdq.fz2.ps1",
+     "creationUtcTime": "2026-11-16 04:21:22.830",
+     "user": "AUTORIDADE NT\\\\SISTEMA"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 04:21:22.830\r\nProcessGuid: {1ab4e09f-84bf-6afa-f400-000000000900}\r\nProcessId: 6476\r\nImage: C:\\WINDOWS\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Windows\\SystemTemp\\__PSScriptPolicyTest_ai2bftdq.fz2.ps1\r\nCreationUtcTime: 2026-11-16 04:21:22.830\r\nUser: AUTORIDADE NT\\SISTEMA\"",
+     "version": "2",
+     "systemTime": "2026-11-16T04:21:22.8503492Z",
+     "eventRecordID": "12284",
+     "threadID": "3900",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3212",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 6,
+   "mail": false,
+   "level": 9,
+   "description": "Powershell process created an executable file in Windows root folder",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92205"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:47.101Z",
+  "location": "EventChannel",
+  "id": "1794803087.2874188",
+  "timestamp": "2026-11-16T04:24:47.101+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name gcim -Value Get-CimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "52702e34-2f54-4237-92e4-f071597f6aac"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name gcim -Value Get-CimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 52702e34-2f54-4237-92e4-f071597f6aac\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960153Z",
+     "eventRecordID": "463",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 5,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960153Z\",\"eventRecordID\":\"463\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name gcim -Value Get-CimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 52702e34-2f54-4237-92e4-f071597f6aac\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name gcim -Value Get-CimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"52702e34-2f54-4237-92e4-f071597f6aac\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.157Z",
+  "location": "EventChannel",
+  "id": "1794803088.2876898",
+  "timestamp": "2026-11-16T04:24:48.157+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name scim -Value Set-CimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "ca6ba820-90ba-4a5c-9ac4-4d5f423c5918"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name scim -Value Set-CimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: ca6ba820-90ba-4a5c-9ac4-4d5f423c5918\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960203Z",
+     "eventRecordID": "464",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 6,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960203Z\",\"eventRecordID\":\"464\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name scim -Value Set-CimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: ca6ba820-90ba-4a5c-9ac4-4d5f423c5918\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name scim -Value Set-CimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"ca6ba820-90ba-4a5c-9ac4-4d5f423c5918\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.161Z",
+  "location": "EventChannel",
+  "id": "1794803088.2879016",
+  "timestamp": "2026-11-16T04:24:48.161+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name ncim -Value New-CimInstance  -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "d8d54a5e-c7f4-477d-a8a9-88690aa6b3e0"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name ncim -Value New-CimInstance  -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: d8d54a5e-c7f4-477d-a8a9-88690aa6b3e0\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960237Z",
+     "eventRecordID": "465",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 7,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960237Z\",\"eventRecordID\":\"465\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name ncim -Value New-CimInstance  -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: d8d54a5e-c7f4-477d-a8a9-88690aa6b3e0\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name ncim -Value New-CimInstance  -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"d8d54a5e-c7f4-477d-a8a9-88690aa6b3e0\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.164Z",
+  "location": "EventChannel",
+  "id": "1794803088.2881134",
+  "timestamp": "2026-11-16T04:24:48.164+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name rcim -Value Remove-cimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "9950a49f-e70d-4c9c-8453-a79103e20f84"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name rcim -Value Remove-cimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 9950a49f-e70d-4c9c-8453-a79103e20f84\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960269Z",
+     "eventRecordID": "466",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 8,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960269Z\",\"eventRecordID\":\"466\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name rcim -Value Remove-cimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 9950a49f-e70d-4c9c-8453-a79103e20f84\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name rcim -Value Remove-cimInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"9950a49f-e70d-4c9c-8453-a79103e20f84\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.167Z",
+  "location": "EventChannel",
+  "id": "1794803088.2883256",
+  "timestamp": "2026-11-16T04:24:48.167+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name icim -Value Invoke-CimMethod -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "ffc4fe1a-5a93-4d33-9037-dc103ba8fa4e"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name icim -Value Invoke-CimMethod -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: ffc4fe1a-5a93-4d33-9037-dc103ba8fa4e\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960301Z",
+     "eventRecordID": "467",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 9,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960301Z\",\"eventRecordID\":\"467\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name icim -Value Invoke-CimMethod -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: ffc4fe1a-5a93-4d33-9037-dc103ba8fa4e\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name icim -Value Invoke-CimMethod -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"ffc4fe1a-5a93-4d33-9037-dc103ba8fa4e\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.170Z",
+  "location": "EventChannel",
+  "id": "1794803088.2885386",
+  "timestamp": "2026-11-16T04:24:48.170+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name gcai -Value Get-CimAssociatedInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "7d87596a-faaf-4e5c-9975-f7e62454d7ef"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name gcai -Value Get-CimAssociatedInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 7d87596a-faaf-4e5c-9975-f7e62454d7ef\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960333Z",
+     "eventRecordID": "468",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 10,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960333Z\",\"eventRecordID\":\"468\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name gcai -Value Get-CimAssociatedInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 7d87596a-faaf-4e5c-9975-f7e62454d7ef\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name gcai -Value Get-CimAssociatedInstance -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"7d87596a-faaf-4e5c-9975-f7e62454d7ef\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.174Z",
+  "location": "EventChannel",
+  "id": "1794803088.2887508",
+  "timestamp": "2026-11-16T04:24:48.174+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name rcie -Value Register-CimIndicationEvent -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "29755677-867d-40ab-9a59-1a030c701cca"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name rcie -Value Register-CimIndicationEvent -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 29755677-867d-40ab-9a59-1a030c701cca\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960376Z",
+     "eventRecordID": "469",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 11,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960376Z\",\"eventRecordID\":\"469\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name rcie -Value Register-CimIndicationEvent -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 29755677-867d-40ab-9a59-1a030c701cca\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name rcie -Value Register-CimIndicationEvent -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"29755677-867d-40ab-9a59-1a030c701cca\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.178Z",
+  "location": "EventChannel",
+  "id": "1794803088.2889666",
+  "timestamp": "2026-11-16T04:24:48.178+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name ncms -Value New-CimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "722addd9-dc73-4d31-891b-6c6f91d8c0aa"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name ncms -Value New-CimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 722addd9-dc73-4d31-891b-6c6f91d8c0aa\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960408Z",
+     "eventRecordID": "470",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 12,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960408Z\",\"eventRecordID\":\"470\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name ncms -Value New-CimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 722addd9-dc73-4d31-891b-6c6f91d8c0aa\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name ncms -Value New-CimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"722addd9-dc73-4d31-891b-6c6f91d8c0aa\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.182Z",
+  "location": "EventChannel",
+  "id": "1794803088.2891832",
+  "timestamp": "2026-11-16T04:24:48.182+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name rcms -Value Remove-cimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "5415d8e0-9b71-403d-a26b-02c9577a2196"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name rcms -Value Remove-cimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 5415d8e0-9b71-403d-a26b-02c9577a2196\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960440Z",
+     "eventRecordID": "471",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 13,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960440Z\",\"eventRecordID\":\"471\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name rcms -Value Remove-cimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 5415d8e0-9b71-403d-a26b-02c9577a2196\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name rcms -Value Remove-cimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"5415d8e0-9b71-403d-a26b-02c9577a2196\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.184Z",
+  "location": "EventChannel",
+  "id": "1794803088.2893946",
+  "timestamp": "2026-11-16T04:24:48.184+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name gcms -Value Get-CimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "0c6237f8-fc2d-4d6b-a46e-eb6699516b4b"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name gcms -Value Get-CimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 0c6237f8-fc2d-4d6b-a46e-eb6699516b4b\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960472Z",
+     "eventRecordID": "472",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 14,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960472Z\",\"eventRecordID\":\"472\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name gcms -Value Get-CimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 0c6237f8-fc2d-4d6b-a46e-eb6699516b4b\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name gcms -Value Get-CimSession -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"0c6237f8-fc2d-4d6b-a46e-eb6699516b4b\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.189Z",
+  "location": "EventChannel",
+  "id": "1794803088.2896072",
+  "timestamp": "2026-11-16T04:24:48.189+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name ncso -Value New-CimSessionOption -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "8b79b921-02de-4a86-a5d9-d573fc7821f8"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name ncso -Value New-CimSessionOption -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 8b79b921-02de-4a86-a5d9-d573fc7821f8\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960503Z",
+     "eventRecordID": "473",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 15,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960503Z\",\"eventRecordID\":\"473\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name ncso -Value New-CimSessionOption -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 8b79b921-02de-4a86-a5d9-d573fc7821f8\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name ncso -Value New-CimSessionOption -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"8b79b921-02de-4a86-a5d9-d573fc7821f8\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.194Z",
+  "location": "EventChannel",
+  "id": "1794803088.2898186",
+  "timestamp": "2026-11-16T04:24:48.194+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Set-Alias -Name gcls -Value Get-CimClass -Option ReadOnly, AllScope -ErrorAction SilentlyContinue",
+     "scriptBlockId": "95e13403-2bec-4f11-937c-fc3e2e48e60f"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nSet-Alias -Name gcls -Value Get-CimClass -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\r\n\r\nID de ScriptBlock: 95e13403-2bec-4f11-937c-fc3e2e48e60f\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:24.2960535Z",
+     "eventRecordID": "474",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 16,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:24.2960535Z\",\"eventRecordID\":\"474\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nSet-Alias -Name gcls -Value Get-CimClass -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\\r\\n\\r\\nID de ScriptBlock: 95e13403-2bec-4f11-937c-fc3e2e48e60f\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Set-Alias -Name gcls -Value Get-CimClass -Option ReadOnly, AllScope -ErrorAction SilentlyContinue\",\"scriptBlockId\":\"95e13403-2bec-4f11-937c-fc3e2e48e60f\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:48.197Z",
+  "location": "EventChannel",
+  "id": "1794803088.2900324",
+  "timestamp": "2026-11-16T04:24:48.197+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "$global:?",
+     "scriptBlockId": "b20f77ec-e57d-400c-847f-0210dec30e27"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n$global:?\r\n\r\nID de ScriptBlock: b20f77ec-e57d-400c-847f-0210dec30e27\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:21:25.1561390Z",
+     "eventRecordID": "475",
+     "threadID": "8352",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "6476",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 17,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:21:25.1561390Z\",\"eventRecordID\":\"475\",\"processID\":\"6476\",\"threadID\":\"8352\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n$global:?\\r\\n\\r\\nID de ScriptBlock: b20f77ec-e57d-400c-847f-0210dec30e27\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"$global:?\",\"scriptBlockId\":\"b20f77ec-e57d-400c-847f-0210dec30e27\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:24:49.923Z",
+  "location": "EventChannel",
+  "id": "1794803089.2902430",
+  "timestamp": "2026-11-16T04:24:49.923+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "image": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+     "processGuid": "{1ab4e09f-85dc-6afa-4c01-000000000900}",
+     "processId": "7592",
+     "utcTime": "2026-11-16 04:26:08.978",
+     "targetFilename": "C:\\\\Users\\\\cannibalsec\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_k33vgraq.sry.ps1",
+     "creationUtcTime": "2026-11-16 04:26:08.978",
+     "user": "SOC-WIN11\\\\cannibalsec"
+    },
+    "system": {
+     "eventID": "11",
+     "keywords": "0x8000000000000000",
+     "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+     "level": "4",
+     "channel": "Microsoft-Windows-Sysmon/Operational",
+     "opcode": "0",
+     "message": "\"File created:\r\nRuleName: -\r\nUtcTime: 2026-11-16 04:26:08.978\r\nProcessGuid: {1ab4e09f-85dc-6afa-4c01-000000000900}\r\nProcessId: 7592\r\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nTargetFilename: C:\\Users\\cannibalsec\\AppData\\Local\\Temp\\__PSScriptPolicyTest_k33vgraq.sry.ps1\r\nCreationUtcTime: 2026-11-16 04:26:08.978\r\nUser: SOC-WIN11\\cannibalsec\"",
+     "version": "2",
+     "systemTime": "2026-11-16T04:26:09.0930070Z",
+     "eventRecordID": "12366",
+     "threadID": "3900",
+     "computer": "soc-win11",
+     "task": "11",
+     "processID": "3212",
+     "severityValue": "INFORMATION",
+     "providerName": "Microsoft-Windows-Sysmon"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": true,
+   "level": 15,
+   "description": "Executable file dropped in folder commonly used by malware",
+   "groups": [
+    "sysmon",
+    "sysmon_eid11_detections",
+    "windows"
+   ],
+   "mitre": {
+    "technique": [
+     "Ingress Tool Transfer"
+    ],
+    "id": [
+     "T1105"
+    ],
+    "tactic": [
+     "Command and Control"
+    ]
+   },
+   "id": "92213"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:29:29.661Z",
+  "location": "EventChannel",
+  "id": "1794803369.3056142",
+  "timestamp": "2026-11-16T04:29:29.661+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "whoami",
+     "scriptBlockId": "f9bf588b-2758-458f-940a-adab4896077f"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nwhoami\r\n\r\nID de ScriptBlock: f9bf588b-2758-458f-940a-adab4896077f\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:26:17.5555604Z",
+     "eventRecordID": "481",
+     "threadID": "4632",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "7592",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 1,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:26:17.5555604Z\",\"eventRecordID\":\"481\",\"processID\":\"7592\",\"threadID\":\"4632\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nwhoami\\r\\n\\r\\nID de ScriptBlock: f9bf588b-2758-458f-940a-adab4896077f\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"whoami\",\"scriptBlockId\":\"f9bf588b-2758-458f-940a-adab4896077f\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:29:40.839Z",
+  "location": "EventChannel",
+  "id": "1794803380.3058936",
+  "timestamp": "2026-11-16T04:29:40.839+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "Get-Date",
+     "scriptBlockId": "3de47bbb-e6f6-4948-ba6f-9c7c7b2ad8f9"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\nGet-Date\r\n\r\nID de ScriptBlock: 3de47bbb-e6f6-4948-ba6f-9c7c7b2ad8f9\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:26:24.2862869Z",
+     "eventRecordID": "483",
+     "threadID": "4632",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "7592",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 2,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:26:24.2862869Z\",\"eventRecordID\":\"483\",\"processID\":\"7592\",\"threadID\":\"4632\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\nGet-Date\\r\\n\\r\\nID de ScriptBlock: 3de47bbb-e6f6-4948-ba6f-9c7c7b2ad8f9\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"Get-Date\",\"scriptBlockId\":\"3de47bbb-e6f6-4948-ba6f-9c7c7b2ad8f9\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:29:49.082Z",
+  "location": "EventChannel",
+  "id": "1794803389.3060678",
+  "timestamp": "2026-11-16T04:29:49.082+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "{ Set-StrictMode -Version 1; $this.DisplayHint }",
+     "scriptBlockId": "b42e632a-97dc-4f4f-b165-77aa0081a92a"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n{ Set-StrictMode -Version 1; $this.DisplayHint }\r\n\r\nID de ScriptBlock: b42e632a-97dc-4f4f-b165-77aa0081a92a\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:26:24.9101566Z",
+     "eventRecordID": "484",
+     "threadID": "4632",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "7592",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 3,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:26:24.9101566Z\",\"eventRecordID\":\"484\",\"processID\":\"7592\",\"threadID\":\"4632\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n{ Set-StrictMode -Version 1; $this.DisplayHint }\\r\\n\\r\\nID de ScriptBlock: b42e632a-97dc-4f4f-b165-77aa0081a92a\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"{ Set-StrictMode -Version 1; $this.DisplayHint }\",\"scriptBlockId\":\"b42e632a-97dc-4f4f-b165-77aa0081a92a\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:29:49.088Z",
+  "location": "EventChannel",
+  "id": "1794803389.3062428",
+  "timestamp": "2026-11-16T04:29:49.088+0000"
+ },
+ {
+  "agent": {
+   "ip": "10.0.10.20",
+   "name": "SOC-Win11",
+   "id": "001"
+  },
+  "manager": {
+   "name": "wazuh-server"
+  },
+  "data": {
+   "win": {
+    "eventdata": {
+     "messageNumber": "1",
+     "messageTotal": "1",
+     "scriptBlockText": "{ Set-StrictMode -Version 1; $this.DisplayHint }",
+     "scriptBlockId": "cb71a2db-ec57-4b29-8bf3-5389fe0a1891"
+    },
+    "system": {
+     "eventID": "4104",
+     "keywords": "0x0",
+     "providerGuid": "{a0c1853b-5c40-4b15-8766-3cf1c58f985a}",
+     "level": "5",
+     "channel": "Microsoft-Windows-PowerShell/Operational",
+     "opcode": "15",
+     "message": "\"Criando texto Scriptblock (1 de 1):\r\n{ Set-StrictMode -Version 1; $this.DisplayHint }\r\n\r\nID de ScriptBlock: cb71a2db-ec57-4b29-8bf3-5389fe0a1891\r\nCaminho: \"",
+     "version": "1",
+     "systemTime": "2026-11-16T04:26:24.9387107Z",
+     "eventRecordID": "485",
+     "threadID": "4632",
+     "computer": "soc-win11",
+     "task": "2",
+     "processID": "7592",
+     "severityValue": "VERBOSE",
+     "providerName": "Microsoft-Windows-PowerShell"
+    }
+   }
+  },
+  "rule": {
+   "firedtimes": 4,
+   "mail": false,
+   "level": 4,
+   "description": "PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado",
+   "groups": [
+    "local",
+    "windows",
+    "powershell",
+    "powershell",
+    "scriptblock"
+   ],
+   "mitre": {
+    "technique": [
+     "PowerShell"
+    ],
+    "id": [
+     "T1059.001"
+    ],
+    "tactic": [
+     "Execution"
+    ]
+   },
+   "id": "100210"
+  },
+  "decoder": {
+   "name": "windows_eventchannel"
+  },
+  "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-PowerShell\",\"providerGuid\":\"{a0c1853b-5c40-4b15-8766-3cf1c58f985a}\",\"eventID\":\"4104\",\"version\":\"1\",\"level\":\"5\",\"task\":\"2\",\"opcode\":\"15\",\"keywords\":\"0x0\",\"systemTime\":\"2026-11-16T04:26:24.9387107Z\",\"eventRecordID\":\"485\",\"processID\":\"7592\",\"threadID\":\"4632\",\"channel\":\"Microsoft-Windows-PowerShell/Operational\",\"computer\":\"soc-win11\",\"severityValue\":\"VERBOSE\",\"message\":\"\\\"Criando texto Scriptblock (1 de 1):\\r\\n{ Set-StrictMode -Version 1; $this.DisplayHint }\\r\\n\\r\\nID de ScriptBlock: cb71a2db-ec57-4b29-8bf3-5389fe0a1891\\r\\nCaminho: \\\"\"},\"eventdata\":{\"messageNumber\":\"1\",\"messageTotal\":\"1\",\"scriptBlockText\":\"{ Set-StrictMode -Version 1; $this.DisplayHint }\",\"scriptBlockId\":\"cb71a2db-ec57-4b29-8bf3-5389fe0a1891\"}}}",
+  "input": {
+   "type": "log"
+  },
+  "@timestamp": "2026-11-16T04:29:49.089Z",
+  "location": "EventChannel",
+  "id": "1794803389.3064338",
+  "timestamp": "2026-11-16T04:29:49.089+0000"
+ }
+]

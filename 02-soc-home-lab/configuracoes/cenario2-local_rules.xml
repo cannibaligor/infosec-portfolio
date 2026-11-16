@@ -1,0 +1,30 @@
+<!-- Regras personalizadas do Cenario 2 (escritas com apoio de IA).
+     Ficam em /var/ossec/etc/rules/local_rules.xml no servidor Wazuh. -->
+
+<!-- Cenario 2 (Home Lab SOC): visibilidade do PowerShell decodificado -->
+<group name="local,windows,powershell,">
+
+  <!-- O evento 4104 (Script Block Logging) grava o codigo PowerShell JA DECODIFICADO.
+       A regra oficial 91802 agrupa esses eventos com nivel 0 (sem alerta).
+       Esta regra transforma cada Script Block em alerta de nivel 4,
+       para o analista ler o que um -EncodedCommand realmente executou. -->
+  <rule id="100210" level="4">
+    <if_sid>91802</if_sid>
+    <description>PowerShell Script Block registrado (evento 4104): codigo executado ja decodificado</description>
+    <mitre>
+      <id>T1059.001</id>
+    </mitre>
+    <group>powershell,scriptblock,</group>
+  </rule>
+
+  <!-- Tuning: silencia o ruido conhecido do proprio console do PowerShell.
+       Exato (ancorado com ^ e $): so o texto inteiro igual a prompt, $global:? ou $Host.
+       Qualquer outro codigo continua gerando o alerta 100210. -->
+  <rule id="100211" level="0">
+    <if_sid>100210</if_sid>
+    <field name="win.eventdata.scriptBlockText" type="pcre2">^\s*(?:prompt|\$global:\?|\$Host)\s*$</field>
+    <description>Ruido conhecido do console do PowerShell (prompt, $global:?, $Host) - ignorado</description>
+    <group>powershell,scriptblock,tuning,</group>
+  </rule>
+
+</group>
