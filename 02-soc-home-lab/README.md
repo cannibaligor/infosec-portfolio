@@ -30,6 +30,64 @@ Laboratório de detecção montado em VirtualBox para simular ataques reais e in
 | **MITRE ATT&CK** | [T1110 – Brute Force](https://attack.mitre.org/techniques/T1110/) → [T1078 – Valid Accounts](https://attack.mitre.org/techniques/T1078/) |
 | **Resultado** | ⚠️ **Conta comprometida**: a senha foi descoberta |
 
+> **Quem fez o quê:** a primeira execução (14/11) foi feita com apoio de IA. Em **16/11/2026 eu refiz o ataque pessoalmente** no Kali (lista de senhas, reconhecimento e brute force) e o resultado se repetiu. Veja a seção [Reexecução](#reexecução-feita-por-mim-16112026) logo abaixo.
+
+### Reexecução feita por mim (16/11/2026)
+
+No terminal do Kali, rodei três comandos:
+
+```bash
+# 1. lista com 9 senhas comuns erradas e a certa no final
+printf "123456\nsenha123\nadmin\nqwerty\nbrasil2026\nJoao123\nmudar123\nVerao2025\nPrimavera2026\nVerao2026\n" > senhas.txt
+# 2. reconhecimento: o alvo responde no SMB? que Windows é?
+nxc smb 10.0.10.20
+# 3. ataque, com o horário de início e fim anotados em UTC
+date -u +"inicio: %H:%M:%S UTC"; nxc smb 10.0.10.20 -u joao.teste -p senhas.txt --local-auth; date -u +"fim: %H:%M:%S UTC"
+```
+
+**Linha do tempo (horário do evento no Windows, UTC):**
+
+| Horário | Regra | O que aconteceu |
+|---|---|---|
+| 05:42:40 | 92652 | Login anônimo (NTLM V1): o comando de **reconhecimento** |
+| 05:44:39 | 92652 | Novo login anônimo: o início do **ataque** (o NetExec sonda o alvo de novo) |
+| 05:44:51 → 05:45:09 | 60122 ×8 + **60204** | **9 falhas** em `joao.teste` (`subStatus 0xC000006A`), uma a cada ~2,2 s. A 8ª virou o alerta correlacionado **60204 (nível 10)** às 05:45:07 |
+| **05:45:11** | **92652** | ✅ **Login com sucesso** como `joao.teste`, NTLM V2, sessão `0x1c25c1` |
+| 05:45:11 | 60137 | Logoff imediato |
+
+**O que aprendi refazendo:**
+
+- **A saída da ferramenta não é a verdade; o log é.** O NetExec mostrou `Connection Error … timed out` nas 9 tentativas, por causa do limitador de autenticação SMB do Windows 11 24H2, que segura cada resposta por ~2 s. Mesmo assim, o Windows registrou as 9 como **senha errada** (4625), e o Wazuh gerou o alerta.
+- **O reconhecimento já entrega muito**, sem senha nenhuma: nome da máquina, versão exata do Windows (build 26100), que as contas são locais (`domain` = nome da máquina), `signing:True` e SMBv1 desligado.
+- **Relógios diferentes atrapalham a investigação.** O Kali marcou o início em 05:43:46 e o Windows registrou o primeiro evento em 05:44:39: o relógio do Windows estava **~53 s adiantado**. Em empresa, todos os equipamentos sincronizam com o mesmo servidor de horário (NTP) para que os logs possam ser cruzados.
+- **O ataque é reproduzível:** mesmo número de falhas, mesmo alerta (60204 na 8ª falha) e mesmo resultado da primeira vez.
+
+Evidência bruta da reexecução (13 alertas): [`evidencias/cenario1-reexecucao-alertas-wazuh.json`](evidencias/cenario1-reexecucao-alertas-wazuh.json)
+
+<details open>
+<summary><b>1. Lista de senhas</b> criada no Kali</summary>
+
+![Lista de senhas](evidencias/cenario1/01-lista-de-senhas.png)
+</details>
+
+<details>
+<summary><b>2. Reconhecimento</b>: <code>nxc smb 10.0.10.20</code> revela nome, versão, assinatura SMB e SMBv1</summary>
+
+![Reconhecimento](evidencias/cenario1/02-reconhecimento-smb.png)
+</details>
+
+<details>
+<summary><b>3. Ataque</b>: 9 tentativas (mostradas como timeout) e <code>[+] joao.teste:Verao2026</code></summary>
+
+![Ataque](evidencias/cenario1/03-ataque-netexec.png)
+</details>
+
+<details>
+<summary><b>4. No Wazuh</b>: 12 eventos do IP 10.0.10.30, com o 60204 e o sucesso 92652</summary>
+
+![Wazuh](evidencias/cenario1/04-eventos-no-wazuh.png)
+</details>
+
 ### Linha do tempo (UTC)
 
 | Horário | Evento Windows | Regra Wazuh | Nível | O que aconteceu |

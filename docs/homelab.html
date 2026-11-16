@@ -131,6 +131,108 @@
 
   <p class="report-link"><a class="btn" href="assets/relatorios/relatorio-cenario1-bruteforce-smb.pdf" target="_blank" rel="noopener">📄 <span data-l="pt">Relatório de incidente (PDF, 1 página)</span><span data-l="en">Incident report (PDF, 1 page, in Portuguese)</span></a></p>
 
+
+  <h3 class="sub"><span data-l="pt">Eu refiz o ataque (16/11/2026)</span><span data-l="en">I re-ran the attack (2026-11-16)</span></h3>
+  <div data-l="pt">
+    <p class="disclaimer">ℹ️ A primeira execução (14/11, a do replay acima) foi feita com apoio de IA. Para dominar o cenário, <b>refiz o ataque pessoalmente</b> no Kali em 16/11, e o resultado se repetiu.</p>
+    <div class="deep">
+      <details open>
+        <summary><span class="n">1</span>Preparar a lista de senhas e fazer o reconhecimento</summary>
+        <div class="body">
+          <p>Criei uma lista com 9 senhas comuns erradas e a certa no final (<code>senhas.txt</code>) e rodei <code>nxc smb 10.0.10.20</code>, sem senha nenhuma. Só esse "bater na porta" já revelou:</p>
+          <ul>
+            <li><b>Porta 445 aberta</b> e o nome da máquina (<code>SOC-WIN11</code>);</li>
+            <li>a <b>versão exata</b> do Windows (build 26100), útil para procurar vulnerabilidades;</li>
+            <li><code>domain</code> igual ao nome da máquina: as contas são <b>locais</b>, por isso o ataque usa <code>--local-auth</code>;</li>
+            <li><code>signing:True</code> (protege contra <i>relay</i>, não contra adivinhar senha) e <code>SMBv1:None</code> (o protocolo antigo do WannaCry está desligado).</li>
+          </ul>
+          <div class="gallery">
+            <figure><img src="assets/img/soc/cenario1/01-lista-de-senhas.png" alt="Lista de senhas criada no Kali" loading="lazy"><figcaption>A lista de 10 senhas.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario1/02-reconhecimento-smb.png" alt="Reconhecimento SMB com NetExec" loading="lazy"><figcaption>O reconhecimento: nome, versão, assinatura e SMBv1.</figcaption></figure>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">2</span>O ataque: a ferramenta mostrou erro, mas o log mostrou a verdade</summary>
+        <div class="body">
+          <p>Rodei <code>nxc smb 10.0.10.20 -u joao.teste -p senhas.txt --local-auth</code>, anotando o horário em UTC antes e depois. As 9 primeiras tentativas apareceram como <code>Connection Error … timed out</code>, e a última como <code>[+] SOC-WIN11\joao.teste:Verao2026</code>.</p>
+          <h5>Por que "timeout"?</h5>
+          <p>O Windows 11 24H2 tem um <b>limitador de autenticação SMB</b>: segura cada resposta de senha errada por ~2 s, e o NetExec entende a demora como erro. Mas as tentativas <b>chegaram</b>: o Windows registrou as 9 como senha errada (evento 4625, <code>subStatus 0xC000006A</code>). <b>A saída da ferramenta não é a verdade; o log é.</b></p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario1/03-ataque-netexec.png" alt="Saída do NetExec com a senha descoberta" loading="lazy"><figcaption>9 tentativas mostradas como timeout e a senha descoberta.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">3</span>No Wazuh: o mesmo padrão da primeira vez</summary>
+        <div class="body">
+          <p>Consulta <code>agent.name:SOC-Win11 and data.win.eventdata.ipAddress:10.0.10.30</code>: <b>12 eventos</b>. Horários do Windows (UTC):</p>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Horário</th><th>Regra</th><th>O que aconteceu</th></tr></thead>
+            <tbody>
+              <tr><td>05:42:40</td><td>92652</td><td>Login anônimo: o comando de reconhecimento</td></tr>
+              <tr><td>05:44:39</td><td>92652</td><td>Novo login anônimo: início do ataque</td></tr>
+              <tr><td>05:44:51 → 05:45:09</td><td>60122 + <b>60204</b></td><td>9 falhas, uma a cada ~2,2 s; a 8ª virou o alerta <b>60204 (nível 10)</b></td></tr>
+              <tr><td><b>05:45:11</b></td><td><b>92652</b></td><td>✅ Login com sucesso como <code>joao.teste</code> (NTLM V2), seguido de logoff</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <h5>Um detalhe que só apareceu refazendo</h5>
+          <p>O Kali marcou o início às 05:43:46, mas o primeiro evento no Windows é de 05:44:39: o relógio do Windows estava <b>~53 s adiantado</b>. Em uma empresa, todos os equipamentos sincronizam com o mesmo servidor de horário (<b>NTP</b>); sem isso, cruzar logs de máquinas diferentes vira adivinhação.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario1/04-eventos-no-wazuh.png" alt="Eventos do ataque no Wazuh" loading="lazy"><figcaption>Os 12 eventos do IP do Kali: sondagens, falhas, alerta 60204 e o sucesso.</figcaption></figure></div>
+        </div>
+      </details>
+    </div>
+  </div>
+  <div data-l="en">
+    <p class="disclaimer">ℹ️ The first run (Nov 14, the one in the replay above) was done with AI assistance. To master the scenario, <b>I re-ran the attack myself</b> from Kali on Nov 16, and the result repeated.</p>
+    <div class="deep">
+      <details open>
+        <summary><span class="n">1</span>Build the password list and do reconnaissance</summary>
+        <div class="body">
+          <p>I created a list with 9 common wrong passwords and the right one last (<code>senhas.txt</code>) and ran <code>nxc smb 10.0.10.20</code>, with no password at all. That simple "knock on the door" already revealed:</p>
+          <ul>
+            <li><b>Port 445 open</b> and the machine name (<code>SOC-WIN11</code>);</li>
+            <li>the <b>exact Windows version</b> (build 26100), useful for looking up vulnerabilities;</li>
+            <li><code>domain</code> equal to the machine name: the accounts are <b>local</b>, hence <code>--local-auth</code>;</li>
+            <li><code>signing:True</code> (protects against <i>relay</i>, not against password guessing) and <code>SMBv1:None</code> (the old WannaCry-era protocol is off).</li>
+          </ul>
+          <div class="gallery">
+            <figure><img src="assets/img/soc/cenario1/01-lista-de-senhas.png" alt="Password list created on Kali" loading="lazy"><figcaption>The 10-password list.</figcaption></figure>
+            <figure><img src="assets/img/soc/cenario1/02-reconhecimento-smb.png" alt="SMB reconnaissance with NetExec" loading="lazy"><figcaption>Reconnaissance: name, version, signing and SMBv1.</figcaption></figure>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">2</span>The attack: the tool showed errors, the log showed the truth</summary>
+        <div class="body">
+          <p>I ran <code>nxc smb 10.0.10.20 -u joao.teste -p senhas.txt --local-auth</code>, noting the UTC time before and after. The first 9 attempts showed as <code>Connection Error … timed out</code>, and the last one as <code>[+] SOC-WIN11\joao.teste:Verao2026</code>.</p>
+          <h5>Why "timeout"?</h5>
+          <p>Windows 11 24H2 has an <b>SMB authentication rate limiter</b>: it holds each wrong-password response for ~2 s, and NetExec reads the delay as an error. But the attempts <b>did arrive</b>: Windows logged all 9 as wrong passwords (event 4625, <code>subStatus 0xC000006A</code>). <b>The tool's output is not the truth; the log is.</b></p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario1/03-ataque-netexec.png" alt="NetExec output with the password found" loading="lazy"><figcaption>9 attempts shown as timeouts and the password found.</figcaption></figure></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="n">3</span>In Wazuh: the same pattern as the first time</summary>
+        <div class="body">
+          <p>Query <code>agent.name:SOC-Win11 and data.win.eventdata.ipAddress:10.0.10.30</code>: <b>12 events</b>. Windows times (UTC):</p>
+          <div class="table-wrap">
+          <table class="fields">
+            <thead><tr><th>Time</th><th>Rule</th><th>What happened</th></tr></thead>
+            <tbody>
+              <tr><td>05:42:40</td><td>92652</td><td>Anonymous logon: the reconnaissance command</td></tr>
+              <tr><td>05:44:39</td><td>92652</td><td>Another anonymous logon: the attack starts</td></tr>
+              <tr><td>05:44:51 → 05:45:09</td><td>60122 + <b>60204</b></td><td>9 failures, one every ~2.2 s; the 8th became alert <b>60204 (level 10)</b></td></tr>
+              <tr><td><b>05:45:11</b></td><td><b>92652</b></td><td>✅ Successful logon as <code>joao.teste</code> (NTLM V2), followed by logoff</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <h5>A detail that only showed up the second time</h5>
+          <p>Kali logged the start at 05:43:46, but the first Windows event is from 05:44:39: the Windows clock was <b>~53 s ahead</b>. In a company every device syncs to the same time server (<b>NTP</b>); without it, correlating logs from different machines becomes guesswork.</p>
+          <div class="gallery"><figure><img src="assets/img/soc/cenario1/04-eventos-no-wazuh.png" alt="Attack events in Wazuh" loading="lazy"><figcaption>The 12 events from Kali's IP: probes, failures, alert 60204 and the success.</figcaption></figure></div>
+        </div>
+      </details>
+    </div>
+  </div>
   <h3 class="sub"><span data-l="pt">As perguntas que um analista N1 responde</span><span data-l="en">The questions a Tier 1 analyst answers</span></h3>
   <div class="qa">
     <details open>
