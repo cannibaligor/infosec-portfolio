@@ -310,7 +310,9 @@ dialog::backdrop { background: rgba(10,10,12,.6); }
 @media (max-width: 900px) {
   .lab-grid, .replay-grid, .two-col { grid-template-columns: 1fr; }
   .viewport { min-height: 340px; } .viewport.tall { min-height: 380px; }
-  .nav { display: none; }
+  .topbar { flex-wrap: wrap; row-gap: 8px; }
+  .nav { order: 3; width: 100%; margin-left: 0; gap: 18px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; padding-bottom: 2px; }
+  .nav::-webkit-scrollbar { display: none; }
   .lang { margin-left: auto; }
 }
 @media (max-width: 520px) {
