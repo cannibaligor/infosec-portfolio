@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Turno da Madrugada</title>
+<meta name="description" content="Minigame de triagem de alertas com as questões do Simulado SOC N1.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/simulado.css">
+</head>
+<body data-view="game">
+<div class="wrap">
+  <a class="back" href="index.html">← Voltar ao portfólio</a>
+  <header class="top">
+    <div>
+      <h1>Turno da Madrugada</h1>
+      <p>Minigame de triagem de alertas: responda às questões do Simulado antes que o tempo acabe e enfrente o chefão no fim do turno.</p>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Seções">
+    <a class="tab" href="simulado.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="1.5" width="11" height="13" rx="1.5"/><path d="M5 5h6M5 8h6M5 11h3.5"/></svg>Simulado</a>
+    <a class="tab" href="minigame.html" aria-current="page"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 1.5 13.5 4v4c0 3.2-2.3 5.6-5.5 6.5C4.8 13.6 2.5 11.2 2.5 8V4z"/><path d="m5.6 8 1.7 1.7L10.6 6.4"/></svg>Minigame</a>
+    <a class="tab" href="ferramentas.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9.8 2.2a3.3 3.3 0 0 0-3.9 4.3L1.8 10.6a1.4 1.4 0 0 0 2 2l4.1-4.1a3.3 3.3 0 0 0 4.3-3.9l-2 2-1.7-.4-.4-1.7z"/></svg>Ferramentas</a>
+  </nav>
+
+  <section class="view" id="vGame" aria-label="Minigame Turno da Madrugada">
+    <div class="gwrap">
+      <div class="gstage">
+        <div class="hud">
+          <div class="hearts" id="gHearts" role="img" aria-label="4 vidas"></div>
+          <div class="hstat"><span>pontos</span><b id="gScore">0</b></div>
+          <div class="hstat"><span>combo</span><b id="gCombo">×0</b></div>
+          <div class="hstat"><span>etapa</span><b id="gStage">—</b></div>
+          <div class="hstat grow"><span id="gDiffName">recorde</span><b id="gBest">—</b></div>
+          <button class="hbtn" id="gPauseBtn" type="button" hidden>Pausar <kbd>P</kbd></button>
+        </div>
+        <div class="bossbar" id="gBoss" hidden>
+          <div class="bb-top"><b>O OPERADOR</b><span id="gBossPhase"></span></div>
+          <i><em id="gBossHp" style="width:100%"></em></i>
+        </div>
+        <div class="arena" id="gArena">
+          <canvas id="gcv" aria-hidden="true"></canvas>
+          <div class="gmenu" id="gMenu"></div>
+        </div>
+        <div class="timebar" aria-hidden="true"><em id="gTime"></em></div>
+      </div>
+      <div class="gpanel" id="gPanel" aria-live="polite"></div>
+    </div>
+  </section>
+</div>
+<script src="assets/data/questoes.js"></script>
+<script src="assets/js/simulado-explicacao.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="assets/js/minigame.js"></script>
+</body>
+</html>

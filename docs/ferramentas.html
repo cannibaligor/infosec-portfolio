@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ferramentas do Analista</title>
+<meta name="description" content="Nove ferramentas de SOC N1 que rodam no navegador: URL, cabeçalhos, IOCs, defang, PowerShell, hash, horário, correlação e referência.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/simulado.css">
+</head>
+<body data-view="tools">
+<div class="wrap">
+  <a class="back" href="index.html">← Voltar ao portfólio</a>
+  <header class="top">
+    <div>
+      <h1>Ferramentas do analista</h1>
+      <p>Ferramentas que rodam só no navegador, cada uma com explicação e um exemplo prático.</p>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Seções">
+    <a class="tab" href="simulado.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="1.5" width="11" height="13" rx="1.5"/><path d="M5 5h6M5 8h6M5 11h3.5"/></svg>Simulado</a>
+    <a class="tab" href="minigame.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 1.5 13.5 4v4c0 3.2-2.3 5.6-5.5 6.5C4.8 13.6 2.5 11.2 2.5 8V4z"/><path d="m5.6 8 1.7 1.7L10.6 6.4"/></svg>Minigame</a>
+    <a class="tab" href="ferramentas.html" aria-current="page"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9.8 2.2a3.3 3.3 0 0 0-3.9 4.3L1.8 10.6a1.4 1.4 0 0 0 2 2l4.1-4.1a3.3 3.3 0 0 0 4.3-3.9l-2 2-1.7-.4-.4-1.7z"/></svg>Ferramentas</a>
+  </nav>
+
+  <section class="view" id="vTools" aria-label="Ferramentas do analista">
+    <div class="tintro">
+      <h2>Caixa de ferramentas do analista</h2>
+      <p>Nove ferramentas para o dia a dia de um SOC N1. Cada uma explica para que serve, quando usar, como usar e como ler o resultado. Use o botão <b>Exemplo prático</b> para ver um caso real funcionando. Tudo roda só no seu navegador: nada é enviado nem acessado.</p>
+      <nav class="tjump" aria-label="Ir para a ferramenta">
+        <a class="chip" href="#t-url">1 · URL</a><a class="chip" href="#t-hdr">2 · Cabeçalhos</a><a class="chip" href="#t-ioc">3 · IOCs</a>
+        <a class="chip" href="#t-defang">4 · Defang</a><a class="chip" href="#t-ps">5 · PowerShell</a><a class="chip" href="#t-hash">6 · Hash</a>
+        <a class="chip" href="#t-time">7 · Horário</a><a class="chip" href="#t-calc">8 · Correlação</a><a class="chip" href="#t-ref">9 · Referência</a>
+      </nav>
+    </div>
+    <div class="tools">
+
+      <article class="tool tool2" id="t-url">
+        <div class="tguide">
+          <div class="tnum">01</div><h3>Analisador de URL</h3>
+          <p class="lead">Mostra para onde um link leva de verdade, sem abrir o link, e aponta os truques usados em phishing.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Um usuário reportou um e-mail suspeito e você precisa saber o destino do botão.</li><li>Um alerta de proxy ou DNS trouxe uma URL estranha.</li><li>Antes de mandar a URL para o VirusTotal ou para o ticket.</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>No e-mail, clique com o botão direito no link e escolha <b>Copiar endereço do link</b>. Nunca clique nele.</li><li>Cole aqui (pode estar com defang, tipo <code>hxxps</code> e <code>[.]</code>).</li><li>Clique em <b>Analisar</b>.</li></ol>
+          <h4>Como ler o resultado</h4>
+          <ul><li><b>Host real</b> (verde): é para lá que o navegador vai. O que está riscado é ignorado.</li><li><b>Domínio registrado</b>: quem é o dono. Compare com a marca que o e-mail diz ser.</li><li><b>Pontos de atenção</b>: vermelho pesa mais. Nenhum sinal não prova que é seguro.</li><li>Copie a linha <b>Para o ticket</b> (já com defang).</li></ul>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>O e-mail do "DETRAN" tinha um botão "Consultar infração". O link parecia ser do office.com. Veja onde ele realmente leva e compare com um link legítimo do gov.br.</p>
+            <div class="row"><button class="btn" type="button" data-ex="url1">Exemplo: golpe DETRAN</button><button class="btn" type="button" data-ex="url2">Exemplo: link legítimo</button></div></div>
+          <label for="urlIn">URL</label>
+          <input type="text" id="urlIn" spellcheck="false" placeholder="cole a URL aqui">
+          <div class="row"><button class="btn primary" id="urlGo" type="button">Analisar</button></div>
+          <div class="out" id="urlOut"></div>
+        </div>
+      </article>
+
+      <article class="tool tool2" id="t-hdr">
+        <div class="tguide">
+          <div class="tnum">02</div><h3>Analisador de cabeçalhos de e-mail</h3>
+          <p class="lead">Lê os cabeçalhos técnicos que o Outlook esconde e mostra de onde o e-mail saiu, por onde passou e se passou na autenticação.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Todo e-mail reportado como phishing.</li><li>Quando você precisa do IP real de envio para denunciar ou bloquear.</li><li>Para confirmar se o remetente é quem diz ser.</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>No Outlook web: abra a mensagem, <b>⋯ → Exibir → Exibir origem da mensagem</b> (em versões antigas, "Exibir detalhes da mensagem"). No Gmail: <b>⋮ → Mostrar original</b>.</li><li>Copie tudo até a primeira linha em branco (o corpo não é necessário).</li><li>Cole aqui e clique em <b>Analisar</b>.</li></ol>
+          <h4>Como ler o resultado</h4>
+          <ul><li><b>Caminho</b>: o nº 1 (vermelho) é a origem real. Os Received são lidos de baixo para cima.</li><li><b>SPF/DKIM/DMARC</b>: verde é pass. <code>none</code> = nada a verificar, <code>fail</code> = falhou.</li><li><b>pass</b> só prova que aquele domínio enviou. Golpista também consegue pass no domínio dele.</li><li><b>SCL</b> 5 ou mais: a Microsoft já achou que era spam.</li></ul>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>Versão simplificada dos cabeçalhos do caso DETRAN (horários e IDs ilustrativos). Note o 1º salto se apresentando como localhost e a autenticação toda em <code>none</code>.</p>
+            <div class="row"><button class="btn" type="button" data-ex="hdr1">Carregar exemplo</button></div></div>
+          <label for="hdrIn">Cabeçalhos</label>
+          <textarea id="hdrIn" spellcheck="false" placeholder="Received: from ...&#10;Authentication-Results: ...&#10;From: ..."></textarea>
+          <div class="row"><button class="btn primary" id="hdrGo" type="button">Analisar</button></div>
+          <div class="out" id="hdrOut"></div>
+        </div>
+      </article>
+
+      <article class="tool tool2" id="t-ioc">
+        <div class="tguide">
+          <div class="tnum">03</div><h3>Extrator de IOCs</h3>
+          <p class="lead">Tira de qualquer texto os indicadores que importam: IPs, URLs, domínios, e-mails, hashes, CVEs e técnicas MITRE, sem repetição.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Para montar a lista de bloqueio de um incidente.</li><li>Para ler rápido um relatório de ameaça ou um JSON de alerta grande.</li><li>Para preencher o campo de IOCs do ticket.</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>Cole o texto: e-mail, alerta do Wazuh em JSON, log, relatório.</li><li>Deixe <b>saída com defang</b> marcado se for para ticket ou chat.</li><li>Clique em <b>Extrair</b> e depois em <b>Copiar lista</b>.</li></ol>
+          <h4>Como ler o resultado</h4>
+          <ul><li>IPs marcados como <b>privado/interno</b> são da sua rede: não vão para lista de bloqueio externa.</li><li>Revise os domínios: nomes de servidores legítimos (outlook.com, por exemplo) também aparecem.</li><li>IOC bom é o que identifica o atacante, não a infraestrutura de todo mundo.</li></ul>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>Um trecho de alerta do Wazuh (brute force do Cenário 1) junto com as anotações do caso de phishing. Veja o que sai e o que você deveria descartar.</p>
+            <div class="row"><button class="btn" type="button" data-ex="ioc1">Carregar exemplo</button></div></div>
+          <label for="iocIn">Texto</label>
+          <textarea id="iocIn" spellcheck="false" placeholder="cole qualquer texto aqui"></textarea>
+          <div class="row"><button class="btn primary" id="iocGo" type="button">Extrair</button>
+            <label class="row" style="gap:6px"><input type="checkbox" id="iocDf" checked> saída com defang</label>
+            <button class="btn ghost" id="iocCopy" type="button">Copiar lista</button></div>
+          <div class="out" id="iocOut"></div>
+        </div>
+      </article>
+
+      <article class="tool tool2" id="t-defang">
+        <div class="tguide">
+          <div class="tnum">04</div><h3>Defang e refang</h3>
+          <p class="lead">"Desarma" URLs, IPs, domínios e e-mails para que não virem links clicáveis em tickets, chats e relatórios. O refang desfaz.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Sempre que um indicador malicioso for para um lugar onde alguém pode clicar: Teams, Slack, e-mail, ticket.</li><li><b>Refang</b>: quando você recebe um IOC desarmado e precisa colar numa ferramenta (bloqueio no firewall, busca no SIEM).</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>Cole um ou vários indicadores, um por linha ou no meio de um texto.</li><li>Clique em <b>Defang</b> (ou <b>Refang</b>).</li><li>Clique em <b>Copiar</b>.</li></ol>
+          <h4>Como ler o resultado</h4>
+          <ul><li><code>https</code> vira <code>hxxps</code>, cada ponto vira <code>[.]</code> e o @ de e-mails vira <code>[@]</code>.</li><li>O texto continua legível para humanos, mas nenhum programa transforma em link.</li></ul>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>Você vai avisar o time no chat sobre o IP e a URL do golpe. Desarme antes de mandar.</p>
+            <div class="row"><button class="btn" type="button" data-ex="df1">Carregar exemplo</button></div></div>
+          <label for="dfIn">Indicadores ou texto</label>
+          <textarea id="dfIn" spellcheck="false" placeholder="cole URLs, IPs, domínios ou e-mails"></textarea>
+          <div class="row"><button class="btn primary" id="dfGo" type="button">Defang</button><button class="btn" id="rfGo" type="button">Refang</button><button class="btn ghost" id="dfCopy" type="button">Copiar</button></div>
+          <pre class="mono" id="dfOut" hidden></pre>
+          <div class="out" id="dfMsg"></div>
+        </div>
+      </article>
+
+      <article class="tool tool2" id="t-ps">
+        <div class="tguide">
+          <div class="tnum">05</div><h3>Decodificador de PowerShell</h3>
+          <p class="lead">Revela o comando escondido num <code>-EncodedCommand</code> (Base64 de UTF-16LE) e aponta o que é perigoso nele.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Um alerta como o 92057 mostrou <code>powershell -enc …</code> na commandLine.</li><li>Um serviço (7045) ou tarefa agendada chama PowerShell com Base64.</li><li>Você não tem o evento 4104 para ver o código já decodificado.</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>No alerta, copie o campo <b>commandLine</b> inteiro (ou só o Base64).</li><li>Cole e clique em <b>Decodificar</b>.</li><li><b>Codificar texto</b> faz o caminho inverso, útil para testes no lab.</li></ol>
+          <h4>Como ler o resultado</h4>
+          <ul><li>O quadro mostra o código que rodou (o mesmo que o 4104 registraria).</li><li><b>Alto</b>: download, IEX, injeção de memória, Defender, persistência. Escale.</li><li><b>Info</b> sozinho (Write-Host, Get-Date) tende a ser teste ou administração. Confirme com quem rodou.</li></ul>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>Compare o teste benigno do Cenário 2 com um "download cradle" malicioso. O formato é o mesmo; o conteúdo decide a gravidade.</p>
+            <div class="row"><button class="btn" type="button" data-ex="ps1">Exemplo: teste do Cenário 2</button><button class="btn" type="button" data-ex="ps2">Exemplo: malicioso</button></div></div>
+          <label for="psIn">commandLine ou Base64</label>
+          <textarea id="psIn" spellcheck="false" placeholder="powershell.exe -nop -w hidden -enc ..."></textarea>
+          <div class="row"><button class="btn primary" id="psGo" type="button">Decodificar</button><button class="btn" id="psEnc" type="button">Codificar texto</button></div>
+          <div class="out" id="psOut"></div>
+        </div>
+      </article>
+
+      <article class="tool tool2" id="t-hash">
+        <div class="tguide">
+          <div class="tnum">06</div><h3>Hash de evidência</h3>
+          <p class="lead">Calcula a "impressão digital" (SHA-256 e SHA-1) de um arquivo ou texto e confere se bate com um hash esperado.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Ao salvar uma evidência (.eml, log exportado): registre o hash no ticket. É a cadeia de custódia.</li><li>Para pesquisar um anexo no VirusTotal pelo hash, sem enviar o arquivo.</li><li>Para provar que um arquivo não mudou desde a coleta.</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>Clique em <b>Escolher arquivo</b> (ele é lido só aqui) ou digite um texto e clique em <b>Hash do texto</b>.</li><li>Para conferir, cole o hash esperado no campo <b>Comparar com</b>.</li></ol>
+          <h4>Como ler o resultado</h4>
+          <ul><li>Mudou um único byte, o hash muda inteiro.</li><li><b>Confere</b>: é o mesmo conteúdo. <b>Não confere</b>: foi alterado ou é outro arquivo.</li><li>Hash não é criptografia: não esconde nada.</li></ul>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>Duas versões de um texto que diferem só numa letra. Veja como os hashes ficam completamente diferentes e o comparador acusa a mudança.</p>
+            <div class="row"><button class="btn" type="button" data-ex="hash1">Carregar exemplo</button></div></div>
+          <label for="hashIn">Texto</label>
+          <textarea id="hashIn" spellcheck="false" placeholder="texto exato (um espaço a mais muda o hash)"></textarea>
+          <label for="hashCmp">Comparar com (opcional)</label>
+          <input type="text" id="hashCmp" spellcheck="false" placeholder="cole o hash esperado">
+          <div class="row"><button class="btn primary" id="hashGo" type="button">Hash do texto</button><label class="btn" style="display:inline-flex;gap:6px;align-items:center">Escolher arquivo<input type="file" id="hashFile" hidden></label></div>
+          <div class="out" id="hashOut"></div>
+        </div>
+      </article>
+
+      <article class="tool tool2" id="t-time">
+        <div class="tguide">
+          <div class="tnum">07</div><h3>Conversor de horário</h3>
+          <p class="lead">Converte um horário entre UTC, o fuso do dashboard do lab (UTC−4), Brasília e o seu computador.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Para montar uma linha do tempo com eventos de fontes diferentes.</li><li>O dashboard mostra um horário, o evento do Windows (systemTime) mostra outro: os dois estão certos, em fusos diferentes.</li><li>Para escrever o relatório num fuso só.</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>Cole o horário como aparece (dashboard, JSON, epoch).</li><li>Escolha em que fuso ele <b>está</b>.</li><li>Clique em <b>Converter</b>.</li></ol>
+          <h4>Como ler o resultado</h4>
+          <ul><li>Use a linha <b>UTC</b> para comparar com o systemTime dos eventos do Windows.</li><li>Epoch é o mesmo instante em segundos: útil para buscas e scripts.</li></ul>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>No dashboard do Wazuh, o alerta 60204 aparece em <code>Nov 14, 2026 @ 01:57:04.000</code>. O evento 4625 do Windows diz 05:57:04. É o mesmo momento?</p>
+            <div class="row"><button class="btn" type="button" data-ex="tm1">Carregar exemplo</button></div></div>
+          <div class="inline">
+            <div><label for="tmIn">Horário</label><input type="text" id="tmIn" spellcheck="false" placeholder="2026-11-14 05:57:04 · 14/11/2026 05:57 · epoch"></div>
+            <div><label for="tmZone">Esse horário está em</label><select id="tmZone">
+              <option value="0">UTC (eventos do Windows)</option>
+              <option value="-4">UTC−4 (dashboard do lab)</option>
+              <option value="-3">UTC−3 (Brasília)</option>
+              <option value="local">fuso deste computador</option>
+            </select></div>
+          </div>
+          <div class="row"><button class="btn primary" id="tmGo" type="button">Converter</button><button class="btn ghost" id="tmNow" type="button">Agora</button></div>
+          <div class="out" id="tmOut"></div>
+        </div>
+      </article>
+
+      <article class="tool tool2" id="t-calc">
+        <div class="tguide">
+          <div class="tnum">08</div><h3>Calculadora de correlação</h3>
+          <p class="lead">Simula uma regra de frequência do Wazuh, como a 60204: quantos eventos, em quanto tempo, fazem o alerta grave disparar.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Para entender por que um ataque gerou (ou não) o alerta correlacionado.</li><li>Para explicar numa entrevista como funciona correlação.</li><li>Para perceber o ponto cego: ataques lentos passam por baixo da janela.</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>Preencha quantas falhas houve e o intervalo entre elas.</li><li>Preencha o <code>frequency</code> e o <code>timeframe</code> da regra (estão no XML dela).</li><li>O resultado atualiza sozinho.</li></ol>
+          <h4>Como ler o resultado</h4>
+          <ul><li><b>Dispara</b>: diz em qual falha e quantos segundos depois da primeira.</li><li><b>Não dispara</b>: diz o motivo (poucas falhas ou lentas demais).</li></ul>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>O Cenário 1 teve 9 falhas a cada ~2 s. Compare com um atacante paciente que tenta uma senha por minuto.</p>
+            <div class="row"><button class="btn" type="button" data-ex="calc1">Ataque do Cenário 1</button><button class="btn" type="button" data-ex="calc2">Ataque lento</button></div></div>
+          <div class="inline">
+            <div><label for="cFails">Falhas no ataque</label><input type="text" id="cFails" value="9" inputmode="numeric"></div>
+            <div><label for="cGap">Intervalo entre falhas (s)</label><input type="text" id="cGap" value="2" inputmode="decimal"></div>
+            <div><label for="cFreq">frequency da regra</label><input type="text" id="cFreq" value="8" inputmode="numeric"></div>
+            <div><label for="cTf">timeframe (s)</label><input type="text" id="cTf" value="120" inputmode="numeric"></div>
+          </div>
+          <div class="out" id="calcOut"></div>
+        </div>
+      </article>
+
+      <article class="tool tool2" id="t-ref">
+        <div class="tguide">
+          <div class="tnum">09</div><h3>Referência rápida</h3>
+          <p class="lead">Event IDs do Windows e do Sysmon, tipos de logon, códigos do 4625, regras vistas no lab e técnicas MITRE do portfólio.</p>
+          <h4>Quando usar</h4>
+          <ul><li>Apareceu um número que você não lembra (4648? logonType 9? 0xC0000234?).</li><li>Para escolher o Event ID certo numa busca no SIEM.</li></ul>
+          <h4>Como usar</h4>
+          <ol><li>Digite um código ou palavra (<code>RDP</code>, <code>lsass</code>, <code>bloqueada</code>).</li><li>Ou filtre pela categoria nos botões.</li></ol>
+        </div>
+        <div class="tbody">
+          <div class="ex"><b>Exemplo prático</b><p>Num 4625 aparece subStatus <code>0xC000006A</code>. O que significa?</p>
+            <div class="row"><button class="btn" type="button" data-ex="ref1">Pesquisar exemplo</button></div></div>
+          <div class="reftools"><input type="search" class="search" id="refQ" placeholder="buscar: 4625, RDP, lsass, T1110…" aria-label="Buscar na referência"><div class="chips" id="refCats"></div></div>
+          <div class="refwrap"><table class="reftable"><thead><tr><th>Categoria</th><th>Código</th><th>Significado</th></tr></thead><tbody id="refBody"></tbody></table></div>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+<script src="assets/js/ferramentas.js"></script>
+</body>
+</html>
