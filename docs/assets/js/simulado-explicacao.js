@@ -104,7 +104,7 @@ function render(el, q, pick, opt = {}){
     <section class="xs"><h4>Teoria</h4>${th.map(t => `<p><b>${esc(t[1])}.</b> ${esc(t[2])}</p>`).join("")}<p class="xai-teoria" hidden></p></section>
     <section class="xs xs-ok"><h4>Por que a ${D(q.answer)} está certa</h4><p>${rich(q.why)}</p><p class="xai-certa" hidden></p></section>
     ${wrong ? `<section class="xs xs-bad"><h4>Por que a ${D(pick)} está errada</h4><p class="xmine">${rich(q.options[pick])}</p><p class="xai-mine sub2">Gerando a explicação…</p></section>` : ""}
-    <section class="xs"><h4>Todas as alternativas</h4><ol class="alts">${alts}</ol></section>
+    <section class="xs xs-alts" hidden><h4>Por que cada alternativa</h4><ol class="alts">${alts}</ol></section>
     <p class="xai-lembrete" hidden></p>
     <div class="xai-bar"><span class="sub2 xai-status"></span><button class="btn ghost xai-btn" type="button" hidden>${wrong ? "Explicar meu erro com Claude" : "Explicar as alternativas com Claude"}</button></div>
   </div>`;
@@ -116,6 +116,8 @@ function render(el, q, pick, opt = {}){
     set(".xai-certa", esc(r.certa));
     if (mine){ mine.textContent = r.erradas[L[pick]] || "Sem explicação para esta alternativa."; mine.classList.remove("sub2"); }
     el.querySelectorAll(".alts li").forEach(li => { const o = +li.dataset.o; if (o !== q.answer && r.erradas[L[o]]) li.querySelector(".areason").textContent = r.erradas[L[o]]; });
+    // a lista só aparece quando traz explicação nova; sem ela, repetiria as alternativas já mostradas acima
+    if (Object.keys(r.erradas).length) el.querySelector(".xs-alts").hidden = false;
     set(".xai-lembrete", `<b>Para lembrar:</b> ${esc(r.lembrete)}`);
     status.textContent = "Explicação das alternativas gerada pelo Claude."; btn.hidden = true;
   }
