@@ -39,6 +39,24 @@ header.top p{margin:6px 0 0;color:var(--muted);max-width:62ch}
 
 .grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px;align-items:start}
 @media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+/* Passo a passo: 3ª coluna à direita em telas largas; abaixo da questão nas menores */
+body[data-view="sim"] .wrap{max-width:1640px}
+@media (min-width:1280px){#vSim{grid-template-columns:280px minmax(0,1fr) 380px}}
+@media (min-width:901px) and (max-width:1279px){#vSim aside.steps{grid-column:2}}
+aside.steps{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);max-height:calc(100vh - 24px);overflow:auto;min-width:0}
+@media (max-width:1279px){aside.steps{position:static;max-height:none}}
+.steps-wait{color:var(--muted);font-size:13.5px;margin:0}
+.proc{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.proc:first-child{border-top:0;padding-top:0;margin-top:0}
+.proc h3{font-family:var(--f-display);font-size:15px;font-weight:700;margin:0 0 4px;line-height:1.3}
+.proc .onde{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);margin:0 0 10px}
+.proc ol{margin:0;padding:0;list-style:none;counter-reset:st;display:flex;flex-direction:column;gap:9px}
+.proc li{counter-increment:st;display:grid;grid-template-columns:24px 1fr;gap:9px;font-size:13.5px;line-height:1.5;min-width:0}
+.proc li::before{content:counter(st);font-family:var(--f-mono);font-size:11.5px;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid var(--line)}
+.proc li span{min-width:0;overflow-wrap:anywhere}
+.proc code{font-family:var(--f-mono);font-size:.86em;background:var(--panel-2);border:1px solid var(--line);border-radius:4px;padding:0 4px;overflow-wrap:anywhere}
+.proc .dica{margin:10px 0 0;font-size:12.5px;color:var(--muted);border-left:3px solid var(--accent);padding-left:9px}
+.steps-foot{margin:14px 0 0;font-size:11.5px;color:var(--muted)}
 aside.side{display:flex;flex-direction:column;gap:14px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
 @media (max-width:900px){aside.side{position:static}}
 .box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}

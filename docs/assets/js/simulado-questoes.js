@@ -82,7 +82,7 @@ function renderCard(){
   const q = st.list[st.pos];
   if (!q){
     c.innerHTML = `<div class="empty">${st.mode==="wrong"?"Nenhuma questão errada com esses filtros. Bom sinal.":st.mode==="new"?"Você já respondeu todas as questões desses filtros.":"Nenhuma questão com esses filtros."}</div>`;
-    Viz.idle("Sem questão selecionada."); return;
+    Viz.idle("Sem questão selecionada."); renderSteps(null); return;
   }
   const p = prog[q.id];
   const answered = !!p;
@@ -106,7 +106,22 @@ function renderCard(){
   });
   $("#prev").onclick = () => go(-1);
   $("#next").onclick = () => go(1);
-  if (answered) showResult(q, p.pick, false); else Viz.idle("Responda para ver a ilustração da resposta.", q);
+  if (answered) showResult(q, p.pick, false); else { Viz.idle("Responda para ver a ilustração da resposta.", q); renderSteps(q, false); }
+}
+
+// Passo a passo prático (assets/data/passos.js), revelado depois de responder para não entregar a resposta
+function richSteps(s){ return rich(s).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>"); }
+function renderSteps(q, show){
+  const el = $("#steps"); if (!el) return;
+  const P = window.SOC_PASSOS;
+  if (!q){ el.innerHTML = `<p class="steps-wait">Sem questão selecionada.</p>`; return; }
+  if (!P){ el.innerHTML = `<p class="steps-wait">O passo a passo não carregou.</p>`; return; }
+  const keys = (P.map[q.id] || []).filter(k => P.proc[k]);
+  if (!show){ el.innerHTML = `<p class="steps-wait">Responda para ver como fazer, na prática, cada ação desta questão (${keys.length} ${keys.length===1?"procedimento":"procedimentos"}).</p>`; return; }
+  el.innerHTML = keys.map(k => { const p = P.proc[k];
+    return `<div class="proc"><h3>${esc(p.t)}</h3>${p.onde?`<p class="onde">${esc(p.onde)}</p>`:""}<ol>${p.s.map(s => `<li><span>${richSteps(s)}</span></li>`).join("")}</ol>${p.dica?`<p class="dica">${richSteps(p.dica)}</p>`:""}</div>`; }).join("")
+    + `<p class="steps-foot">Nomes de menus podem mudar conforme a versão do programa.</p>`;
+  el.closest("aside").scrollTop = 0;
 }
 
 function showResult(q, pick, fresh){
@@ -119,6 +134,7 @@ function showResult(q, pick, fresh){
   });
   if (window.SOCExplain) SOCExplain.render($("#fb"), q, pick, { auto:fresh }); else $("#fb").innerHTML = `<div class="verdict"><span class="pill ${ok?"ok":"bad"}">${ok?"Correta":"Incorreta"}</span><span>${ok?"Isso mesmo.":"Resposta certa: "+"ABCD"[q.answer]+"."}</span></div><p class="why">${rich(q.why)}</p>`;
   Viz.show(q);
+  renderSteps(q, true);
   if (fresh) $("#next") && !$("#next").disabled && $("#next").focus({preventScroll:true});
 }
 
